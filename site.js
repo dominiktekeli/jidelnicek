@@ -46,7 +46,6 @@
     const num = parseInt(String(p).replace(/\D/g, ""), 10);
     if (priceEl) priceEl.textContent = p;
     if (heroBuy) heroBuy.textContent = "🛒 Kompletní balíček — " + p;
-    /* hero-price = sociální důkaz (hvězdičky), ne cena — ta je v tlačítku */
     if (stickyPrice) stickyPrice.textContent = p;
     if (perWeekEl && num > 0) {
       perWeekEl.textContent = Math.round(num / 4) + " Kč za jeden týden";
@@ -81,21 +80,18 @@
     }
 
     playBtn.addEventListener("click", function () {
-      hideOverlay();
-      video.controls = true;
-      video.muted = false;
-      const p = video.play();
-      if (p && typeof p.catch === "function") {
-        p.catch(function () {
-          video.muted = true;
-          video.play();
-        });
+      if (video.paused) {
+        video.play();
+        hideOverlay();
+      } else {
+        video.pause();
+        showOverlay();
       }
     });
 
-    video.addEventListener("ended", function () {
-      video.controls = false;
-      video.currentTime = 0;
+    video.addEventListener("ended", showOverlay);
+    video.addEventListener("pause", function () {
+      if (video.currentTime > 0 && !video.ended) return;
       showOverlay();
     });
 
@@ -108,33 +104,54 @@
 
   function wireHeroMealsCarousel() {
     const root = document.getElementById("hero-meals");
+    const viewport = document.getElementById("hero-meals-viewport");
     const track = document.getElementById("hero-meals-track");
     const dotsWrap = document.getElementById("hero-meals-dots");
-    if (!root || !track || !dotsWrap) return;
+    if (!root || !viewport || !track || !dotsWrap) return;
 
-    const slides = Array.from(track.querySelectorAll(".hero-meals__slide"));
-    if (slides.length < 2) return;
+    const cards = Array.from(track.querySelectorAll(".hero-meals-card"));
+    if (cards.length < 2) return;
 
     let index = 0;
     let timer = null;
-    const intervalMs = 4200;
+    const intervalMs = 3800;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    function maxOffset() {
+      const last = cards[cards.length - 1];
+      const vp = viewport.clientWidth;
+      const end = last.offsetLeft + last.offsetWidth;
+      return Math.max(0, end - vp + parseFloat(getComputedStyle(track).paddingRight || 0));
+    }
+
+    function offsetForIndex(i) {
+      const card = cards[i];
+      if (!card) return 0;
+      const vp = viewport.clientWidth;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      let x = cardCenter - vp / 2;
+      const max = maxOffset();
+      if (x < 0) return 0;
+      if (x > max) return max;
+      return x;
+    }
+
     function goTo(i) {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = "translate3d(-" + index * 100 + "%, 0, 0)";
-      dotsWrap.querySelectorAll(".hero-meals__dot").forEach(function (dot, n) {
+      index = Math.max(0, Math.min(i, cards.length - 1));
+      track.style.transform = "translate3d(-" + offsetForIndex(index) + "px, 0, 0)";
+      cards.forEach(function (card, n) {
+        card.classList.toggle("is-active", n === index);
+      });
+      dotsWrap.querySelectorAll(".hero-meals-rail__dot").forEach(function (dot, n) {
         dot.classList.toggle("is-active", n === index);
         dot.setAttribute("aria-selected", n === index ? "true" : "false");
       });
     }
 
-    goTo(0);
-
-    slides.forEach(function (_, n) {
+    cards.forEach(function (_, n) {
       const dot = document.createElement("button");
       dot.type = "button";
-      dot.className = "hero-meals__dot" + (n === 0 ? " is-active" : "");
+      dot.className = "hero-meals-rail__dot" + (n === 0 ? " is-active" : "");
       dot.setAttribute("role", "tab");
       dot.setAttribute("aria-label", "Jídlo " + (n + 1));
       dot.setAttribute("aria-selected", n === 0 ? "true" : "false");
@@ -149,21 +166,23 @@
       if (reducedMotion) return;
       if (timer) window.clearInterval(timer);
       timer = window.setInterval(function () {
-        goTo(index + 1);
+        if (index >= cards.length - 1) {
+          goTo(0);
+        } else {
+          goTo(index + 1);
+        }
       }, intervalMs);
     }
 
-    const viewport = track.parentElement;
     let touchX = 0;
-    const swipeTarget = viewport || track;
-    swipeTarget.addEventListener(
+    viewport.addEventListener(
       "touchstart",
       function (e) {
         touchX = e.changedTouches[0].screenX;
       },
       { passive: true }
     );
-    swipeTarget.addEventListener(
+    viewport.addEventListener(
       "touchend",
       function (e) {
         const dx = e.changedTouches[0].screenX - touchX;
@@ -179,6 +198,11 @@
     });
     root.addEventListener("mouseleave", restartAutoplay);
 
+    window.addEventListener("resize", function () {
+      goTo(index);
+    });
+
+    goTo(0);
     restartAutoplay();
   }
 

@@ -83,40 +83,47 @@
 
         <div class="hero__meals" id="hero-meals" aria-label="Ukázka jídel z balíčku">
           <p class="hero__meals-kicker">Co tě čeká v balíčku</p>
-          <div class="hero-meals">
-            <div class="hero-meals__viewport">
-              <div class="hero-meals__track" id="hero-meals-track">
-              <article class="hero-meals__slide" data-index="0">
-                <img src="images/reviews/review-kid-rizek.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-                <div class="hero-meals__cap">
-                  <span class="hero-meals__when">Po · oběd</span>
-                  <p class="hero-meals__name">Kuřecí řízek, bramborová kaše</p>
-                </div>
-              </article>
-              <article class="hero-meals__slide" data-index="1">
-                <img src="images/food-pasta.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-                <div class="hero-meals__cap">
-                  <span class="hero-meals__when">Út · večeře</span>
-                  <p class="hero-meals__name">Těstoviny s mozzarellou</p>
-                </div>
-              </article>
-              <article class="hero-meals__slide" data-index="2">
-                <img src="images/reviews/review-varim-gulas.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-                <div class="hero-meals__cap">
-                  <span class="hero-meals__when">St · oběd</span>
-                  <p class="hero-meals__name">Hovězí guláš s knedlíkem</p>
-                </div>
-              </article>
-              <article class="hero-meals__slide" data-index="3">
-                <img src="images/reviews/review-family-dinner.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-                <div class="hero-meals__cap">
-                  <span class="hero-meals__when">Čt · večeře</span>
-                  <p class="hero-meals__name">Rodinná večeře u stolu</p>
-                </div>
-              </article>
+          <div class="hero-meals-rail">
+            <div class="hero-meals-rail__viewport" id="hero-meals-viewport">
+              <div class="hero-meals-rail__track" id="hero-meals-track">
+                <article class="hero-meals-card is-active" data-index="0">
+                  <img src="images/reviews/review-kid-rizek.jpg" alt="" width="320" height="200" loading="lazy" decoding="async" />
+                  <div class="hero-meals-card__body">
+                    <span class="hero-meals-card__when">Po · oběd</span>
+                    <p class="hero-meals-card__name">Kuřecí řízek, bramborová kaše</p>
+                  </div>
+                </article>
+                <article class="hero-meals-card" data-index="1">
+                  <img src="images/food-pasta.jpg" alt="" width="320" height="200" loading="lazy" decoding="async" />
+                  <div class="hero-meals-card__body">
+                    <span class="hero-meals-card__when">Út · večeře</span>
+                    <p class="hero-meals-card__name">Těstoviny s mozzarellou</p>
+                  </div>
+                </article>
+                <article class="hero-meals-card" data-index="2">
+                  <img src="images/reviews/review-varim-gulas.jpg" alt="" width="320" height="200" loading="lazy" decoding="async" />
+                  <div class="hero-meals-card__body">
+                    <span class="hero-meals-card__when">St · oběd</span>
+                    <p class="hero-meals-card__name">Hovězí guláš s knedlíkem</p>
+                  </div>
+                </article>
+                <article class="hero-meals-card" data-index="3">
+                  <img src="images/reviews/review-family-dinner.jpg" alt="" width="320" height="200" loading="lazy" decoding="async" />
+                  <div class="hero-meals-card__body">
+                    <span class="hero-meals-card__when">Čt · večeře</span>
+                    <p class="hero-meals-card__name">Rodinná večeře u stolu</p>
+                  </div>
+                </article>
+                <article class="hero-meals-card" data-index="4">
+                  <img src="images/reviews/review-pasta-plate.jpg" alt="" width="320" height="200" loading="lazy" decoding="async" />
+                  <div class="hero-meals-card__body">
+                    <span class="hero-meals-card__when">Pá · oběd</span>
+                    <p class="hero-meals-card__name">Špagety s omáčkou a sýrem</p>
+                  </div>
+                </article>
               </div>
             </div>
-            <div class="hero-meals__dots" id="hero-meals-dots" role="tablist" aria-label="Vyber jídlo"></div>
+            <div class="hero-meals-rail__dots" id="hero-meals-dots" role="tablist" aria-label="Vyber jídlo"></div>
           </div>
         </div>
       </section>
