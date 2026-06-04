@@ -8,29 +8,30 @@
 
   function isCheckoutReady() {
     const url = checkoutUrl();
-    return url && !url.includes("YOUR-STORE") && !url.includes("VAŠE-ID");
+    return (
+      url &&
+      !url.includes("YOUR-STORE") &&
+      !url.includes("VAŠE-ID") &&
+      url.startsWith("http")
+    );
   }
 
   function wireBuyButtons() {
     const url = checkoutUrl();
     const ready = isCheckoutReady();
 
-    ["btn-koupit", "btn-koupit-hero"].forEach((id) => {
+    ["btn-koupit", "btn-koupit-hero", "sticky-buy"].forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       el.href = ready ? url : "#koupit";
-      if (ready) {
-        el.setAttribute("target", "_blank");
-        el.setAttribute("rel", "noopener noreferrer");
-      }
+      /* Stejné okno = na mobilu se po Stripe vrátí zpět snáze */
     });
 
     if (!ready && document.getElementById("btn-koupit")) {
       const warn = document.createElement("p");
       warn.className = "hero__note";
       warn.style.color = "#b45309";
-      warn.textContent =
-        "⚠️ Doplň checkout URL v souboru config.js (viz README).";
+      warn.textContent = "⚠️ Doplň checkout URL v config.js.";
       const pricing = document.querySelector(".pricing__card");
       if (pricing) pricing.appendChild(warn);
     }
@@ -40,8 +41,10 @@
     const p = cfg.priceDisplay || "297 Kč";
     const priceEl = document.getElementById("pricing-price");
     const heroPrice = document.getElementById("hero-price");
+    const stickyPrice = document.getElementById("sticky-price");
     if (priceEl) priceEl.textContent = p;
     if (heroPrice) heroPrice.textContent = "Jednorázově " + p + " · okamžitý přístup";
+    if (stickyPrice) stickyPrice.textContent = p;
   }
 
   function wireEmail() {

@@ -1,0 +1,11 @@
+{
+  "name": "Klid v kuchyni",
+  "short_name": "Jídelníček",
+  "description": "4týdenní rodinný jídelníček a nákupní seznamy",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8f3",
+  "theme_color": "#2d9a6a",
+  "lang": "cs",
+  "orientation": "portrait"
+}

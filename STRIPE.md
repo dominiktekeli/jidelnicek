@@ -1,38 +1,40 @@
-# Stripe — tvůj checkout
+# Stripe — nastavení (doporučená cesta)
 
-**Odkaz (test):** `https://buy.stripe.com/test_4gM28rcAB6Zl1Zy92n3Je00`
+**Web:** https://jidelnicek-olive.vercel.app
 
-Je už v `config.js` → tlačítka **Koupit** na webu vedou na Stripe.
+## 1. Redirect po platbě (povinné)
 
-## Po úspěšné platbě (důležité)
-
-V [Stripe Dashboard](https://dashboard.stripe.com) → **Payment Links** → tvůj link → **After payment**:
-
-**Redirect customers to a webpage**
+Stripe → **Payment Links** → tvůj link → **After payment** → **Redirect**:
 
 ```
 https://jidelnicek-olive.vercel.app/dekujeme.html
 ```
 
-## E-mail zákaznici
+Zákaznice po zaplacení uvidí velké tlačítko **Otevřít jídelníček** — bez hesla.
 
-Stripe umí poslat potvrzení. Do vlastního textu (nebo do Stripe e-mailu) přidej:
+## 2. E-mail od Stripe
+
+Do potvrzení objednávky přidej:
 
 ```
-Aplikace: https://jidelnicek-olive.vercel.app/app/
-Heslo (záloha): [downloadPassword z config.js]
-Vstup: https://jidelnicek-olive.vercel.app/stahnout.html
+Otevřete jídelníček: https://jidelnicek-olive.vercel.app/dekujeme.html
+
+(Na mobilu: Sdílet → Přidat na plochu.)
+
+Záložní vstup heslem: https://jidelnicek-olive.vercel.app/stahnout.html
 ```
 
-## Test vs. ostrý prodej
+Heslo = `downloadPassword` v `config.js`.
 
-| Režim | Odkaz začíná |
-|--------|----------------|
-| Test | `buy.stripe.com/test_...` |
-| Live | `buy.stripe.com/...` (bez `test_`) |
+## 3. Test vs. live
 
-Až budeš prodávat naživo, vytvoř **live** Payment Link a vyměň `checkoutUrl` v `config.js` → `git push`.
+| | URL |
+|---|-----|
+| **Test (teď)** | `buy.stripe.com/test_...` |
+| **Ostrý prodej** | vytvoř live Payment Link, vyměň v `config.js` |
 
-## Testovací karta
+Test karta: `4242 4242 4242 4242`
 
-`4242 4242 4242 4242` · libovolné datum · libovolné CVC
+## 4. DPH / faktury
+
+Jako fyzická osoba v ČR sleduj limity pro DPH. Pro vyšší obrat zvaž **Lemon Squeezy** (řeší DPH jako prodejce) — viz `PLATBY.md`.

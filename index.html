@@ -7,6 +7,14 @@
       name="description"
       content="4týdenní rodinný jídelníček s nákupními seznamy. Klid v kuchyni — bez přemýšlení, co vařit."
     />
+    <meta property="og:title" content="Klid v kuchyni — 4 týdny jídla bez stresu" />
+    <meta
+      property="og:description"
+      content="Jídelníček + nákupní seznamy v telefonu. Pro maminky, které chtějí klid v kuchyni."
+    />
+    <meta property="og:url" content="https://jidelnicek-olive.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#2d9a6a" />
     <title>Klid v kuchyni — 4týdenní jídelníček pro rodinu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,7 +42,7 @@
           jednoduché aplikaci v telefonu. Otevřeš a víš.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">Koupit balíček</a>
+          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">Koupit — mám klid na 4 týdny</a>
           <a class="btn btn--ghost" href="app/">Ukázka aplikace</a>
         </div>
         <p class="hero__note" id="hero-price">Jednorázově · okamžitý přístup</p>
@@ -111,7 +119,7 @@
             <li>Bezpečná platba kartou (Stripe)</li>
             <li>Faktura pro ČR / EU</li>
           </ul>
-          <a class="btn btn--primary btn--full" id="btn-koupit" href="#">Koupit a získat přístup</a>
+          <a class="btn btn--primary btn--full" id="btn-koupit" href="#">Koupit a otevřít jídelníček</a>
           <p class="pricing__secure">Bezpečná platba kartou · Apple Pay · Google Pay</p>
         </div>
       </section>
@@ -148,6 +156,14 @@
         <a href="stahnout.html">Mám už zakoupeno</a>
       </p>
     </footer>
+
+    <div class="sticky-bar" id="sticky-bar" aria-hidden="false">
+      <div class="sticky-bar__text">
+        <strong>Klid na 4 týdny</strong>
+        <span id="sticky-price">297 Kč</span>
+      </div>
+      <a class="btn btn--primary sticky-bar__btn" id="sticky-buy" href="#koupit">Koupit</a>
+    </div>
 
     <script src="config.js"></script>
     <script src="site.js"></script>

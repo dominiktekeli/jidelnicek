@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Přístup pro zákaznice — Klid v kuchyni</title>
+    <title>Přístup — Klid v kuchyni</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=DM+Sans:wght@500;600&display=swap"
       rel="stylesheet"
@@ -17,51 +17,53 @@
 
     <div class="page-narrow">
       <h1>Už mám zakoupeno</h1>
-      <p class="hero__lead">
-        Zadej heslo z potvrzovacího e-mailu. Po správném hesle tě pošleme do aplikace.
+      <p class="hero__lead" id="gate-lead">
+        Zadej heslo z e-mailu. Nebo přejdi ze stránky po zaplacení — tam není heslo potřeba.
       </p>
 
       <form class="gate-form" id="gate-form">
         <label for="pass" style="display: block; text-align: left; font-weight: 600; margin-bottom: 0.35rem"
-          >Heslo</label
+          >Heslo z e-mailu</label
         >
         <input
           type="password"
           id="pass"
           name="pass"
           autocomplete="current-password"
-          placeholder="Heslo z e-mailu"
+          placeholder="Heslo"
           required
         />
         <button type="submit" class="btn btn--primary">Vstoupit do aplikace</button>
       </form>
 
-      <p class="msg-error" id="gate-error" hidden>Špatné heslo. Zkontroluj e-mail nebo napiš podporu.</p>
+      <p class="msg-error" id="gate-error" hidden>Špatné heslo. Zkontroluj e-mail.</p>
 
-      <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--muted)">
-        Právě jsi platila?
-        <a href="dekujeme.html">Přejdi na stránku po zaplacení</a>
+      <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--muted)">
+        Právě jsi platila? <a href="dekujeme.html"><strong>Otevřít aplikaci hned</strong></a>
       </p>
     </div>
 
     <script src="config.js"></script>
+    <script src="access.js"></script>
     <script>
       (function () {
-        var cfg = window.KLID_CONFIG || {};
-        var KEY = "klid-pristup-ok";
-
-        if (sessionStorage.getItem(KEY) === "1") {
+        function goApp() {
           window.location.href = "app/";
+        }
+
+        if (window.KLID_ACCESS && KLID_ACCESS.has()) {
+          goApp();
           return;
         }
 
+        var cfg = window.KLID_CONFIG || {};
         document.getElementById("gate-form").addEventListener("submit", function (e) {
           e.preventDefault();
           var val = document.getElementById("pass").value.trim();
           var err = document.getElementById("gate-error");
           if (val && val === cfg.downloadPassword) {
-            sessionStorage.setItem(KEY, "1");
-            window.location.href = "app/";
+            KLID_ACCESS.grant();
+            goApp();
           } else {
             err.hidden = false;
           }

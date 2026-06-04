@@ -432,7 +432,85 @@ section {
   color: var(--primary-dark);
 }
 
+/* Po zaplacení */
+.thanks .btn--huge {
+  min-height: 58px;
+  font-size: 1.15rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.thanks-steps {
+  text-align: left;
+  padding: 1rem 1.1rem;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.thanks-steps p {
+  margin: 0 0 0.75rem;
+}
+
+.thanks-steps p:last-child {
+  margin-bottom: 0;
+}
+
+.thanks-back {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Mobilní lišta Koupit */
+.sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid rgba(28, 25, 23, 0.08);
+  box-shadow: 0 -8px 24px rgba(45, 154, 106, 0.12);
+}
+
+.sticky-bar__text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  line-height: 1.25;
+}
+
+.sticky-bar__text span {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.sticky-bar__btn {
+  min-height: 44px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+body:has(.sticky-bar) {
+  padding-bottom: 5rem;
+}
+
 @media (min-width: 768px) {
+  .sticky-bar {
+    display: none;
+  }
+
+  body:has(.sticky-bar) {
+    padding-bottom: 0;
+  }
+
   .hero {
     padding-top: 3.5rem;
   }
