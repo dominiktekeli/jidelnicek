@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="4týdenní rodinný jídelníček s nákupními seznamy. Klid v kuchyni — bez přemýšlení, co vařit."
+    />
+    <title>Klid v kuchyni — 4týdenní jídelníček pro rodinu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="/">Klid v kuchyni</a>
+      <a class="nav__cta" href="#koupit">Koupit</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="hero__badge">Pro maminky, které chtějí klid</p>
+        <h1 class="hero__title">
+          4 týdny jídla.<br />
+          <em>Bez stresu</em> z toho, co zase vařit.
+        </h1>
+        <p class="hero__lead">
+          Hotový rodinný jídelníček, nákupní seznamy a tipy na úsporu času — v jedné
+          jednoduché aplikaci v telefonu. Otevřeš a víš.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">Koupit balíček</a>
+          <a class="btn btn--ghost" href="/app/">Ukázka aplikace</a>
+        </div>
+        <p class="hero__note" id="hero-price">Jednorázově · okamžitý přístup</p>
+        <div class="hero__mock">
+          <div class="mock-card">
+            <p class="mock-card__day">Dnes · čtvrtek</p>
+            <p class="mock-card__meal"><strong>Oběd</strong> Kuřecí řízek, bramborová kaše</p>
+            <p class="mock-card__meal mock-card__meal--alt"><strong>Večeře</strong> Těstoviny s mozzarellou</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bundle" id="balicek">
+        <h2 class="section-title">Co dostaneš v balíčku</h2>
+        <ul class="bundle__list">
+          <li class="bundle__item">
+            <span class="bundle__icon" aria-hidden="true">📋</span>
+            <div>
+              <h3>4× týdenní jídelníček</h3>
+              <p>Oběd a večeře na každý den — české rodinné recepty.</p>
+            </div>
+          </li>
+          <li class="bundle__item">
+            <span class="bundle__icon" aria-hidden="true">🛒</span>
+            <div>
+              <h3>4× nákupní seznam</h3>
+              <p>Zaškrtáváš v obchodě z mobilu. Nic nezapomeneš.</p>
+            </div>
+          </li>
+          <li class="bundle__item">
+            <span class="bundle__icon" aria-hidden="true">📅</span>
+            <div>
+              <h3>Přehled celého týdne</h3>
+              <p>Vidíš dopředu, co čeká rodinu — bez chaosu.</p>
+            </div>
+          </li>
+          <li class="bundle__item">
+            <span class="bundle__icon" aria-hidden="true">⏱</span>
+            <div>
+              <h3>Tipy na úsporu času</h3>
+              <p>Kratší večery v kuchyni, méně „co zase vařit“.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="weeks-preview">
+        <h2 class="section-title">4 týdny, 4 nálady</h2>
+        <div class="weeks-preview__grid">
+          <article class="week-chip"><span>🍗</span><strong>Týden 1</strong>Oblíbené u dětí</article>
+          <article class="week-chip"><span>🥗</span><strong>Týden 2</strong>Zdravě a rychle</article>
+          <article class="week-chip"><span>💰</span><strong>Týden 3</strong>Šetříme rozpočet</article>
+          <article class="week-chip"><span>☀️</span><strong>Týden 4</strong>Pohodový víkend</article>
+        </div>
+      </section>
+
+      <section class="for-who">
+        <h2 class="section-title">Pro koho je to</h2>
+        <p class="for-who__text">
+          Pro mámu, která vaří pro 3–5 lidí, nemá čas plánovat a chce mít
+          <strong>hotový plán na měsíc</strong> — bez složité aplikace. Stačí telefon a
+          pár klepnutí.
+        </p>
+      </section>
+
+      <section class="pricing" id="koupit">
+        <div class="pricing__card">
+          <p class="pricing__label">Kompletní balíček</p>
+          <p class="pricing__price" id="pricing-price">297 Kč</p>
+          <p class="pricing__sub">Jednorázová platba · tvůj přístup navždy</p>
+          <ul class="pricing__checks">
+            <li>Okamžitý přístup po zaplacení</li>
+            <li>Funguje v prohlížeči (mobil i počítač)</li>
+            <li>Platba včetně DPH (Lemon Squeezy)</li>
+            <li>Faktura pro ČR / EU</li>
+          </ul>
+          <a class="btn btn--primary btn--full" id="btn-koupit" href="#">Koupit a získat přístup</a>
+          <p class="pricing__secure">Bezpečná platba kartou · Apple Pay · Google Pay</p>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2 class="section-title">Časté otázky</h2>
+        <details class="faq__item">
+          <summary>Jak dostanu produkt po zaplacení?</summary>
+          <p>
+            Hned po platbě přijde e-mail s odkazem na stažení / přístup. Stejný odkaz
+            najdeš i na stránce s poděkováním.
+          </p>
+        </details>
+        <details class="faq__item">
+          <summary>Musím něco instalovat?</summary>
+          <p>Ne. Otevřeš odkaz v prohlížeči — jako běžnou stránku. Můžeš si ji přidat na plochu telefonu.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Pro kolik lidí je jídelníček?</summary>
+          <p>Počítáno pro rodinu cca 4 osoby. Porce snadno upravíš podle sebe.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Můžu platit z druhého týdne?</summary>
+          <p>Ano — v aplikaci přepneš Týden 1 až 4 kdykoliv chceš.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Klid v kuchyni</p>
+      <p>
+        <a href="mailto:ahoj@tvujemail.cz" id="footer-email">Kontakt</a>
+        ·
+        <a href="/stahnout.html">Mám už zakoupeno</a>
+      </p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="site.js"></script>
+  </body>
+</html>

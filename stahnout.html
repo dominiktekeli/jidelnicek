@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Přístup pro zákaznice — Klid v kuchyni</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=DM+Sans:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="/">Klid v kuchyni</a>
+    </header>
+
+    <div class="page-narrow">
+      <h1>Už mám zakoupeno</h1>
+      <p class="hero__lead">
+        Zadej heslo z potvrzovacího e-mailu. Po správném hesle tě pošleme do aplikace.
+      </p>
+
+      <form class="gate-form" id="gate-form">
+        <label for="pass" style="display: block; text-align: left; font-weight: 600; margin-bottom: 0.35rem"
+          >Heslo</label
+        >
+        <input
+          type="password"
+          id="pass"
+          name="pass"
+          autocomplete="current-password"
+          placeholder="Heslo z e-mailu"
+          required
+        />
+        <button type="submit" class="btn btn--primary">Vstoupit do aplikace</button>
+      </form>
+
+      <p class="msg-error" id="gate-error" hidden>Špatné heslo. Zkontroluj e-mail nebo napiš podporu.</p>
+
+      <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--muted)">
+        Právě jsi platila?
+        <a href="/dekujeme.html">Přejdi na stránku po zaplacení</a>
+      </p>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+      (function () {
+        var cfg = window.KLID_CONFIG || {};
+        var KEY = "klid-pristup-ok";
+
+        if (sessionStorage.getItem(KEY) === "1") {
+          window.location.href = "/app/";
+          return;
+        }
+
+        document.getElementById("gate-form").addEventListener("submit", function (e) {
+          e.preventDefault();
+          var val = document.getElementById("pass").value.trim();
+          var err = document.getElementById("gate-error");
+          if (val && val === cfg.downloadPassword) {
+            sessionStorage.setItem(KEY, "1");
+            window.location.href = "/app/";
+          } else {
+            err.hidden = false;
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

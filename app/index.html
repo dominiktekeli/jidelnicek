@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Tvůj klidný plán jídla na 4 týdny." />
+    <title>Klid v kuchyni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top">
+        <p class="top__hello">Ahoj, máš to pod kontrolou</p>
+        <h1 class="top__title">Klid v kuchyni</h1>
+        <p class="top__sub">4 týdny jídla · nákup · tipy</p>
+      </header>
+
+      <section class="weeks" aria-label="Vyber týden">
+        <p class="label">Který týden právě jedeš?</p>
+        <div class="weeks__grid" id="week-picker"></div>
+      </section>
+
+      <main class="content" id="main"></main>
+
+      <nav class="bottom" aria-label="Hlavní menu">
+        <button type="button" class="bottom__btn bottom__btn--on" data-mode="food">
+          <span class="bottom__icon">🍽</span>
+          <span>Co vaříme</span>
+        </button>
+        <button type="button" class="bottom__btn" data-mode="shop">
+          <span class="bottom__icon">🛒</span>
+          <span>Nákup</span>
+        </button>
+        <button type="button" class="bottom__btn" data-mode="tip">
+          <span class="bottom__icon">💚</span>
+          <span>Tip</span>
+        </button>
+      </nav>
+
+      <p class="print-link">
+        <button type="button" id="btn-print">Vytisknout tento týden</button>
+      </p>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
