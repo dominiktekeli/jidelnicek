@@ -3,6 +3,7 @@ name: Web na internetu (GitHub Pages)
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,10 +17,21 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Stáhnout kód
+        uses: actions/checkout@v4
+
+      - name: Nastavit Pages
+        uses: actions/configure-pages@v5
+
+      - name: Nahrát soubory
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "."
-      - uses: actions/deploy-pages@v4
+
+      - name: Publikovat web
+        id: deploy
+        uses: actions/deploy-pages@v4
