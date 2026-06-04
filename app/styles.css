@@ -1,22 +1,4 @@
-:root {
-  --bg: linear-gradient(180deg, #fff8f3 0%, #e8f7f0 55%, #f3ecff 100%);
-  --card: #ffffff;
-  --text: #2a2a32;
-  --text-soft: #5c5c6a;
-  --mint: #5ecf9a;
-  --mint-light: #d4f5e6;
-  --mint-dark: #2d9a6a;
-  --peach: #ff9a8b;
-  --peach-light: #ffe8e3;
-  --lavender: #b8a9ff;
-  --lavender-light: #ede8ff;
-  --sun: #ffd166;
-  --sun-light: #fff3d6;
-  --radius: 22px;
-  --touch: 52px;
-  --font: "Nunito", system-ui, sans-serif;
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
+@import url("../tokens.css");
 
 *,
 *::before,
@@ -192,14 +174,26 @@ body {
 .meal-card {
   background: var(--card);
   border-radius: var(--radius);
-  padding: 1.35rem 1.25rem;
-  box-shadow: 0 10px 32px rgba(184, 169, 255, 0.2);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
   margin-bottom: 1rem;
+  border: 2px solid var(--mint-light);
+}
+
+.meal-card__photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.meal-card__inner {
+  padding: 1.2rem 1.2rem 1.3rem;
 }
 
 .meal-card__day {
   margin: 0 0 1rem;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--lavender);
 }

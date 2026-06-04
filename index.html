@@ -13,15 +13,11 @@
       content="Jídelníček + nákupní seznamy v telefonu. Pro maminky, které chtějí klid v kuchyni."
     />
     <meta property="og:url" content="https://jidelnicek-olive.vercel.app/" />
+    <meta property="og:image" content="https://jidelnicek-olive.vercel.app/images/hero-food.jpg" />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#2d9a6a" />
+    <link rel="apple-touch-icon" href="images/food-groceries.jpg" />
     <title>Klid v kuchyni — 4týdenní jídelníček pro rodinu</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="site.css" />
   </head>
   <body>
@@ -38,22 +34,57 @@
           <em>Bez stresu</em> z toho, co zase vařit.
         </h1>
         <p class="hero__lead">
-          Hotový rodinný jídelníček, nákupní seznamy a tipy na úsporu času — v jedné
-          jednoduché aplikaci v telefonu. Otevřeš a víš.
+          Hotový rodinný jídelníček a nákup v telefonu — otevřeš a víš. Jednoduché jako zpráva na
+          Instagramu.
         </p>
         <div class="hero__actions">
           <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">Koupit — mám klid na 4 týdny</a>
           <a class="btn btn--ghost" href="app/">Ukázka aplikace</a>
         </div>
         <p class="hero__note" id="hero-price">Jednorázově · okamžitý přístup</p>
+
+        <figure class="hero__visual">
+          <img src="images/hero-food.jpg" alt="Rodinné jídlo na stole" width="800" height="500" />
+        </figure>
+
         <div class="hero__mock">
           <div class="mock-card">
-            <p class="mock-card__day">Dnes · čtvrtek</p>
-            <p class="mock-card__meal"><strong>Oběd</strong> Kuřecí řízek, bramborová kaše</p>
-            <p class="mock-card__meal mock-card__meal--alt"><strong>Večeře</strong> Těstoviny s mozzarellou</p>
+            <img class="mock-card__img" src="images/food-pasta.jpg" alt="" loading="lazy" />
+            <div class="mock-card__body">
+              <p class="mock-card__day">Dnes · čtvrtek</p>
+              <p class="mock-card__meal"><strong>Oběd</strong> Kuřecí řízek, bramborová kaše</p>
+              <p class="mock-card__meal mock-card__meal--alt">
+                <strong>Večeře</strong> Těstoviny s mozzarellou
+              </p>
+            </div>
           </div>
         </div>
       </section>
+
+      <section class="transform">
+        <h2 class="section-title">Znáš ten pocit?</h2>
+        <p class="transform__lead">Plán na 4 týdny = méně večerů v chaosu, víc chvil pro sebe.</p>
+        <div class="transform__grid">
+          <figure class="transform__card transform__card--before">
+            <img src="images/mom-stressed.jpg" alt="Unavená maminka v kuchyni" loading="lazy" />
+            <span class="transform__label">Před: co zase vařit?</span>
+          </figure>
+          <figure class="transform__card transform__card--after">
+            <img src="images/mom-calm.jpg" alt="Klidná maminka s čajem" loading="lazy" />
+            <span class="transform__label">Po: mám hotový plán</span>
+          </figure>
+        </div>
+        <p class="transform__arrow">→</p>
+      </section>
+
+      <div class="food-strip">
+        <figure class="food-strip__item">
+          <img src="images/food-pasta.jpg" alt="Rodinná večeře" loading="lazy" />
+        </figure>
+        <figure class="food-strip__item">
+          <img src="images/food-groceries.jpg" alt="Nákup na týden" loading="lazy" />
+        </figure>
+      </div>
 
       <section class="bundle" id="balicek">
         <h2 class="section-title">Co dostaneš v balíčku</h2>
@@ -83,7 +114,7 @@
             <span class="bundle__icon" aria-hidden="true">⏱</span>
             <div>
               <h3>Tipy na úsporu času</h3>
-              <p>Kratší večery v kuchyni, méně „co zase vařit“.</p>
+              <p>Kratší večery v kuchyni, méně přemýšlení.</p>
             </div>
           </li>
         </ul>
@@ -102,9 +133,8 @@
       <section class="for-who">
         <h2 class="section-title">Pro koho je to</h2>
         <p class="for-who__text">
-          Pro mámu, která vaří pro 3–5 lidí, nemá čas plánovat a chce mít
-          <strong>hotový plán na měsíc</strong> — bez složité aplikace. Stačí telefon a
-          pár klepnutí.
+          Pro mámu 30–45 let, která vaří pro rodinu, nemá čas plánovat a chce
+          <strong>hotový plán na měsíc</strong> — bez složité aplikace. Stačí telefon.
         </p>
       </section>
 
@@ -112,15 +142,15 @@
         <div class="pricing__card">
           <p class="pricing__label">Kompletní balíček</p>
           <p class="pricing__price" id="pricing-price">297 Kč</p>
-          <p class="pricing__sub">Jednorázová platba · tvůj přístup navždy</p>
+          <p class="pricing__sub">Jednorázová platba · přístup hned po zaplacení</p>
           <ul class="pricing__checks">
-            <li>Okamžitý přístup po zaplacení</li>
+            <li>Okamžitý přístup — jedno tlačítko</li>
             <li>Funguje v prohlížeči (mobil i počítač)</li>
+            <li>Přidat na plochu jako „aplikace“</li>
             <li>Bezpečná platba kartou (Stripe)</li>
-            <li>Faktura pro ČR / EU</li>
           </ul>
           <a class="btn btn--primary btn--full" id="btn-koupit" href="#">Koupit a otevřít jídelníček</a>
-          <p class="pricing__secure">Bezpečná platba kartou · Apple Pay · Google Pay</p>
+          <p class="pricing__secure">Karta · Apple Pay · Google Pay</p>
         </div>
       </section>
 
@@ -128,22 +158,19 @@
         <h2 class="section-title">Časté otázky</h2>
         <details class="faq__item">
           <summary>Jak dostanu produkt po zaplacení?</summary>
-          <p>
-            Hned po platbě přijde e-mail s odkazem na stažení / přístup. Stejný odkaz
-            najdeš i na stránce s poděkováním.
-          </p>
+          <p>Hned tě přesměrujeme na stránku s odkazem do aplikace. Stejný odkaz přijde i e-mailem.</p>
         </details>
         <details class="faq__item">
           <summary>Musím něco instalovat?</summary>
-          <p>Ne. Otevřeš odkaz v prohlížeči — jako běžnou stránku. Můžeš si ji přidat na plochu telefonu.</p>
+          <p>Ne. Otevřeš odkaz v prohlížeči. Na mobilu: Sdílet → Přidat na plochu.</p>
         </details>
         <details class="faq__item">
           <summary>Pro kolik lidí je jídelníček?</summary>
-          <p>Počítáno pro rodinu cca 4 osoby. Porce snadno upravíš podle sebe.</p>
+          <p>Počítáno pro rodinu cca 4 osoby.</p>
         </details>
         <details class="faq__item">
-          <summary>Můžu platit z druhého týdne?</summary>
-          <p>Ano — v aplikaci přepneš Týden 1 až 4 kdykoliv chceš.</p>
+          <summary>Můžu začít od týdne 2?</summary>
+          <p>Ano — v aplikaci přepneš Týden 1 až 4 kdykoliv.</p>
         </details>
       </section>
     </main>
@@ -157,7 +184,7 @@
       </p>
     </footer>
 
-    <div class="sticky-bar" id="sticky-bar" aria-hidden="false">
+    <div class="sticky-bar" id="sticky-bar">
       <div class="sticky-bar__text">
         <strong>Klid na 4 týdny</strong>
         <span id="sticky-price">297 Kč</span>
@@ -175,11 +202,8 @@
     <script>
       (function () {
         var ref = document.referrer || "";
-        var fromStripe = ref.indexOf("stripe.com") !== -1;
-        var params = new URLSearchParams(window.location.search);
-        if (fromStripe || params.get("platba") === "ok") {
-          var box = document.getElementById("stripe-return");
-          if (box) box.hidden = false;
+        if (ref.indexOf("stripe.com") !== -1 || new URLSearchParams(location.search).get("platba") === "ok") {
+          document.getElementById("stripe-return").hidden = false;
         }
       })();
     </script>

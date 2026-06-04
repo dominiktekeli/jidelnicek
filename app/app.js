@@ -4,6 +4,16 @@
 
   const DAY_ORDER = ["ne", "po", "ut", "st", "ct", "pa", "so"];
 
+  const MEAL_IMAGES = {
+    po: "../images/hero-food.jpg",
+    ut: "../images/food-pasta.jpg",
+    st: "../images/food-groceries.jpg",
+    ct: "../images/hero-food.jpg",
+    pa: "../images/food-pasta.jpg",
+    so: "../images/food-groceries.jpg",
+    ne: "../images/hero-food.jpg",
+  };
+
   const CAT_EMOJI = {
     "Maso & ryby": "🥩",
     "Maso & alternativy": "🥩",
@@ -92,20 +102,25 @@
         `<button type="button" class="day-pill${x.id === day ? " day-pill--on" : ""}" data-day="${x.id}">${x.short}</button>`
     ).join("");
 
+    const photo = MEAL_IMAGES[day] || "../images/hero-food.jpg";
+
     return `
       ${isToday ? '<p class="calm-msg">Dnes už víš, co vařit. Bez přemýšlení.</p>' : ""}
       <div class="days">${pills}</div>
       <article class="meal-card">
-        <h2 class="meal-card__day">${esc(d.label)}</h2>
-        <div class="meal-row">
-          <span class="meal-row__tag">Oběd</span>
-          <span class="meal-row__food">${esc(m.lunch)}</span>
+        <img class="meal-card__photo" src="${photo}" alt="" loading="lazy" />
+        <div class="meal-card__inner">
+          <h2 class="meal-card__day">${esc(d.label)}</h2>
+          <div class="meal-row">
+            <span class="meal-row__tag">Oběd</span>
+            <span class="meal-row__food">${esc(m.lunch)}</span>
+          </div>
+          <div class="meal-row meal-row--dinner">
+            <span class="meal-row__tag">Večeře</span>
+            <span class="meal-row__food">${esc(m.dinner)}</span>
+          </div>
+          <p class="meal-card__hint"><span>Tip:</span> ${esc(m.prep)}</p>
         </div>
-        <div class="meal-row meal-row--dinner">
-          <span class="meal-row__tag">Večeře</span>
-          <span class="meal-row__food">${esc(m.dinner)}</span>
-        </div>
-        <p class="meal-card__hint"><span>Tip:</span> ${esc(m.prep)}</p>
       </article>
     `;
   }
