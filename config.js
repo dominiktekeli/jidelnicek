@@ -1,17 +1,16 @@
-// Nastav po vytvoření produktu v Lemon Squeezy (viz README)
+// Nastavení pro https://jidelnicek-olive.vercel.app
 window.KLID_CONFIG = {
-  // Checkout URL z: Lemon Squeezy → Products → Share → Checkout link
+  siteUrl: "https://jidelnicek-olive.vercel.app",
+
+  // Lemon Squeezy → Products → Share → Checkout link (doplň své ID)
   checkoutUrl: "https://YOUR-STORE.lemonsqueezy.com/checkout/buy/VAŠE-ID",
 
-  // Payhip (alternativa k LS) — pokud vyplníš, tlačítko Koupit povede sem
   payhipUrl: "",
 
-  // Cena jen pro zobrazení (skutečnou cenu nastavíš v Lemon Squeezy)
   priceDisplay: "297 Kč",
 
-  // Heslo pro /stahnout.html — změň před spuštěním (nebo vypni a použij jen e-mail z LS)
+  // Heslo pro stahnout.html — stejné pošli v potvrzovacím e-mailu z Lemon Squeezy
   downloadPassword: "zmen-heslo-2026",
 
-  // Podpora
   supportEmail: "ahoj@tvujemail.cz",
 };

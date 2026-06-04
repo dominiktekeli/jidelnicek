@@ -29,11 +29,11 @@ supportEmail: "ahoj@tvoje-domena.cz",
 3. **Price** — např. 297 Kč / EUR podle trhu.
 4. **Files** (volitelné) — můžeš přiložit PDF; hlavní produkt je odkaz na web.
 5. **Confirmation email** — do těla e-mailu vlož:
-   - Odkaz na aplikaci: `https://TVOJE-DOMENA.vercel.app/app/`
+   - Odkaz na aplikaci: `https://jidelnicek-olive.vercel.app/app/`
    - Heslo: stejné jako `downloadPassword` v `config.js`
-   - Odkaz: `https://TVOJE-DOMENA.vercel.app/stahnout.html`
+   - Odkaz: `https://jidelnicek-olive.vercel.app/stahnout.html`
 6. **Product → Settings → Confirmation modal / Redirect URL**:
-   - `https://TVOJE-DOMENA.vercel.app/dekujeme.html`
+   - `https://jidelnicek-olive.vercel.app/dekujeme.html`
 7. Zkopíruj **Checkout link** do `config.js` → `checkoutUrl`.
 
 ### Payhip (alternativa)

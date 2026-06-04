@@ -1,12 +1,21 @@
 # Kde uvidíš web a aplikaci na internetu
 
-## Adresy (po zapnutí GitHub Pages)
+## Hlavní adresa (Vercel) — aktivní
+
+| Co | Odkaz |
+|----|--------|
+| **Prodejní stránka** | https://jidelnicek-olive.vercel.app/ |
+| **Koupit (kotva)** | https://jidelnicek-olive.vercel.app/#koupit |
+| **Aplikace** | https://jidelnicek-olive.vercel.app/app/ |
+| **Po zaplacení** | https://jidelnicek-olive.vercel.app/dekujeme.html |
+| **Vstup heslem** | https://jidelnicek-olive.vercel.app/stahnout.html |
+
+## Záloha (GitHub Pages)
 
 | Co | Odkaz |
 |----|--------|
 | **Prodejní stránka** | https://dominiktekeli.github.io/jidelnicek/ |
-| **Aplikace (náhled)** | https://dominiktekeli.github.io/jidelnicek/app/ |
-| **Po zaplacení** | https://dominiktekeli.github.io/jidelnicek/dekujeme.html |
+| **Aplikace** | https://dominiktekeli.github.io/jidelnicek/app/ |
 
 ## Jednorázově zapni Pages (2 kliky)
 
