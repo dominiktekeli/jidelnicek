@@ -316,10 +316,11 @@ img {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
-/* Slider jídel — 5 oken vedle sebe, šedé mimo aktivní, celá šířka stránky */
+/* Nekonečný slider jídel — celá šířka, jede za okraj a vrací se z druhé strany */
 .hero__meals {
   --meal-card-w: clamp(11.5rem, 17.5vw, 16.5rem);
   --meal-gap: 0.75rem;
+  --slider-duration: 38s;
   margin: 0.85rem 0 0;
   width: 100vw;
   max-width: 100vw;
@@ -340,31 +341,45 @@ img {
   text-align: center;
 }
 
-.hero-meals-rail {
+.hero-meals-slider {
   width: 100%;
 }
 
-.hero-meals-rail__viewport {
+.hero-meals-slider__viewport {
   overflow: hidden;
   width: 100%;
-  padding: 0.35rem 0 0.5rem;
+  padding: 0.35rem 0 0.65rem;
   touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
-.hero-meals-rail__track {
+.hero-meals-slider__track {
   display: flex;
   align-items: stretch;
   gap: var(--meal-gap);
   width: max-content;
-  padding: 0.25rem max(1rem, calc((100vw - (5 * var(--meal-card-w) + 4 * var(--meal-gap))) / 2)) 0.85rem;
+  padding: 0.25rem 0;
   will-change: transform;
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: hero-meals-slide var(--slider-duration) linear infinite;
 }
 
-@media (max-width: 900px) {
-  .hero-meals-rail__track {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.hero-meals-slider.is-paused .hero-meals-slider__track {
+  animation-play-state: paused;
+}
+
+@keyframes hero-meals-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-1 * var(--slider-shift, 0px)), 0, 0);
   }
 }
 
@@ -377,25 +392,6 @@ img {
   border-radius: var(--radius);
   border: 2px solid var(--mint-light);
   box-shadow: var(--shadow-soft);
-  transition:
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.55s ease,
-    filter 0.55s ease,
-    border-color 0.55s ease,
-    box-shadow 0.55s ease;
-  filter: grayscale(0.85) saturate(0.45);
-  opacity: 0.58;
-  transform: scale(0.96);
-}
-
-.hero-meals-card.is-active {
-  filter: none;
-  opacity: 1;
-  transform: scale(1);
-  border-color: rgba(45, 154, 106, 0.55);
-  box-shadow:
-    0 16px 36px rgba(46, 154, 106, 0.18),
-    0 0 0 3px var(--mint-light);
 }
 
 .hero-meals-card img {
@@ -430,41 +426,9 @@ img {
   color: var(--text);
 }
 
-.hero-meals-rail__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.15rem 1rem 0.35rem;
-}
-
-.hero-meals-rail__dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  background: var(--mint-light);
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.hero-meals-rail__dot.is-active {
-  transform: scale(1.25);
-  background: var(--mint-dark);
-}
-
-.hero-meals-rail__dot:focus-visible {
-  outline: 2px solid var(--mint-dark);
-  outline-offset: 2px;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-meals-rail__track {
-    transition: none;
-  }
-
-  .hero-meals-card {
-    transition: none;
+  .hero-meals-slider__track {
+    animation: none;
   }
 }
 

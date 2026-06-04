@@ -102,113 +102,69 @@
     });
   }
 
-  function wireHeroMealsCarousel() {
+  function wireHeroMealsSlider() {
     const root = document.getElementById("hero-meals");
-    const viewport = document.getElementById("hero-meals-viewport");
+    const slider = document.getElementById("hero-meals-slider");
     const track = document.getElementById("hero-meals-track");
-    const dotsWrap = document.getElementById("hero-meals-dots");
-    if (!root || !viewport || !track || !dotsWrap) return;
+    if (!root || !slider || !track) return;
 
-    const cards = Array.from(track.querySelectorAll(".hero-meals-card"));
-    if (cards.length < 2) return;
+    const originals = Array.from(
+      track.querySelectorAll(".hero-meals-card:not(.hero-meals-card--clone)")
+    );
+    if (originals.length < 2) return;
 
-    let index = 0;
-    let timer = null;
-    const intervalMs = 3800;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function maxOffset() {
-      const last = cards[cards.length - 1];
-      const vp = viewport.clientWidth;
-      const end = last.offsetLeft + last.offsetWidth;
-      return Math.max(0, end - vp + parseFloat(getComputedStyle(track).paddingRight || 0));
+    originals.forEach(function (card) {
+      const clone = card.cloneNode(true);
+      clone.classList.add("hero-meals-card--clone");
+      clone.setAttribute("aria-hidden", "true");
+      clone.removeAttribute("data-index");
+      track.appendChild(clone);
+    });
+
+    function syncLoopMetrics() {
+      const loopWidth = track.scrollWidth / 2;
+      track.style.setProperty("--slider-shift", loopWidth + "px");
+      const pxPerSec = 52;
+      const duration = Math.max(24, Math.round(loopWidth / pxPerSec));
+      root.style.setProperty("--slider-duration", duration + "s");
     }
 
-    function offsetForIndex(i) {
-      const card = cards[i];
-      if (!card) return 0;
-      const vp = viewport.clientWidth;
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      let x = cardCenter - vp / 2;
-      const max = maxOffset();
-      if (x < 0) return 0;
-      if (x > max) return max;
-      return x;
-    }
-
-    function goTo(i) {
-      index = Math.max(0, Math.min(i, cards.length - 1));
-      track.style.transform = "translate3d(-" + offsetForIndex(index) + "px, 0, 0)";
-      cards.forEach(function (card, n) {
-        card.classList.toggle("is-active", n === index);
-      });
-      dotsWrap.querySelectorAll(".hero-meals-rail__dot").forEach(function (dot, n) {
-        dot.classList.toggle("is-active", n === index);
-        dot.setAttribute("aria-selected", n === index ? "true" : "false");
+    function afterLayout() {
+      requestAnimationFrame(function () {
+        syncLoopMetrics();
+        requestAnimationFrame(syncLoopMetrics);
       });
     }
 
-    cards.forEach(function (_, n) {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "hero-meals-rail__dot" + (n === 0 ? " is-active" : "");
-      dot.setAttribute("role", "tab");
-      dot.setAttribute("aria-label", "Jídlo " + (n + 1));
-      dot.setAttribute("aria-selected", n === 0 ? "true" : "false");
-      dot.addEventListener("click", function () {
-        goTo(n);
-        restartAutoplay();
-      });
-      dotsWrap.appendChild(dot);
+    afterLayout();
+    window.addEventListener("resize", syncLoopMetrics);
+    track.querySelectorAll("img").forEach(function (img) {
+      if (!img.complete) {
+        img.addEventListener("load", syncLoopMetrics, { once: true });
+      }
     });
 
-    function restartAutoplay() {
-      if (reducedMotion) return;
-      if (timer) window.clearInterval(timer);
-      timer = window.setInterval(function () {
-        if (index >= cards.length - 1) {
-          goTo(0);
-        } else {
-          goTo(index + 1);
-        }
-      }, intervalMs);
-    }
+    if (reducedMotion) return;
 
-    let touchX = 0;
-    viewport.addEventListener(
-      "touchstart",
-      function (e) {
-        touchX = e.changedTouches[0].screenX;
-      },
-      { passive: true }
-    );
-    viewport.addEventListener(
-      "touchend",
-      function (e) {
-        const dx = e.changedTouches[0].screenX - touchX;
-        if (Math.abs(dx) < 40) return;
-        goTo(dx < 0 ? index + 1 : index - 1);
-        restartAutoplay();
-      },
-      { passive: true }
-    );
-
-    root.addEventListener("mouseenter", function () {
-      if (timer) window.clearInterval(timer);
+    slider.addEventListener("mouseenter", function () {
+      slider.classList.add("is-paused");
     });
-    root.addEventListener("mouseleave", restartAutoplay);
-
-    window.addEventListener("resize", function () {
-      goTo(index);
+    slider.addEventListener("mouseleave", function () {
+      slider.classList.remove("is-paused");
     });
-
-    goTo(0);
-    restartAutoplay();
+    slider.addEventListener("focusin", function () {
+      slider.classList.add("is-paused");
+    });
+    slider.addEventListener("focusout", function () {
+      slider.classList.remove("is-paused");
+    });
   }
 
   wireBuyButtons();
   wirePrice();
   wireEmail();
   wireHeroVideo();
-  wireHeroMealsCarousel();
+  wireHeroMealsSlider();
 })();
