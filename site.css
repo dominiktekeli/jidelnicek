@@ -462,6 +462,32 @@ section {
   color: var(--muted);
 }
 
+/* Návrat ze Stripe bez redirectu */
+.stripe-return {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 5.5rem;
+  z-index: 45;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: var(--primary-soft);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stripe-return p {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+}
+
+.stripe-return .btn {
+  width: 100%;
+}
+
 /* Mobilní lišta Koupit */
 .sticky-bar {
   position: fixed;

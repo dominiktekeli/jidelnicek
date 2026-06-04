@@ -2,13 +2,17 @@
 
 **Web:** https://jidelnicek-olive.vercel.app
 
-## 1. Redirect po platbě (povinné)
+## 1. Redirect po platbě (povinné — bez toho to nefunguje)
 
-Stripe → **Payment Links** → tvůj link → **After payment** → **Redirect**:
+**Podrobný návod s obrázky kroků:** soubor `STRIPE-REDIRECT.md`
+
+Ve zkratce: Payment Link → **Upravit** → **Po platbě** → **Přesměrovat na web**:
 
 ```
 https://jidelnicek-olive.vercel.app/dekujeme.html
 ```
+
+Nepoužívej jen „potvrzovací stránku Stripe“ — tam redirect není.
 
 Zákaznice po zaplacení uvidí velké tlačítko **Otevřít jídelníček** — bez hesla.
 

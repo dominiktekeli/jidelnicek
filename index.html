@@ -165,7 +165,23 @@
       <a class="btn btn--primary sticky-bar__btn" id="sticky-buy" href="#koupit">Koupit</a>
     </div>
 
+    <div class="stripe-return" id="stripe-return" hidden>
+      <p><strong>Právě jsi platila?</strong> Tady je tvůj jídelníček:</p>
+      <a class="btn btn--primary" href="dekujeme.html">Otevřít po zaplacení</a>
+    </div>
+
     <script src="config.js"></script>
     <script src="site.js"></script>
+    <script>
+      (function () {
+        var ref = document.referrer || "";
+        var fromStripe = ref.indexOf("stripe.com") !== -1;
+        var params = new URLSearchParams(window.location.search);
+        if (fromStripe || params.get("platba") === "ok") {
+          var box = document.getElementById("stripe-return");
+          if (box) box.hidden = false;
+        }
+      })();
+    </script>
   </body>
 </html>

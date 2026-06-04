@@ -44,6 +44,11 @@
       (function () {
         if (window.KLID_ACCESS) KLID_ACCESS.grant();
 
+        /* Stripe redirect často přidá ?session_id=... */
+        if (window.location.search.indexOf("session_id=") !== -1 && window.KLID_ACCESS) {
+          KLID_ACCESS.grant();
+        }
+
         var cfg = window.KLID_CONFIG || {};
         var appUrl = (cfg.siteUrl || "") + "/app/";
         if (cfg.siteUrl) {
