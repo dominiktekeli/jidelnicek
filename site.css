@@ -120,6 +120,23 @@ img {
   font-weight: 600;
 }
 
+.hero__note--social {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.55rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hero__stars {
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+  color: #e8a317;
+  line-height: 1;
+}
+
 .hero__video {
   position: relative;
   margin: 0 auto 1.25rem;
