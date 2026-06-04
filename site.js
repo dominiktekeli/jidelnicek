@@ -122,14 +122,14 @@
 
     function goTo(i) {
       index = (i + slides.length) % slides.length;
-      slides.forEach(function (slide, n) {
-        slide.classList.toggle("is-active", n === index);
-      });
+      track.style.transform = "translate3d(-" + index * 100 + "%, 0, 0)";
       dotsWrap.querySelectorAll(".hero-meals__dot").forEach(function (dot, n) {
         dot.classList.toggle("is-active", n === index);
         dot.setAttribute("aria-selected", n === index ? "true" : "false");
       });
     }
+
+    goTo(0);
 
     slides.forEach(function (_, n) {
       const dot = document.createElement("button");
@@ -153,15 +153,17 @@
       }, intervalMs);
     }
 
+    const viewport = track.parentElement;
     let touchX = 0;
-    track.addEventListener(
+    const swipeTarget = viewport || track;
+    swipeTarget.addEventListener(
       "touchstart",
       function (e) {
         touchX = e.changedTouches[0].screenX;
       },
       { passive: true }
     );
-    track.addEventListener(
+    swipeTarget.addEventListener(
       "touchend",
       function (e) {
         const dx = e.changedTouches[0].screenX - touchX;
