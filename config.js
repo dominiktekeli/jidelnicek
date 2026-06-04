@@ -5,6 +5,8 @@ window.KLID_CONFIG = {
   // Stripe Payment Link — pro live prodej vyměň test odkaz za live (bez "test_" v URL)
   checkoutUrl: "https://buy.stripe.com/test_4gM28rcAB6Zl1Zy92n3Je00",
 
+  thankYouUrl: "https://jidelnicek-olive.vercel.app/dekujeme.html",
+
   payhipUrl: "",
 
   priceDisplay: "297 Kč",
