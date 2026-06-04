@@ -12,7 +12,7 @@
   </head>
   <body>
     <header class="nav">
-      <a class="nav__logo" href="/">Klid v kuchyni</a>
+      <a class="nav__logo" href="./">Klid v kuchyni</a>
     </header>
 
     <div class="page-narrow">
@@ -40,7 +40,7 @@
 
       <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--muted)">
         Právě jsi platila?
-        <a href="/dekujeme.html">Přejdi na stránku po zaplacení</a>
+        <a href="dekujeme.html">Přejdi na stránku po zaplacení</a>
       </p>
     </div>
 
@@ -51,7 +51,7 @@
         var KEY = "klid-pristup-ok";
 
         if (sessionStorage.getItem(KEY) === "1") {
-          window.location.href = "/app/";
+          window.location.href = "app/";
           return;
         }
 
@@ -61,7 +61,7 @@
           var err = document.getElementById("gate-error");
           if (val && val === cfg.downloadPassword) {
             sessionStorage.setItem(KEY, "1");
-            window.location.href = "/app/";
+            window.location.href = "app/";
           } else {
             err.hidden = false;
           }
