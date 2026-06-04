@@ -106,8 +106,83 @@
     });
   }
 
+  function wireHeroMealsCarousel() {
+    const root = document.getElementById("hero-meals");
+    const track = document.getElementById("hero-meals-track");
+    const dotsWrap = document.getElementById("hero-meals-dots");
+    if (!root || !track || !dotsWrap) return;
+
+    const slides = Array.from(track.querySelectorAll(".hero-meals__slide"));
+    if (slides.length < 2) return;
+
+    let index = 0;
+    let timer = null;
+    const intervalMs = 4200;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      slides.forEach(function (slide, n) {
+        slide.classList.toggle("is-active", n === index);
+      });
+      dotsWrap.querySelectorAll(".hero-meals__dot").forEach(function (dot, n) {
+        dot.classList.toggle("is-active", n === index);
+        dot.setAttribute("aria-selected", n === index ? "true" : "false");
+      });
+    }
+
+    slides.forEach(function (_, n) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "hero-meals__dot" + (n === 0 ? " is-active" : "");
+      dot.setAttribute("role", "tab");
+      dot.setAttribute("aria-label", "Jídlo " + (n + 1));
+      dot.setAttribute("aria-selected", n === 0 ? "true" : "false");
+      dot.addEventListener("click", function () {
+        goTo(n);
+        restartAutoplay();
+      });
+      dotsWrap.appendChild(dot);
+    });
+
+    function restartAutoplay() {
+      if (reducedMotion) return;
+      if (timer) window.clearInterval(timer);
+      timer = window.setInterval(function () {
+        goTo(index + 1);
+      }, intervalMs);
+    }
+
+    let touchX = 0;
+    track.addEventListener(
+      "touchstart",
+      function (e) {
+        touchX = e.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+    track.addEventListener(
+      "touchend",
+      function (e) {
+        const dx = e.changedTouches[0].screenX - touchX;
+        if (Math.abs(dx) < 40) return;
+        goTo(dx < 0 ? index + 1 : index - 1);
+        restartAutoplay();
+      },
+      { passive: true }
+    );
+
+    root.addEventListener("mouseenter", function () {
+      if (timer) window.clearInterval(timer);
+    });
+    root.addEventListener("mouseleave", restartAutoplay);
+
+    restartAutoplay();
+  }
+
   wireBuyButtons();
   wirePrice();
   wireEmail();
   wireHeroVideo();
+  wireHeroMealsCarousel();
 })();
