@@ -944,7 +944,7 @@ section {
   margin: 0 auto 1.25rem;
   padding: 0;
   max-width: 26rem;
-  text-align: left;
+  text-align: center;
 }
 
 .demo__features li {
@@ -955,6 +955,9 @@ section {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text);
+  text-align: left;
+  margin: 0 auto;
+  max-width: fit-content;
 }
 
 .demo__features span {
