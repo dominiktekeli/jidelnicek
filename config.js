@@ -19,6 +19,6 @@ window.KLID_CONFIG = {
 
   supportEmail: "klidvkuchyni@gmail.com",
 
-  legalName: "Dominik Tekeli",
+  legalName: "Klid v kuchyni",
   legalIco: "21428808",
 };
