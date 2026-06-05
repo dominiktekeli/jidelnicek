@@ -12,7 +12,7 @@
     { href: "obchodni-podminky.html", label: "Obchodní podmínky" },
     { href: "podminky-sluzby.html", label: "Podmínky služby" },
     { href: "pravni-upozorneni.html", label: "Právní upozornění" },
-    { href: "vraceni-penez.html", label: "Zásady vrácení peněz" },
+    { href: "vraceni-penez.html", label: "Odstoupení od smlouvy" },
     { href: "cookies.html", label: "Soubory cookie" },
   ];
 

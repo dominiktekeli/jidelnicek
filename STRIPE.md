@@ -97,14 +97,10 @@ https://jidelnicek-olive.vercel.app/stahnout.html
 - **Support email:** tvůj e-mail
 - **Policy links** (nastav na webu):
   - Obchodní podmínky: `https://jidelnicek-olive.vercel.app/obchodni-podminky.html`
-  - Vrácení peněz: `https://jidelnicek-olive.vercel.app/vraceni-penez.html`
+  - Odstoupení / reklamace: `https://jidelnicek-olive.vercel.app/vraceni-penez.html`
   - Ochrana údajů: `https://jidelnicek-olive.vercel.app/ochrana-osobnich-udaju.html`
 
-Krátká věta k vrácení (pokud nabízíš garanci):
-
-```
-Nespokojenost do 14 dní — napiš na support e-mail, vrátíme platbu.
-```
+Dobrovolné vrácení peněz **neposkytujeme** — v Stripe nepiš garanci spokojenosti.
 
 ---
 
