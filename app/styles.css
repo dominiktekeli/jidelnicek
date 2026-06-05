@@ -230,6 +230,15 @@ body {
   background: var(--mint-light);
 }
 
+.meal-clickable {
+  transition: background 0.1s ease;
+  border-radius: 16px;
+}
+
+.meal-clickable:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
 .meal-row__tag {
   display: block;
   font-size: 0.85rem;
