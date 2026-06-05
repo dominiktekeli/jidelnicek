@@ -2010,37 +2010,37 @@ body:has(.sticky-bar) {
   .sticky-bar {
     padding-left: 0.3rem;
     padding-right: 0.3rem;
-    padding-top: 0.2rem;
-    padding-bottom: calc(0.2rem + var(--safe-bottom));
+    padding-top: 0.25rem;
+    padding-bottom: calc(0.25rem + var(--safe-bottom));
   }
 
   .sticky-bar__inner {
-    gap: 0.3rem;
-    padding: 0.2rem 0.4rem 0.2rem 0.5rem;
+    gap: 0.35rem;
+    padding: 0.25rem 0.45rem 0.25rem 0.55rem;
   }
 
   .sticky-bar__icon {
-    width: 1.4rem;
-    height: 1.4rem;
-    font-size: 0.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
   }
 
   .sticky-bar__text strong {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
   }
 
   .sticky-bar__sub {
-    font-size: 0.55rem;
+    font-size: 0.58rem;
   }
 
   .sticky-bar__btn {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.7rem;
-    min-height: 32px;
+    padding: 0.22rem 0.55rem;
+    font-size: 0.74rem;
+    min-height: 34px;
   }
 
   body:has(.sticky-bar) {
-    padding-bottom: calc(3rem + var(--safe-bottom));
+    padding-bottom: calc(3.3rem + var(--safe-bottom));
   }
 }
 
@@ -2055,32 +2055,54 @@ body:has(.sticky-bar) {
     font-size: 0.82rem;
   }
 
-  /* Make sticky even more compact on typical phones */
+  .hero__faces img {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .hero__stars {
+    font-size: 1rem;
+  }
+
+  .hero__rating-num {
+    font-size: 0.9rem;
+  }
+
+  .hero__lead {
+    font-size: 1.12rem;
+  }
+
+  .hero__video-tag {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  /* Slightly enlarge sticky bar for better readability/tap on phone for 40+ */
   .sticky-bar {
-    padding: 0.2rem 0.35rem calc(0.2rem + var(--safe-bottom));
+    padding: 0.3rem 0.45rem calc(0.3rem + var(--safe-bottom));
   }
   .sticky-bar__inner {
-    padding: 0.2rem 0.4rem 0.2rem 0.5rem;
-    gap: 0.3rem;
+    padding: 0.3rem 0.55rem 0.3rem 0.65rem;
+    gap: 0.4rem;
   }
   .sticky-bar__icon {
-    width: 1.3rem;
-    height: 1.3rem;
-    font-size: 0.65rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 0.8rem;
   }
   .sticky-bar__text strong {
-    font-size: 0.62rem;
+    font-size: 0.72rem;
   }
   .sticky-bar__sub {
-    font-size: 0.52rem;
+    font-size: 0.62rem;
   }
   .sticky-bar__btn {
-    min-height: 30px;
-    padding: 0.18rem 0.5rem;
-    font-size: 0.68rem;
+    min-height: 36px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.78rem;
   }
   body:has(.sticky-bar) {
-    padding-bottom: calc(3rem + var(--safe-bottom));
+    padding-bottom: calc(3.6rem + var(--safe-bottom));
   }
 }
 
