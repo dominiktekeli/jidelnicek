@@ -3,7 +3,15 @@
 
   function checkoutUrl() {
     if (cfg.payhipUrl) return cfg.payhipUrl;
-    return cfg.checkoutUrl || "#koupit";
+    const base = cfg.checkoutUrl || "#koupit";
+    if (!base.startsWith("http") || !cfg.stripeLocale) return base;
+    try {
+      const u = new URL(base);
+      u.searchParams.set("locale", cfg.stripeLocale);
+      return u.toString();
+    } catch (e) {
+      return base;
+    }
   }
 
   function isCheckoutReady() {

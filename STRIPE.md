@@ -17,6 +17,36 @@ Payment Link **není** Shopify košík — nejde tam velký marketingový sloupe
 
 **Nevyplňuj** u Payment Linku: dodací adresu, telefon (pokud nepotřebuješ), předplatné.
 
+## Česká pokladna (jazyk + Kč)
+
+### 1. Jazyk checkoutu (pro zákaznice)
+
+V `config.js` je `stripeLocale: "cs"` — web k odkazu **Koupit** automaticky přidá `?locale=cs`.
+
+Ručně v Dashboardu u Payment Linku: **Copy link** → **Add URL parameters** → `locale` = `cs`.
+
+Nebo na konec odkazu:
+
+```
+https://buy.stripe.com/...?locale=cs
+```
+
+Checkout pak bude česky (e-mail, karta, souhrn). Tlačítko může zůstat „Zaplatit“ / „Pay“ podle verze Stripe.
+
+### 2. Měna produktu
+
+**Products** → cena musí být **CZK** (297 Kč), ne EUR/USD.
+
+### 3. Jazyk Stripe Dashboardu (jen pro tebe)
+
+[Dashboard](https://dashboard.stripe.com) → ikona účtu → **Settings** → **Personal details** / jazyk prohlížeče — admin rozhraní, ne pokladna zákaznice.
+
+### 4. Účet Stripe
+
+Při zakládání účtu zvol **Česko** jako zemi podnikání (ovlivní výpisy a některá nastavení). Už hotový účet: **Settings → Business** — země se mění jen přes podporu Stripe.
+
+---
+
 ### Název produktu (Product name)
 
 ```
