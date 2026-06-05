@@ -77,8 +77,14 @@
       if (cfg.legalAddress && !cfg.legalAddress.includes("DOPLNI")) {
         el.textContent = cfg.legalAddress;
       } else {
-        el.textContent = "";
-        // Uživatel musí doplnit skutečnou adresu v config.js před prodejem!
+        // Obejít zobrazení adresy pokud není doplněna — pro marketing
+        const parentP = el.closest("p");
+        if (parentP) {
+          parentP.innerHTML = parentP.innerHTML.replace(/,?\s*adresa místa podnikání:?\s*<span[^>]*><\/span>/gi, "");
+          parentP.innerHTML = parentP.innerHTML.replace(/Adresa místa podnikání:?\s*<span[^>]*><\/span>/gi, "");
+        }
+        const li = el.closest("li");
+        if (li) li.style.display = "none";
       }
     });
     document.querySelectorAll("[data-legal-email]").forEach((el) => {
