@@ -1,11 +1,25 @@
 {
   "name": "Klid v kuchyni",
-  "short_name": "Jídelníček",
+  "short_name": "Klid v kuchyni",
   "description": "4týdenní rodinný jídelníček a nákupní seznamy",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#fff8f3",
   "theme_color": "#2d9a6a",
   "lang": "cs",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "../images/logo-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "../images/logo-app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }

@@ -48,10 +48,24 @@ img {
 }
 
 .nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.1;
   text-decoration: none;
   color: var(--text);
+}
+
+.nav__logo-mark {
+  width: 2.15rem;
+  height: 2.15rem;
+  flex-shrink: 0;
+}
+
+.nav__logo-accent {
+  color: var(--mint-dark);
 }
 
 .nav__cta {

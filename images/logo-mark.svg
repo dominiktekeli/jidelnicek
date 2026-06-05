@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="kvk-bowl" x1="10" y1="34" x2="38" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2d9a6a"/>
+      <stop offset="1" stop-color="#5ecf9a"/>
+    </linearGradient>
+    <linearGradient id="kvk-leaf" x1="22" y1="6" x2="30" y2="18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5ecf9a"/>
+      <stop offset="1" stop-color="#2d9a6a"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="14" fill="#d4f5e6"/>
+  <!-- miska -->
+  <path
+    d="M9 27.5c0-1.2 6.8-4.5 15-4.5s15 3.3 15 4.5c0 2.2-6.2 6.5-15 6.5S9 29.7 9 27.5Z"
+    fill="url(#kvk-bowl)"
+  />
+  <ellipse cx="24" cy="27" rx="13.5" ry="2.2" fill="#fff" opacity="0.35"/>
+  <!-- pára → lístek klidu -->
+  <path
+    d="M17 26c2-5 1.5-9 3-13.5"
+    stroke="#5ecf9a"
+    stroke-width="2.2"
+    stroke-linecap="round"
+  />
+  <path
+    d="M24 25.5c0-6-.5-10.5 0-16"
+    stroke="#2d9a6a"
+    stroke-width="2.6"
+    stroke-linecap="round"
+  />
+  <path
+    d="M31 26c-1.8-4.5-2-9-4.5-13"
+    stroke="#5ecf9a"
+    stroke-width="2.2"
+    stroke-linecap="round"
+  />
+  <path
+    d="M24 9.2c-3.2 0-5.8 2.4-5.8 5.4 0 3.4 2.6 5.2 5.8 8.2 3.2-3 5.8-4.8 5.8-8.2 0-3-2.6-5.4-5.8-5.4Z"
+    fill="url(#kvk-leaf)"
+  />
+  <path
+    d="M24 11.8c-1.6 0-2.8 1.2-2.8 2.6 0 1.6 1.2 2.5 2.8 4.2 1.6-1.7 2.8-2.6 2.8-4.2 0-1.4-1.2-2.6-2.8-2.6Z"
+    fill="#fff"
+    opacity="0.45"
+  />
+</svg>

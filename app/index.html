@@ -8,6 +8,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Jídelníček" />
     <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
     <title>Klid v kuchyni</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,13 +22,16 @@
   <body>
     <div class="app">
       <header class="top">
-        <p class="top__hello">Ahoj, máš to pod kontrolou</p>
-        <h1 class="top__title">Klid v kuchyni</h1>
-        <p class="top__sub">4 týdny jídla · nákup · tipy</p>
+        <p class="top__hello">👋 Ahoj, máš to pod kontrolou</p>
+        <div class="top__brand">
+          <img class="top__logo" src="../images/logo-mark.svg" alt="" width="44" height="44" decoding="async" />
+          <h1 class="top__title">Klid <span class="top__title-accent">v kuchyni</span></h1>
+        </div>
+        <p class="top__sub">🍽 4 týdny jídla · 🛒 nákup · 💚 tipy</p>
       </header>
 
       <section class="weeks" aria-label="Vyber týden">
-        <p class="label">Který týden právě jedeš?</p>
+        <p class="label">🗓️ Který týden právě jedeš?</p>
         <div class="weeks__grid" id="week-picker"></div>
       </section>
 
@@ -48,7 +53,7 @@
       </nav>
 
       <p class="print-link">
-        <button type="button" id="btn-print">Vytisknout tento týden</button>
+        <button type="button" id="btn-print">🖨️ Vytisknout tento týden</button>
       </p>
     </div>
 
