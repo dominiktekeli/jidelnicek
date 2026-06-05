@@ -207,11 +207,11 @@
 
   // Live social proof notifications - subtle FOMO in corner, fits calm "klid" vibe + conversion
   const liveJoins = [
-    { name: "Markéta K.", avatar: "images/moms/avatar-01.jpg", action: "se právě přidala!" },
-    { name: "Tereza M.", avatar: "images/moms/avatar-02.jpg", action: "právě koupila balíček!" },
-    { name: "Jana S.", avatar: "images/moms/avatar-03.jpg", action: "se přidala k mámám v klidu!" },
-    { name: "Petra L.", avatar: "images/moms/avatar-04.jpg", action: "vaří teď v klidu!" },
-    { name: "Lucie N.", avatar: "images/moms/avatar-05.jpg", action: "se právě přidala!" },
+    { name: "Markéta K.", avatar: "images/moms/avatar-01.jpg", action: "se přidala" },
+    { name: "Tereza M.", avatar: "images/moms/avatar-02.jpg", action: "koupila balíček" },
+    { name: "Jana S.", avatar: "images/moms/avatar-03.jpg", action: "se přidala k mámám v klidu" },
+    { name: "Petra L.", avatar: "images/moms/avatar-04.jpg", action: "vaří v klidu" },
+    { name: "Lucie N.", avatar: "images/moms/avatar-05.jpg", action: "se přidala" },
   ];
 
   function showLiveJoin() {
