@@ -20,15 +20,26 @@ Payment Link **není** Shopify košík — nejde tam velký marketingový sloupe
 ### Název produktu (Product name)
 
 ```
-Klid v kuchyni — 4týdenní jídelníček
+🍽 Klid v kuchyni — 4týdenní jídelníček
 ```
 
 ### Popis produktu (Product description) — zobrazí se u pokladny
 
 ```
-4 týdny obědů a večeří v mobilu · nákupní seznamy · jedna platba 297 Kč · přístup navždy (žádné předplatné).
+🍽 4 týdny obědů a večeří pro rodinu — vše v mobilu
+🛒 Nákupní seznamy · přehled celého týdne dopředu
+💚 Jedna platba 297 Kč · žádné předplatné
+♻️ Přístup navždy — recepty, které budeš chtít opakovat
 
-Po zaplacení: okamžitý přístup přes e-mail a na stránce s odkazem do aplikace.
+📱 Po zaplacení hned: odkaz do aplikace v prohlížeči (bez instalace)
+📧 Stejný odkaz ti přijde i e-mailem
+📲 Na mobilu: Sdílet → Přidat na plochu
+```
+
+Kratší varianta (limit znaků):
+
+```
+🍽 4 týdny jídla v mobilu · 🛒 nákup · 💚 297 Kč jednorázově · 📱 přístup hned po platbě
 ```
 
 ### Potvrzovací e-mail od Stripe (Settings → Emails → Successful payments)
@@ -36,17 +47,17 @@ Po zaplacení: okamžitý přístup přes e-mail a na stránce s odkazem do apli
 Do vlastního textu / footeru:
 
 ```
-Děkujeme za nákup!
+💚 Děkujeme za nákup!
 
-Otevři jídelníček hned tady:
+📱 Otevři jídelníček hned tady:
 https://jidelnicek-olive.vercel.app/dekujeme.html
 
-Na mobilu: po otevření Sdílet → Přidat na plochu.
+📲 Na mobilu: po otevření Sdílet → Přidat na plochu.
 
-Záložní vstup (heslo z e-mailu / po objednávce):
+🔑 Záložní vstup (heslo z e-mailu / po objednávce):
 https://jidelnicek-olive.vercel.app/stahnout.html
 
-Potřebuješ pomoc? napiš na ahoj@tvujemail.cz
+✉️ Potřebuješ pomoc? napiš na ahoj@tvujemail.cz
 ```
 
 (Vyměň e-mail za skutečný z `config.js`.)
