@@ -162,9 +162,37 @@
     });
   }
 
+  function wireHeroPick() {
+    const pick = document.querySelector(".hero-pick");
+    if (!pick) return;
+
+    const buttons = pick.querySelectorAll(".hero-pick__btn");
+    const variants = document.querySelectorAll(".hero-variant");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const id = btn.getAttribute("data-hero");
+        if (!id) return;
+
+        buttons.forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-selected", on ? "true" : "false");
+        });
+
+        variants.forEach((block) => {
+          const show = block.getAttribute("data-hero-variant") === id;
+          block.classList.toggle("is-active", show);
+          block.hidden = !show;
+        });
+      });
+    });
+  }
+
   wireBuyButtons();
   wirePrice();
   wireEmail();
   wireHeroVideo();
   wireHeroMealsSlider();
+  wireHeroPick();
 })();

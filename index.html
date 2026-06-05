@@ -31,26 +31,39 @@
 
     <main>
       <section class="hero">
-        <p class="hero__badge">👩‍🍳 Pro maminky, které chtějí klid</p>
-        <h1 class="hero__title">
-          4 týdny jídla.<br />
-          <em>Bez stresu</em> z toho, co zase vařit.
-        </h1>
-        <p class="hero__lead">
-          Hotový rodinný jídelníček a nákup v telefonu — otevřeš a víš. Jednoduché jako zpráva na
-          Instagramu.
-        </p>
-        <p class="value-note value-note--hero">
-          ♻️ Recepty tak dobré, že je budeš <strong>chtít pořád opakovat</strong> — navždy v mobilu.
-        </p>
-        <ul class="perks-grid perks-grid--hero" aria-label="Hlavní výhody">
-          <li><span aria-hidden="true">📋</span> 4 týdny oběd + večeře</li>
-          <li><span aria-hidden="true">🛒</span> Nákup v mobilu</li>
-          <li><span aria-hidden="true">♻️</span> Oblíbené — opakuješ kdykoliv</li>
-          <li><span aria-hidden="true">💚</span> Jedna platba · bez předplatného</li>
-          <li><span aria-hidden="true">📱</span> Jen odkaz · bez instalace</li>
-          <li><span aria-hidden="true">⚡</span> Hned po platbě</li>
-        </ul>
+        <div class="hero-pick" role="tablist" aria-label="Návrh hero sekce">
+          <button type="button" class="hero-pick__btn is-active" role="tab" aria-selected="true" data-hero="a">
+            Návrh 1
+          </button>
+          <button type="button" class="hero-pick__btn" role="tab" aria-selected="false" data-hero="b">
+            Návrh 2
+          </button>
+        </div>
+
+        <div class="hero-variant hero-variant--a is-active" data-hero-variant="a">
+          <p class="hero__badge">👩‍🍳 Pro vytížené maminky</p>
+          <h1 class="hero__title">
+            V 17:00 nevíš,<br />
+            <em>co zase vařit?</em>
+          </h1>
+          <p class="hero__lead">
+            Makáš na plný úvazek — na jídlo nemáš čas stavět systém. Hotový měsíc v mobilu, bez
+            přemýšlení v obchodě.
+          </p>
+        </div>
+
+        <div class="hero-variant hero-variant--b" data-hero-variant="b" hidden>
+          <p class="hero__badge">🍽 4 týdny jídla v mobilu</p>
+          <h1 class="hero__title">
+            4 týdny jídla.<br />
+            <em>Bez stresu</em> z toho, co zase vařit.
+          </h1>
+          <p class="hero__lead">
+            Jídelníček a nákup na jednom místě — otevřeš odkaz a máš klid. Jednoduché jako zpráva na
+            Instagramu.
+          </p>
+        </div>
+
         <div class="hero__actions">
           <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">🛒 Kompletní balíček — 297 Kč</a>
           <a class="btn btn--ghost" href="#ukazka">📱 Ukázka aplikace</a>
@@ -178,10 +191,6 @@
         <p class="transform__lead">
           Bez plánu je chaos. S plánem máš <strong>večeři bez paniky</strong> a konečně čas na sebe ☕
         </p>
-        <p class="value-note">
-          ♻️ Recepty tak dobré, že je budeš <strong>chtít pořád opakovat</strong> — ne jednorázovka.
-        </p>
-
         <figure class="transform__compare">
           <img
             src="images/before-after.jpg"
@@ -286,33 +295,28 @@
         </p>
       </section>
 
-      <section class="for-who">
+      <section class="for-who" id="pro-koho">
         <h2 class="section-title">👩‍👧‍👦 Pro koho je to</h2>
         <div class="for-who__card">
           <figure class="for-who__photo">
             <img
               src="images/mom-stressed.jpg"
-              alt="Vytížená maminka v kuchyni — neví, co zase vařit"
+              alt="Vytížená maminka po práci v kuchyni — neví, co koupit a co uvařit"
               width="600"
               height="400"
               loading="lazy"
             />
           </figure>
           <div class="for-who__body">
-            <p class="for-who__kicker">Máma 30–45 · vaří pro rodinu</p>
-            <p class="for-who__headline">Večer zase stojíš u lednice a nevíš, <em>co vařit</em>.</p>
-            <p class="for-who__text">
-              Nemáš čas plánovat — chceš <strong>hotový plán na měsíc</strong>, ne další složitou
-              aplikaci.
+            <p class="for-who__kicker">Maminka 30–45 · práce, děti, domácnost</p>
+            <p class="for-who__headline">
+              Makáš na plný úvazek a večer stejně stojíš u lednice — <em>nevíš, co koupit ani co
+              uvařit</em>.
             </p>
-            <ul class="for-who__points">
-              <li><span aria-hidden="true">📱</span> Otevřeš odkaz v telefonu</li>
-              <li><span aria-hidden="true">📋</span> 4 týdny jídla připravené</li>
-              <li><span aria-hidden="true">♻️</span> Oblíbené večeře — pořád znovu</li>
-              <li><span aria-hidden="true">🛒</span> Nákup zaškrtáváš v obchodě</li>
-              <li><span aria-hidden="true">🔒</span> Přístup navždy · jedna platba</li>
-              <li><span aria-hidden="true">💚</span> Bez předplatného · 297 Kč celkem</li>
-            </ul>
+            <p class="for-who__text">
+              Nemáš čas si zařizovat žádný systém na jídlo. Chceš hotový měsíc v mobilu — bez další
+              aplikace, kterou musíš řešit.
+            </p>
           </div>
         </div>
       </section>
