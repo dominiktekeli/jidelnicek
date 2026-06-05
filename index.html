@@ -757,6 +757,20 @@
       <a class="btn btn--primary" href="dekujeme.html">Otevřít po zaplacení</a>
     </div>
 
+    <!-- Cookie banner - jednoduchý, protože nepoužíváme non-essential cookies -->
+    <div id="cookie-banner" class="cookie-banner">
+      <div class="cookie-banner-inner">
+        <p>
+          Používáme pouze nezbytné úložiště (pro přístup po platbě) a technické soubory třetích stran (Stripe při platbě, Google Fonts). 
+          Žádné marketingové ani analytické cookies. <a href="cookies.html">Více v zásadách cookies</a>.
+        </p>
+        <div class="cookie-actions">
+          <button id="cookie-decline" class="btn">Odmítnout nepovinné</button>
+          <button id="cookie-accept" class="btn btn-accept">Přijmout</button>
+        </div>
+      </div>
+    </div>
+
     <script src="config.js"></script>
     <script src="site.js"></script>
     <script src="legal.js"></script>
@@ -765,6 +779,42 @@
         var ref = document.referrer || "";
         if (ref.indexOf("stripe.com") !== -1 || new URLSearchParams(location.search).get("platba") === "ok") {
           document.getElementById("stripe-return").hidden = false;
+        }
+
+        // Cookie banner logic
+        var banner = document.getElementById('cookie-banner');
+        var acceptBtn = document.getElementById('cookie-accept');
+        var declineBtn = document.getElementById('cookie-decline');
+
+        function showBanner() {
+          if (banner) banner.classList.add('show');
+        }
+
+        function hideBanner() {
+          if (banner) banner.classList.remove('show');
+        }
+
+        // Check preference
+        var pref = localStorage.getItem('cookie-preference');
+        if (!pref) {
+          // Show after short delay so it doesn't jump on load
+          setTimeout(showBanner, 1200);
+        }
+
+        if (acceptBtn) {
+          acceptBtn.addEventListener('click', function () {
+            localStorage.setItem('cookie-preference', 'accepted');
+            hideBanner();
+          });
+        }
+
+        if (declineBtn) {
+          declineBtn.addEventListener('click', function () {
+            localStorage.setItem('cookie-preference', 'declined');
+            hideBanner();
+            // Zde bychom v budoucnu vypnuli non-essential skripty (GA atd.)
+            // Momentálně nic takového nenačítáme.
+          });
         }
       })();
     </script>

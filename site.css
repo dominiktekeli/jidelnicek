@@ -1894,6 +1894,67 @@ section {
   width: 100%;
 }
 
+/* Cookie banner — jednoduchý, klidný, bez nutnosti souhlasu s non-essential (protože momentálně žádné nejsou) */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  display: none;
+}
+
+.cookie-banner.show {
+  display: block;
+}
+
+.cookie-banner-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cookie-banner p {
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cookie-actions button {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cookie-actions .btn-accept {
+  background: var(--mint);
+  color: #fff;
+  border-color: var(--mint);
+}
+
+.cookie-actions .btn-accept:hover {
+  background: #1f7a54;
+}
+
 /* Spodní sticky lišta — mobil i desktop, drží dole při scrollu */
 .sticky-bar {
   position: fixed;
