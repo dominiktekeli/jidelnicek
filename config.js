@@ -15,7 +15,7 @@ window.KLID_CONFIG = {
   priceDisplay: "297 Kč",
 
   // Heslo jen pro záložní vstup přes stahnout.html (po zaplacení stačí dekujeme.html)
-  downloadPassword: "zmen-heslo-2026",
+  downloadPassword: "klid2026-zive-4tydny",
 
   supportEmail: "klidvkuchyni@gmail.com",
 
