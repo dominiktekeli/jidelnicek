@@ -1104,11 +1104,15 @@ section {
 }
 
 .pricing__bonus {
+  display: inline-block;
   margin: 0.5rem 0 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #fff;
-  opacity: 0.95;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #8b5a14;
+  background: var(--sun-light);
+  border-radius: 999px;
+  animation: pricing-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes pricing-pulse {
