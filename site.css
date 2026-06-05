@@ -1175,8 +1175,8 @@ section {
 }
 
 .pricing__perks-panel {
-  margin: 0 1rem 1rem;
-  padding: 0.55rem;
+  margin: 0 1rem 0.85rem;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.92);
   border-radius: 18px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -1196,9 +1196,9 @@ section {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  padding: 0.52rem 0.42rem;
+  padding: 0.55rem 0.5rem;
   background: #fff;
   border-radius: 12px;
   color: var(--text);
