@@ -18,4 +18,7 @@ window.KLID_CONFIG = {
   downloadPassword: "zmen-heslo-2026",
 
   supportEmail: "ahoj@tvujemail.cz",
+
+  legalName: "Dominik Tekeli",
+  legalIco: "21428808",
 };

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Právní upozornění — Klid v kuchyni</title>
+    <link rel="stylesheet" href="site.css" />
+    <meta name="theme-color" content="#2d9a6a" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
+        <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
+      </a>
+    </header>
+
+    <main class="legal-doc">
+      <p class="legal-doc__back"><a href="./">← Zpět na úvod</a></p>
+      <h1>Právní upozornění</h1>
+      <p>Platí od: <span id="legal-date"></span></p>
+
+      <p>
+        Informace v produktu Klid v kuchyni (jídelníček, recepty, nákupní seznamy, tipy) slouží pouze pro
+        <strong>inspiraci a plánování běžné domácí stravy</strong>. Nejde o lékařskou, nutriční ani dietologickou
+        péči.
+      </p>
+      <p>
+        Provozovatel není lékař ani zdravotnický pracovník. Obsah <strong>nenahrazuje</strong> diagnostiku, léčbu ani
+        individuální výživové poradenství.
+      </p>
+      <p>
+        Jakékoli změny ve stravování provádíš na vlastní zodpovědnost. Pokud máš zdravotní potíže, alergie, užíváš léky,
+        jsi těhotná nebo kojíš, vždy se poraď s lékařem nebo odborníkem na výživu.
+      </p>
+      <p>
+        Recepty počítají s běžnou rodinou; nesedí každému dítěti ani každému vkusu. Za použití receptů a nákupních
+        seznamů včetně alergenů v surovinách odpovídáš ty — suroviny kontroluj podle svých potřeb.
+      </p>
+      <p>
+        Provozovatel (<span data-legal-name></span>, IČO <span data-legal-ico></span>) nenese odpovědnost za škody
+        vzniklé použitím materiálů mimo rozsah běžné domácí přípravy jídla, v mezích povolených právními předpisy.
+      </p>
+    </main>
+
+    <div id="site-legal-footer"></div>
+    <script src="config.js"></script>
+    <script src="legal.js"></script>
+    <script>
+      document.getElementById("legal-date").textContent = new Date().toLocaleDateString("cs-CZ");
+    </script>
+  </body>
+</html>

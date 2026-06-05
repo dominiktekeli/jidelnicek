@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kontaktní údaje — Klid v kuchyni</title>
+    <link rel="stylesheet" href="site.css" />
+    <meta name="theme-color" content="#2d9a6a" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
+        <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
+      </a>
+    </header>
+
+    <main class="legal-doc">
+      <p class="legal-doc__back"><a href="./">← Zpět na úvod</a></p>
+      <h1>Kontaktní údaje</h1>
+      <p>Provozovatel digitálního produktu <strong>Klid v kuchyni</strong>:</p>
+      <ul class="legal-doc__facts">
+        <li><strong>Jméno:</strong> <span data-legal-name></span></li>
+        <li><strong>IČO:</strong> <span data-legal-ico></span></li>
+        <li><strong>Forma podnikání:</strong> osoba podnikající dle živnostenského zákona</li>
+        <li>
+          <strong>E-mail:</strong>
+          <a href="mailto:ahoj@tvujemail.cz" data-legal-email>ahoj@tvujemail.cz</a>
+        </li>
+        <li><strong>Web:</strong> <a href="https://jidelnicek-olive.vercel.app/">jidelnicek-olive.vercel.app</a></li>
+      </ul>
+      <p>
+        S dotazy k objednávce, přístupu do jídelníčku nebo vrácení platby piš na e-mail výše. Odpovídáme obvykle do
+        2 pracovních dnů.
+      </p>
+      <p>Údaje o podnikání jsou vedeny v živnostenském rejstříku pod IČO <span data-legal-ico></span>.</p>
+    </main>
+
+    <div id="site-legal-footer"></div>
+    <script src="config.js"></script>
+    <script src="legal.js"></script>
+  </body>
+</html>

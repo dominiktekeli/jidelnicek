@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zásady ochrany osobních údajů — Klid v kuchyni</title>
+    <link rel="stylesheet" href="site.css" />
+    <meta name="theme-color" content="#2d9a6a" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
+        <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
+      </a>
+    </header>
+
+    <main class="legal-doc">
+      <p class="legal-doc__back"><a href="./">← Zpět na úvod</a></p>
+      <h1>Zásady ochrany osobních údajů</h1>
+      <p>
+        Správce: <span data-legal-name></span>, IČO <span data-legal-ico></span>, kontakt:
+        <a href="kontakt.html" data-legal-email>e-mail</a>.
+      </p>
+
+      <h2>1. Jaké údaje zpracováváme</h2>
+      <ul>
+        <li><strong>E-mail</strong> — při platbě přes Stripe (potvrzení, podpora).</li>
+        <li><strong>Jméno</strong> — pokud ho zadáš při platbě u Stripe.</li>
+        <li><strong>Technické údaje</strong> — IP, typ prohlížeče (logy hostingu Vercel), pokud je hosting eviduje.</li>
+        <li>
+          <strong>Local storage</strong> v prohlížeči — příznak „má přístup“ po zaplacení (viz
+          <a href="cookies.html">Cookies</a>).
+        </li>
+      </ul>
+      <p>Na landingu nevyžadujeme registraci ani newsletter.</p>
+
+      <h2>2. Účel a právní základ</h2>
+      <ul>
+        <li>Plnění smlouvy (prodej a přístup k jídelníčku) — čl. 6 odst. 1 písm. b) GDPR.</li>
+        <li>Plnění právních povinností (účetnictví, daně) — písm. c).</li>
+        <li>Oprávněný zájem (bezpečnost webu, reklamace) — písm. f).</li>
+      </ul>
+
+      <h2>3. Příjemci (zpracovatelé)</h2>
+      <ul>
+        <li><strong>Stripe</strong> — platební brána (EU/USA dle jejich DPA).</li>
+        <li><strong>Vercel</strong> — hosting webu.</li>
+      </ul>
+
+      <h2>4. Doba uchování</h2>
+      <p>Údaje o objednávkách po dobu vyžadovanou zákonem (typicky 5–10 let u dokladů). E-mail pro podporu do vyřešení sporu.</p>
+
+      <h2>5. Tvá práva</h2>
+      <p>
+        Přístup, oprava, výmaz, omezení, námitka, přenositelnost, stížnost u ÚOOÚ (uoou.cz). Žádosti na
+        <a href="kontakt.html" data-legal-email>e-mail</a> správce.
+      </p>
+
+      <h2>6. Zabezpečení</h2>
+      <p>HTTPS, omezený přístup k administraci, heslo pro záložní vstup jen pro zákaznice s nákupem.</p>
+    </main>
+
+    <div id="site-legal-footer"></div>
+    <script src="config.js"></script>
+    <script src="legal.js"></script>
+  </body>
+</html>

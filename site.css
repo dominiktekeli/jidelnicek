@@ -1527,6 +1527,150 @@ section {
   margin: 0.3rem 0;
 }
 
+/* Právní stránky + zelená patička */
+.legal-doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2rem;
+  text-align: left;
+}
+
+.legal-doc__back {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.legal-doc__back a {
+  color: var(--mint-dark);
+  text-decoration: none;
+}
+
+.legal-doc h1 {
+  margin: 0 0 1rem;
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.legal-doc h2 {
+  margin: 1.35rem 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.legal-doc p,
+.legal-doc li {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+
+.legal-doc p {
+  margin: 0 0 0.85rem;
+}
+
+.legal-doc ul,
+.legal-doc ol {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.legal-doc__facts {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.legal-doc__facts li {
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.legal-footer {
+  margin-top: 0;
+  padding: 2.25rem 1.25rem calc(2rem + var(--safe-bottom));
+  background: var(--mint-dark);
+  color: #fff;
+}
+
+.legal-footer a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-footer a:hover {
+  color: var(--mint-light);
+}
+
+.legal-footer__grid {
+  display: grid;
+  gap: 1.75rem;
+  max-width: 1100px;
+  margin: 0 auto 1.75rem;
+}
+
+.legal-footer h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.legal-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.legal-footer__links li {
+  margin: 0.35rem 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.legal-footer__links a {
+  text-decoration: none;
+}
+
+.legal-footer__links a:hover {
+  text-decoration: underline;
+}
+
+.legal-footer__col--note p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.legal-footer__bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  text-align: center;
+}
+
+.legal-footer__bottom p {
+  margin: 0.35rem 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.legal-footer__mini {
+  line-height: 1.45;
+}
+
+@media (min-width: 768px) {
+  .legal-footer__grid {
+    grid-template-columns: 1fr 1.15fr;
+    align-items: start;
+  }
+}
+
 .page-narrow {
   max-width: 480px;
   margin: 0 auto;

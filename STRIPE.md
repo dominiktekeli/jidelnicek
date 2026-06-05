@@ -95,7 +95,10 @@ https://jidelnicek-olive.vercel.app/stahnout.html
 ### Checkout → zásady obchodu (Settings → Checkout)
 
 - **Support email:** tvůj e-mail
-- **Policy links:** až máš stránku obchodních podmínek / vrácení peněz (nebo odkaz na jednoduchou stránku na webu)
+- **Policy links** (nastav na webu):
+  - Obchodní podmínky: `https://jidelnicek-olive.vercel.app/obchodni-podminky.html`
+  - Vrácení peněz: `https://jidelnicek-olive.vercel.app/vraceni-penez.html`
+  - Ochrana údajů: `https://jidelnicek-olive.vercel.app/ochrana-osobnich-udaju.html`
 
 Krátká věta k vrácení (pokud nabízíš garanci):
 

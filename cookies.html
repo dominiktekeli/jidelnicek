@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Soubory cookie — Klid v kuchyni</title>
+    <link rel="stylesheet" href="site.css" />
+    <meta name="theme-color" content="#2d9a6a" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
+        <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
+      </a>
+    </header>
+
+    <main class="legal-doc">
+      <p class="legal-doc__back"><a href="./">← Zpět na úvod</a></p>
+      <h1>Soubory cookie a úložiště</h1>
+
+      <h2>1. Co používáme na webu</h2>
+      <ul>
+        <li>
+          <strong>localStorage / sessionStorage</strong> — klíč pro zapamatování přístupu po zaplacení (`klid-ma-pristup`).
+          Není to marketingová cookie.
+        </li>
+        <li><strong>Technicky nutné</strong> — provoz stránky (hosting).</li>
+      </ul>
+      <p>Na landingu nepoužíváme analytické cookies (Google Analytics apod.), pokud je později nezapneme — tuto stránku pak aktualizujeme.</p>
+
+      <h2>2. Stripe</h2>
+      <p>
+        Při platbě na stránce Stripe mohou být nastaveny cookies platební brány. Řídí se
+        <a href="https://stripe.com/cz/privacy" rel="noopener noreferrer">zásadami Stripe</a>.
+      </p>
+
+      <h2>3. Správa</h2>
+      <p>
+        Úložiště můžeš smazat v nastavení prohlížeče — ztratíš zapamatovaný přístup, ale můžeš znovu použít odkaz z
+        e-mailu nebo <a href="stahnout.html">vstup heslem</a>.
+      </p>
+      <p>Více o osobních údajích: <a href="ochrana-osobnich-udaju.html">Zásady ochrany osobních údajů</a>.</p>
+    </main>
+
+    <div id="site-legal-footer"></div>
+    <script src="config.js"></script>
+    <script src="legal.js"></script>
+  </body>
+</html>
