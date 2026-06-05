@@ -1073,6 +1073,27 @@ section {
   animation: pricing-pulse 2.4s ease-in-out infinite;
 }
 
+.pricing__urgency {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--mint-dark);
+  background: #fff;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pricing__bonus {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0.95;
+}
+
 @keyframes pricing-pulse {
   0%,
   100% {
