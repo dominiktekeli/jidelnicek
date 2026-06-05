@@ -17,6 +17,16 @@ Payment Link **není** Shopify košík — nejde tam velký marketingový sloupe
 
 **Nevyplňuj** u Payment Linku: dodací adresu, telefon (pokud nepotřebuješ), předplatné.
 
+### Souhlas s okamžitým digitálním přístupem (důležité)
+
+Na webu je u **#koupit** povinné zaškrtnutí před platbou (zánik odstoupení u digitálního obsahu).
+
+Ve Stripe Payment Link → **Options** zapni také:
+- **Require customers to accept your terms of service** (v Settings → Public details musí být URL obchodních podmínek)
+- U digitálního produktu Stripe často zobrazí vlastní souhlas — zkontroluj v test platbě
+
+Obojí (web + Stripe) je bezpečnější než jen text v právních stránkách.
+
 ## Česká pokladna (jazyk + Kč)
 
 ### 1. Jazyk checkoutu (pro zákaznice)

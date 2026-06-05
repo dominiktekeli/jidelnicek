@@ -323,11 +323,29 @@
             </ul>
           </div>
 
-          <a class="btn btn--full btn--buy" id="btn-koupit" href="#">
+          <label class="pricing__consent" id="pricing-consent">
+            <input type="checkbox" id="consent-digital" name="consent-digital" />
+            <span class="pricing__consent-text">
+              Chci <strong>okamžitý přístup</strong> k digitálnímu jídelníčku po platbě a beru na vědomí, že tím v
+              zákonném rozsahu <strong>zaniká právo odstoupit</strong> od smlouvy (viz
+              <a href="vraceni-penez.html">odstoupení</a>). Souhlasím s
+              <a href="obchodni-podminky.html">obchodními podmínkami</a>.
+            </span>
+          </label>
+
+          <a
+            class="btn btn--full btn--buy is-disabled"
+            id="btn-koupit"
+            href="#"
+            aria-disabled="true"
+          >
             <span class="btn--buy__shine" aria-hidden="true"></span>
             <span class="btn--buy__label">KOUPIT</span>
             <span class="btn--buy__arrow" aria-hidden="true">→</span>
           </a>
+          <p class="pricing__consent-hint" id="consent-hint" hidden>
+            Zaškrtni souhlas výše, pak můžeš zaplatit.
+          </p>
 
           <div class="pricing__pay">
             <p class="pricing__pay-label">Zaplatíš na jedno kliknutí</p>
