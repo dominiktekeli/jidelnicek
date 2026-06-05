@@ -73,6 +73,11 @@
     document.querySelectorAll("[data-legal-ico]").forEach((el) => {
       el.textContent = ico;
     });
+    document.querySelectorAll("[data-legal-address]").forEach((el) => {
+      if (cfg.legalAddress) {
+        el.textContent = cfg.legalAddress;
+      }
+    });
     document.querySelectorAll("[data-legal-email]").forEach((el) => {
       if (email) {
         el.href = "mailto:" + email;

@@ -19,6 +19,8 @@ window.KLID_CONFIG = {
 
   supportEmail: "klidvkuchyni@gmail.com",
 
-  legalName: "Klid v kuchyni",
+  legalName: "Dominik Tekeli",
   legalIco: "21428808",
+  // DŮLEŽITÉ: Nahraď skutečnou adresou místa podnikání/bydliště (povinné pro kontakt a podmínky)
+  legalAddress: "[DOPLNI ADRESU - např. Ulice 123, 110 00 Praha 1]",
 };
