@@ -3,7 +3,7 @@ window.KLID_CONFIG = {
   siteUrl: "https://jidelnicek-olive.vercel.app",
 
   // Stripe Payment Link — pro live prodej vyměň test odkaz za live (bez "test_" v URL)
-  checkoutUrl: "https://buy.stripe.com/test_4gM28rcAB6Zl1Zy92n3Je00",
+  checkoutUrl: "https://buy.stripe.com/test_7sY8wP5896Zl7jSdiD3Je01",
 
   // Jazyk Stripe pokladny: cs = čeština (přidá se ?locale=cs k odkazu)
   stripeLocale: "cs",
