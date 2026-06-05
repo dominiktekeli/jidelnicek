@@ -77,9 +77,8 @@
       if (cfg.legalAddress && !cfg.legalAddress.includes("DOPLNI")) {
         el.textContent = cfg.legalAddress;
       } else {
-        // pokud není vyplněno, skryj řádek nebo nech prázdné (uživatel musí doplnit před prodejem)
-        const parent = el.closest("li");
-        if (parent) parent.style.display = "none";
+        el.textContent = "";
+        // Uživatel musí doplnit skutečnou adresu v config.js před prodejem!
       }
     });
     document.querySelectorAll("[data-legal-email]").forEach((el) => {
