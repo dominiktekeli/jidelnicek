@@ -74,8 +74,12 @@
       el.textContent = ico;
     });
     document.querySelectorAll("[data-legal-address]").forEach((el) => {
-      if (cfg.legalAddress) {
+      if (cfg.legalAddress && !cfg.legalAddress.includes("DOPLNI")) {
         el.textContent = cfg.legalAddress;
+      } else {
+        // pokud není vyplněno, skryj řádek nebo nech prázdné (uživatel musí doplnit před prodejem)
+        const parent = el.closest("li");
+        if (parent) parent.style.display = "none";
       }
     });
     document.querySelectorAll("[data-legal-email]").forEach((el) => {
