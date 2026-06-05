@@ -182,4 +182,26 @@
   wireEmail();
   wireHeroVideo();
   wireHeroMealsSlider();
+
+  // Hide sticky bar when user reaches the pricing section (better UX, less annoying on mobile)
+  function wireStickyHide() {
+    const sticky = document.getElementById("sticky-bar");
+    const pricing = document.getElementById("koupit");
+    if (!sticky || !pricing) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            sticky.classList.add("hidden");
+          } else {
+            sticky.classList.remove("hidden");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(pricing);
+  }
+  wireStickyHide();
 })();
