@@ -19,9 +19,9 @@ Payment Link **není** Shopify košík — nejde tam velký marketingový sloupe
 
 ### Souhlas s okamžitým digitálním přístupem (důležité)
 
-Na webu je u **#koupit** povinné zaškrtnutí před platbou (zánik odstoupení u digitálního obsahu).
+Na webu: tlačítko **„KOUPIT — hned přístup“** + krátký text pod ním (souhlas kliknutím). Hero a sticky vedou rovnou na Stripe.
 
-Ve Stripe Payment Link → **Options** zapni také:
+Ve Stripe Payment Link → **Options** zapni (hlavní jistota):
 - **Require customers to accept your terms of service** (v Settings → Public details musí být URL obchodních podmínek)
 - U digitálního produktu Stripe často zobrazí vlastní souhlas — zkontroluj v test platbě
 

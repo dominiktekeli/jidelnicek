@@ -25,75 +25,6 @@
   }
 
   const BUY_IDS = ["btn-koupit", "btn-koupit-hero", "sticky-buy"];
-  const CONSENT_KEY = "klid-digital-consent";
-
-  function hasDigitalConsent() {
-    const box = document.getElementById("consent-digital");
-    if (box && box.checked) return true;
-    try {
-      return sessionStorage.getItem(CONSENT_KEY) === "1";
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function setBuyButtonsEnabled(enabled) {
-    BUY_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (enabled) {
-        el.classList.remove("is-disabled");
-        el.setAttribute("aria-disabled", "false");
-      } else {
-        el.classList.add("is-disabled");
-        el.setAttribute("aria-disabled", "true");
-      }
-    });
-    const hint = document.getElementById("consent-hint");
-    if (hint) hint.hidden = enabled;
-  }
-
-  function wireDigitalConsent() {
-    const box = document.getElementById("consent-digital");
-    const wrap = document.getElementById("pricing-consent");
-    if (!box) return;
-
-    try {
-      if (sessionStorage.getItem(CONSENT_KEY) === "1") box.checked = true;
-    } catch (e) {
-      /* ignore */
-    }
-
-    function sync() {
-      try {
-        if (box.checked) sessionStorage.setItem(CONSENT_KEY, "1");
-        else sessionStorage.removeItem(CONSENT_KEY);
-      } catch (e) {
-        /* ignore */
-      }
-      if (wrap) wrap.classList.toggle("is-checked", box.checked);
-      setBuyButtonsEnabled(hasDigitalConsent());
-    }
-
-    box.addEventListener("change", sync);
-    sync();
-
-    BUY_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.addEventListener("click", function (e) {
-        if (!hasDigitalConsent()) {
-          e.preventDefault();
-          if (wrap) {
-            wrap.classList.add("is-highlight");
-            box.focus({ preventScroll: true });
-          }
-          const koupit = document.getElementById("koupit");
-          if (koupit) koupit.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      });
-    });
-  }
 
   function wireBuyButtons() {
     const url = checkoutUrl();
@@ -102,11 +33,14 @@
     BUY_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
-      el.href = ready ? url : "#koupit";
+      /* Hero a sticky rovnou na Stripe; jinak kotva na ceník */
+      if (ready && id !== "btn-koupit") {
+        el.href = url;
+      } else {
+        el.href = ready ? url : "#koupit";
+      }
       /* Stejné okno = na mobilu se po Stripe vrátí zpět snáze */
     });
-
-    setBuyButtonsEnabled(hasDigitalConsent());
 
     if (!ready && document.getElementById("btn-koupit")) {
       const warn = document.createElement("p");
@@ -244,7 +178,6 @@
   }
 
   wireBuyButtons();
-  wireDigitalConsent();
   wirePrice();
   wireEmail();
   wireHeroVideo();
