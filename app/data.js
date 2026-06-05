@@ -142,6 +142,31 @@ const WEEKS = [
         lunch: "Krůtí plátky, bramborová kaše, kyselá okurka",
         dinner: "Polévka z červené čočky, celozrnný chléb",
         prep: "Čočku namočit ráno",
+        recipe: {
+          ingredients: [
+            "krůtí prsa 400 g",
+            "strouhanka nebo ovesné vločky 80 g",
+            "vejce 1 ks",
+            "brambory 600 g",
+            "mléko 80 ml",
+            "máslo 20 g",
+            "kyselá okurka 2 ks",
+            "červená čočka 150 g",
+            "mrkev, cibule, česnek",
+            "sůl, pepř, olej, majoránka"
+          ],
+          steps: [
+            "Krůtí prsa nakrájej na plátky, osol, obal ve vejci a strouhance.",
+            "Osmaž na pánvi dozlatova (4 min z každé strany).",
+            "Brambory uvař, rozmačkej s mlékem a máslem na kaši.",
+            "Kyselou okurku nakrájej na kolečka.",
+            "Večer nebo ráno: čočku propláchni, namoč na 30+ min (ideálně ráno).",
+            "Na pánvi osmaž cibuli a česnek, přidej mrkev, zalij vodou, přidej čočku a vař 20-25 min.",
+            "Dochut' solí, pepřem, majoránkou. Podávej s celozrnným chlebem."
+          ],
+          time: "35 min",
+          note: "Lehké, rychlé, zdravé. Čočka se dá připravit den předem."
+        }
       },
       ut: {
         lunch: "Wrapy s kuřetem, zeleninou a jogurtovým dresinkem",

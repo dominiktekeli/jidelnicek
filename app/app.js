@@ -31,6 +31,7 @@
   let mode = "food";
   let day = todayDayId();
   let isBonus = localStorage.getItem("jidelnicek-bonus") === "1";
+  let selectedRecipe = null; // 'lunch' | 'dinner' | null
 
   const main = document.getElementById("main");
   const weekPicker = document.getElementById("week-picker");
@@ -93,6 +94,7 @@
 
     weekPicker.querySelectorAll(".week-pick").forEach((btn) => {
       btn.addEventListener("click", () => {
+        selectedRecipe = null;
         if (btn.dataset.bonus === "true") {
           isBonus = true;
           localStorage.setItem("jidelnicek-bonus", "1");
@@ -121,34 +123,82 @@
 
     const photo = MEAL_IMAGES[day] || "../images/hero-food.jpg";
 
+    const lunchRecipe = m.recipe;
+    const dinnerRecipe = m.recipe; // for now same recipe object covers both; in future we can split
+
+    const showLunch = selectedRecipe === 'lunch';
+    const showDinner = selectedRecipe === 'dinner';
+
+    let recipeHtml = '';
+    if (showLunch && lunchRecipe) {
+      recipeHtml = `
+        <div class="recipe-detail" style="margin-top:0.8rem; background:#fff; border-radius:12px; padding:0.8rem; border:1px solid #eee;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+            <strong style="color:#2d9a6a;">🍽 Oběd — plný recept</strong>
+            <button type="button" class="close-recipe" data-close="lunch" style="background:none; border:none; font-size:1.1rem; cursor:pointer; line-height:1;">×</button>
+          </div>
+          <p style="margin:0 0 0.4rem; font-size:0.9rem; font-weight:600;">${esc(m.lunch)}</p>
+          <p style="margin:0 0 0.3rem; font-size:0.8rem;"><strong>Čas:</strong> ${esc(lunchRecipe.time)} | ${esc(lunchRecipe.servings || '4 porce')}</p>
+          <p style="margin:0.3rem 0 0.2rem; font-size:0.85rem; font-weight:600;">Ingredience:</p>
+          <ul style="margin:0 0 0.5rem; padding-left:1.1rem; font-size:0.82rem; line-height:1.35;">
+            ${lunchRecipe.ingredients.map(i => `<li>${esc(i)}</li>`).join('')}
+          </ul>
+          <p style="margin:0.2rem 0 0.2rem; font-size:0.85rem; font-weight:600;">Postup:</p>
+          <ol style="margin:0; padding-left:1.1rem; font-size:0.82rem; line-height:1.35;">
+            ${lunchRecipe.steps.map(s => `<li>${esc(s)}</li>`).join('')}
+          </ol>
+          ${lunchRecipe.note ? `<p style="margin:0.5rem 0 0; font-size:0.8rem; color:#2d9a6a;">💡 ${esc(lunchRecipe.note)}</p>` : ''}
+        </div>
+      `;
+    } else if (showDinner && dinnerRecipe) {
+      recipeHtml = `
+        <div class="recipe-detail" style="margin-top:0.8rem; background:#fff; border-radius:12px; padding:0.8rem; border:1px solid #eee;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+            <strong style="color:#2d9a6a;">🌙 Večeře — plný recept</strong>
+            <button type="button" class="close-recipe" data-close="dinner" style="background:none; border:none; font-size:1.1rem; cursor:pointer; line-height:1;">×</button>
+          </div>
+          <p style="margin:0 0 0.4rem; font-size:0.9rem; font-weight:600;">${esc(m.dinner)}</p>
+          <p style="margin:0 0 0.3rem; font-size:0.8rem;"><strong>Čas:</strong> ${esc(dinnerRecipe.time)} | ${esc(dinnerRecipe.servings || '4 porce')}</p>
+          <p style="margin:0.3rem 0 0.2rem; font-size:0.85rem; font-weight:600;">Ingredience:</p>
+          <ul style="margin:0 0 0.5rem; padding-left:1.1rem; font-size:0.82rem; line-height:1.35;">
+            ${dinnerRecipe.ingredients.map(i => `<li>${esc(i)}</li>`).join('')}
+          </ul>
+          <p style="margin:0.2rem 0 0.2rem; font-size:0.85rem; font-weight:600;">Postup:</p>
+          <ol style="margin:0; padding-left:1.1rem; font-size:0.82rem; line-height:1.35;">
+            ${dinnerRecipe.steps.map(s => `<li>${esc(s)}</li>`).join('')}
+          </ol>
+          ${dinnerRecipe.note ? `<p style="margin:0.5rem 0 0; font-size:0.8rem; color:#2d9a6a;">💡 ${esc(dinnerRecipe.note)}</p>` : ''}
+        </div>
+      `;
+    }
+
     return `
       ${isToday ? '<p class="calm-msg">✨ Dnes už víš, co vařit. Bez přemýšlení.</p>' : ""}
       <div class="days">${pills}</div>
+
       <article class="meal-card">
         <img class="meal-card__photo" src="${photo}" alt="" loading="lazy" />
         <div class="meal-card__inner">
           <h2 class="meal-card__day">${esc(d.label)}</h2>
-          <div class="meal-row">
-            <span class="meal-row__tag">🍽 Oběd</span>
+
+          <div class="meal-row meal-clickable" data-meal="lunch" style="cursor:pointer;">
+            <span class="meal-row__tag">🍽 OBĚD</span>
             <span class="meal-row__food">${esc(m.lunch)}</span>
           </div>
-          <div class="meal-row meal-row--dinner">
-            <span class="meal-row__tag">🌙 Večeře</span>
+          ${showLunch ? recipeHtml : ''}
+
+          <div class="meal-row meal-row--dinner meal-clickable" data-meal="dinner" style="cursor:pointer; margin-top:0.4rem;">
+            <span class="meal-row__tag">🌙 VEČEŘE</span>
             <span class="meal-row__food">${esc(m.dinner)}</span>
           </div>
-          <p class="meal-card__hint"><span>💡 Tip:</span> ${esc(m.prep)}</p>
-          ${m.recipe ? `
-            <div style="margin-top:0.6rem; padding-top:0.5rem; border-top:1px dashed #ddd;">
-              <p style="margin:0 0 0.3rem; font-weight:700; font-size:0.9rem;">Plný recept (${esc(m.recipe.time)}):</p>
-              <p style="margin:0 0 0.3rem; font-size:0.85rem;"><strong>Ingredience:</strong> ${m.recipe.ingredients.map(esc).join(", ")}</p>
-              <ol style="margin:0; padding-left:1.1rem; font-size:0.82rem; line-height:1.3;">
-                ${m.recipe.steps.map(s => `<li>${esc(s)}</li>`).join("")}
-              </ol>
-              ${m.recipe.note ? `<p style="margin:0.4rem 0 0; font-size:0.8rem; color:#2d9a6a;">💡 ${esc(m.recipe.note)}</p>` : ""}
-            </div>
-          ` : `
-            <p style="margin-top:0.5rem; font-size:0.8rem; color:#666;">Ingredience a přesný postup podle nákupního seznamu tohoto týdne (4 porce). Opakuj podle chuti — všechny recepty jsou tvé navždy.</p>
-          `}
+          ${showDinner ? recipeHtml : ''}
+
+          <p class="meal-card__hint" style="margin-top:0.6rem;"><span>💡 Tip:</span> ${esc(m.prep)}</p>
+
+          <p style="margin-top:0.5rem; font-size:0.78rem; color:#666; line-height:1.3;">
+            Klikni na oběd nebo večeři pro zobrazení celého receptu (ingredience + postup). 
+            Nákupní seznam je pro celý týden (pohodlné na jeden nákup). Všechny recepty můžeš opakovat kdykoliv.
+          </p>
         </div>
       </article>
     `;
@@ -260,6 +310,7 @@
       main.querySelectorAll(".day-pill").forEach((btn) => {
         btn.addEventListener("click", () => {
           day = btn.dataset.day;
+          selectedRecipe = null;
           render();
         });
       });
@@ -270,6 +321,23 @@
           if (cb.checked) data[cb.dataset.key] = true;
           else delete data[cb.dataset.key];
           setChecked(data);
+          render();
+        });
+      });
+
+      // Click on OBĚD / VEČEŘE cards to show full recipe
+      main.querySelectorAll('.meal-clickable').forEach((el) => {
+        el.addEventListener('click', () => {
+          const mealType = el.dataset.meal;
+          selectedRecipe = (selectedRecipe === mealType) ? null : mealType;
+          render();
+        });
+      });
+
+      main.querySelectorAll('.close-recipe').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopImmediatePropagation();
+          selectedRecipe = null;
           render();
         });
       });
