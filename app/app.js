@@ -105,21 +105,21 @@
     const photo = MEAL_IMAGES[day] || "../images/hero-food.jpg";
 
     return `
-      ${isToday ? '<p class="calm-msg">Dnes už víš, co vařit. Bez přemýšlení.</p>' : ""}
+      ${isToday ? '<p class="calm-msg">✨ Dnes už víš, co vařit. Bez přemýšlení.</p>' : ""}
       <div class="days">${pills}</div>
       <article class="meal-card">
         <img class="meal-card__photo" src="${photo}" alt="" loading="lazy" />
         <div class="meal-card__inner">
           <h2 class="meal-card__day">${esc(d.label)}</h2>
           <div class="meal-row">
-            <span class="meal-row__tag">Oběd</span>
+            <span class="meal-row__tag">🍽 Oběd</span>
             <span class="meal-row__food">${esc(m.lunch)}</span>
           </div>
           <div class="meal-row meal-row--dinner">
-            <span class="meal-row__tag">Večeře</span>
+            <span class="meal-row__tag">🌙 Večeře</span>
             <span class="meal-row__food">${esc(m.dinner)}</span>
           </div>
-          <p class="meal-card__hint"><span>Tip:</span> ${esc(m.prep)}</p>
+          <p class="meal-card__hint"><span>💡 Tip:</span> ${esc(m.prep)}</p>
         </div>
       </article>
     `;
@@ -153,8 +153,8 @@
 
     const banner =
       done === total && total > 0
-        ? '<p class="shop-done">Nákup máš hotový! Můžeš domů.</p>'
-        : '<p class="calm-msg">Klikni na položku, když ji dáš do košíku.</p>';
+        ? '<p class="shop-done">🎉 Nákup máš hotový! Můžeš domů.</p>'
+        : '<p class="calm-msg">🛒 Klikni na položku, když ji dáš do košíku.</p>';
 
     return banner + html;
   }
@@ -165,7 +165,7 @@
       .map(
         (t) => `
         <article class="tip-card">
-          <h3>${esc(t.title)}</h3>
+          <h3>💚 ${esc(t.title)}</h3>
           <p>${esc(t.text)}</p>
         </article>`
       )
@@ -173,7 +173,7 @@
 
     return `
       <div class="tip-hero">
-        <p>Ušetříš si čas a nervy. Týden ${w.id} máš naplánovaný.</p>
+        <p>⏱️ Ušetříš si čas a nervy. Týden ${w.id} máš naplánovaný.</p>
       </div>
       ${cards}
     `;
