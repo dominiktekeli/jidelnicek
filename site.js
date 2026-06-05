@@ -168,14 +168,28 @@
     if (!bar || !closeBtn) return;
 
     const key = "klid-promo-sticky-dismissed";
-    if (sessionStorage.getItem(key) === "1") {
+
+    function hidePromo() {
       bar.classList.add("is-hidden");
-      return;
+      document.body.classList.add("promo-sticky-hidden");
+    }
+
+    try {
+      if (localStorage.getItem(key) === "1") {
+        hidePromo();
+        return;
+      }
+    } catch (e) {
+      /* private mode */
     }
 
     closeBtn.addEventListener("click", function () {
-      bar.classList.add("is-hidden");
-      sessionStorage.setItem(key, "1");
+      hidePromo();
+      try {
+        localStorage.setItem(key, "1");
+      } catch (e) {
+        /* ignore */
+      }
     });
   }
 

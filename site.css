@@ -33,17 +33,22 @@ img {
   display: block;
 }
 
-/* Horní sticky lišta + navigace */
+/* Horní sticky lišta + navigace — celý blok jezdí se scrollem */
 .site-top {
   position: sticky;
   top: 0;
   z-index: 60;
+  background: rgba(255, 248, 243, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+body.promo-sticky-hidden .site-top {
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .promo-sticky {
-  padding: 0.45rem 0.65rem 0;
-  background: rgba(255, 248, 243, 0.97);
-  border-bottom: 1px solid rgba(94, 207, 154, 0.12);
+  padding: 0.5rem 0.75rem 0;
 }
 
 .promo-sticky.is-hidden {
@@ -56,22 +61,25 @@ img {
   gap: 0.55rem;
   max-width: 720px;
   margin: 0 auto;
-  padding: 0.5rem 0.65rem 0.5rem 0.75rem;
-  background: #fff;
-  border: 1.5px solid var(--mint-light);
+  padding: 0.55rem 0.7rem 0.55rem 0.8rem;
+  background: linear-gradient(135deg, #fff 0%, #f4fdf8 100%);
+  border: 1.5px solid rgba(94, 207, 154, 0.45);
   border-radius: 999px;
   box-shadow:
-    0 4px 16px rgba(94, 207, 154, 0.14),
-    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+    0 6px 20px rgba(45, 154, 106, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
 }
 
-.promo-sticky__dot {
+.promo-sticky__icon {
   flex-shrink: 0;
-  width: 10px;
-  height: 10px;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  line-height: 1;
+  background: var(--mint-light);
   border-radius: 50%;
-  background: var(--mint);
-  box-shadow: 0 0 0 3px var(--mint-light);
 }
 
 .promo-sticky__copy {
@@ -81,12 +89,12 @@ img {
 }
 
 .promo-sticky__note {
-  margin: 0 0 0.1rem;
-  font-size: 0.58rem;
+  margin: 0 0 0.12rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--text-soft);
-  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #8b7355;
+  line-height: 1.25;
 }
 
 .promo-sticky__title {
@@ -101,11 +109,8 @@ img {
   margin: 0;
   font-size: 0.68rem;
   font-weight: 600;
-  color: var(--text-soft);
+  color: var(--mint-dark);
   line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .promo-sticky__cta {
