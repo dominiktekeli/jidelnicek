@@ -2106,6 +2106,93 @@ body:has(.sticky-bar) {
   }
 }
 
+.live-join {
+  position: fixed;
+  bottom: 85px;
+  right: 12px;
+  z-index: 55;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  max-width: 210px;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.95);
+  transition: all 0.25s ease;
+}
+
+.live-join.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  animation: live-join-pop 0.4s ease;
+}
+
+@keyframes live-join-pop {
+  0% {
+    transform: translateY(10px) scale(0.9);
+  }
+  60% {
+    transform: translateY(-3px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.live-join__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1.5px solid var(--mint-light);
+  object-fit: cover;
+}
+
+.live-join__content {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.live-join__name {
+  font-weight: 700;
+  color: var(--mint-dark);
+}
+
+.live-join__action {
+  color: var(--text-soft);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 480px) {
+  .live-join {
+    bottom: 65px;
+    right: 8px;
+    max-width: 185px;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.6rem;
+  }
+  .live-join__avatar {
+    width: 22px;
+    height: 22px;
+  }
+  .live-join__action {
+    font-size: 0.68rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .live-join {
+    bottom: 95px;
+  }
+}
+
 @media (min-width: 768px) {
   .transform__stage {
     gap: 0.75rem;

@@ -204,4 +204,41 @@
     observer.observe(pricing);
   }
   wireStickyHide();
+
+  // Live social proof notifications - subtle FOMO in corner, fits calm "klid" vibe + conversion
+  const liveJoins = [
+    { name: "Markéta K.", avatar: "images/moms/avatar-01.jpg", action: "se právě přidala!" },
+    { name: "Tereza M.", avatar: "images/moms/avatar-02.jpg", action: "právě koupila balíček!" },
+    { name: "Jana S.", avatar: "images/moms/avatar-03.jpg", action: "se přidala k mámám v klidu!" },
+    { name: "Petra L.", avatar: "images/moms/avatar-04.jpg", action: "vaří teď v klidu!" },
+    { name: "Lucie N.", avatar: "images/moms/avatar-05.jpg", action: "se právě přidala!" },
+  ];
+
+  function showLiveJoin() {
+    const el = document.getElementById("live-join");
+    if (!el) return;
+
+    const join = liveJoins[Math.floor(Math.random() * liveJoins.length)];
+    const avatarEl = el.querySelector(".live-join__avatar");
+    const nameEl = el.querySelector(".live-join__name");
+
+    avatarEl.src = join.avatar;
+    avatarEl.alt = join.name;
+    nameEl.textContent = join.name;
+    el.querySelector(".live-join__action").textContent = join.action;
+
+    el.classList.add("show");
+
+    setTimeout(() => {
+      el.classList.remove("show");
+    }, 5800);
+  }
+
+  // Show a few times subtly after load, to boost conversion without being spammy
+  // Fits the calm copy - "someone just joined the calm moms"
+  setTimeout(() => {
+    showLiveJoin();
+    setTimeout(showLiveJoin, 24000);
+    setTimeout(showLiveJoin, 52000);
+  }, 9500);
 })();
