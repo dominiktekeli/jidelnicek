@@ -20,7 +20,7 @@
     const url = checkoutUrl();
     const ready = isCheckoutReady();
 
-    ["btn-koupit", "btn-koupit-hero", "sticky-buy", "promo-sticky-cta"].forEach((id) => {
+    ["btn-koupit", "btn-koupit-hero", "sticky-buy"].forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       el.href = ready ? url : "#koupit";
@@ -162,41 +162,9 @@
     });
   }
 
-  function wirePromoSticky() {
-    const bar = document.getElementById("promo-sticky");
-    const closeBtn = document.getElementById("promo-sticky-close");
-    if (!bar || !closeBtn) return;
-
-    const key = "klid-promo-sticky-dismissed";
-
-    function hidePromo() {
-      bar.classList.add("is-hidden");
-      document.body.classList.add("promo-sticky-hidden");
-    }
-
-    try {
-      if (localStorage.getItem(key) === "1") {
-        hidePromo();
-        return;
-      }
-    } catch (e) {
-      /* private mode */
-    }
-
-    closeBtn.addEventListener("click", function () {
-      hidePromo();
-      try {
-        localStorage.setItem(key, "1");
-      } catch (e) {
-        /* ignore */
-      }
-    });
-  }
-
   wireBuyButtons();
   wirePrice();
   wireEmail();
   wireHeroVideo();
   wireHeroMealsSlider();
-  wirePromoSticky();
 })();
