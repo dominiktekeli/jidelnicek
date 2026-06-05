@@ -33,11 +33,144 @@ img {
   display: block;
 }
 
-/* Nav */
-.nav {
+/* Horní sticky lišta + navigace */
+.site-top {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 60;
+}
+
+.promo-sticky {
+  padding: 0.45rem 0.65rem 0;
+  background: rgba(255, 248, 243, 0.97);
+  border-bottom: 1px solid rgba(94, 207, 154, 0.12);
+}
+
+.promo-sticky.is-hidden {
+  display: none;
+}
+
+.promo-sticky__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.5rem 0.65rem 0.5rem 0.75rem;
+  background: #fff;
+  border: 1.5px solid var(--mint-light);
+  border-radius: 999px;
+  box-shadow:
+    0 4px 16px rgba(94, 207, 154, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.promo-sticky__dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 3px var(--mint-light);
+}
+
+.promo-sticky__copy {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.promo-sticky__note {
+  margin: 0 0 0.1rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-soft);
+  line-height: 1.2;
+}
+
+.promo-sticky__title {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.promo-sticky__sub {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.promo-sticky__cta {
+  flex-shrink: 0;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--mint-dark) 0%, #3cb87a 100%);
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(45, 154, 106, 0.35);
+  transition: transform 0.12s ease;
+}
+
+.promo-sticky__cta:active {
+  transform: scale(0.97);
+}
+
+.promo-sticky__close {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.15rem 0.35rem;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.promo-sticky__close:hover {
+  color: var(--text);
+}
+
+@media (max-width: 380px) {
+  .promo-sticky {
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
+  }
+
+  .promo-sticky__inner {
+    gap: 0.4rem;
+    padding: 0.45rem 0.5rem 0.45rem 0.6rem;
+  }
+
+  .promo-sticky__title {
+    font-size: 0.78rem;
+  }
+
+  .promo-sticky__sub {
+    font-size: 0.62rem;
+  }
+
+  .promo-sticky__cta {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* Nav */
+.nav {
   display: flex;
   align-items: center;
   justify-content: space-between;

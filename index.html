@@ -22,12 +22,29 @@
     <link rel="stylesheet" href="site.css" />
   </head>
   <body>
-    <header class="nav">
-      <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
-        <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
-      </a>
-      <a class="nav__cta" href="#koupit">Koupit 🛒</a>
-    </header>
+    <div class="site-top" id="site-top">
+      <aside class="promo-sticky" id="promo-sticky" role="region" aria-label="Oznámení">
+        <div class="promo-sticky__inner">
+          <span class="promo-sticky__dot" aria-hidden="true"></span>
+          <div class="promo-sticky__copy">
+            <p class="promo-sticky__note">toto je jen návrh co jsem někde viděl</p>
+            <p class="promo-sticky__title">Klid v kuchyni</p>
+            <p class="promo-sticky__sub">🍽 430+ maminek · měsíc jídla bez paniky v 17:00</p>
+          </div>
+          <a class="promo-sticky__cta" id="promo-sticky-cta" href="#koupit">Chci →</a>
+          <button type="button" class="promo-sticky__close" id="promo-sticky-close" aria-label="Zavřít oznámení">
+            ×
+          </button>
+        </div>
+      </aside>
+
+      <header class="nav">
+        <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
+          <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
+        </a>
+        <a class="nav__cta" href="#koupit">Koupit 🛒</a>
+      </header>
+    </div>
 
     <main>
       <section class="hero">
