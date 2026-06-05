@@ -19,28 +19,74 @@
       <p class="legal-doc__back"><a href="./">← Zpět na úvod</a></p>
       <h1>Soubory cookie a úložiště</h1>
 
-      <h2>1. Co používáme na webu</h2>
+      <p>Tato stránka vysvětluje, jaké cookies a podobná úložiště používáme na webu <strong>Klid v kuchyni</strong>.</p>
+
+      <h2>1. Co jsou cookies a úložiště?</h2>
+      <p>
+        Cookies jsou malé textové soubory, které web ukládá do tvého prohlížeče. Podobně funguje <strong>localStorage</strong> a <strong>sessionStorage</strong> (HTML5 úložiště). 
+        Používáme je hlavně k technickému provozu webu.
+      </p>
+
+      <h2>2. Jaké cookies a úložiště používáme</h2>
       <ul>
         <li>
-          <strong>localStorage / sessionStorage</strong> — klíč pro zapamatování přístupu po zaplacení (`klid-ma-pristup`).
-          Není to marketingová cookie.
+          <strong>localStorage / sessionStorage</strong> (nezbytné)<br>
+          Klíč <code>klid-ma-pristup</code> — slouží k zapamatování, že jsi zakoupil přístup do aplikace. 
+          Umožňuje ti otevřít jídelníček bez opakovaného přihlašování. Není to marketingové ani sledovací úložiště.
         </li>
-        <li><strong>Technicky nutné</strong> — provoz stránky (hosting).</li>
+        <li>
+          <strong>localStorage v aplikaci</strong> (nezbytné)<br>
+          Ukládá zaškrtnuté položky v nákupním seznamu a vybraný týden (klíče <code>jidelnicek-nakup</code> a <code>jidelnicek-tyden</code>). 
+          Zůstává jen na tvém zařízení.
+        </li>
+        <li>
+          <strong>Technické cookies od hostingu (Vercel)</strong><br>
+          Nutné pro správný provoz stránky, zabezpečení a doručení obsahu. Bez nich by web nefungoval.
+        </li>
       </ul>
-      <p>Na landingu nepoužíváme analytické cookies (Google Analytics apod.), pokud je později nezapneme — tuto stránku pak aktualizujeme.</p>
 
-      <h2>2. Stripe</h2>
       <p>
-        Při platbě na stránce Stripe mohou být nastaveny cookies platební brány. Řídí se
-        <a href="https://stripe.com/cz/privacy" rel="noopener noreferrer">zásadami Stripe</a>.
+        <strong>Na tomto webu momentálně nepoužíváme žádné marketingové, analytické ani sledovací cookies</strong> 
+        (např. Google Analytics, Facebook Pixel, remarketing). Pokud je v budoucnu přidáme, tuto stránku aktualizujeme 
+        a případně přidáme souhlasový banner.
       </p>
 
-      <h2>3. Správa</h2>
+      <h2>3. Cookies třetích stran</h2>
+      <ul>
+        <li>
+          <strong>Stripe</strong> (při platbě)<br>
+          Při přechodu na platební stránku Stripe se mohou nastavit jejich cookies (pro zabezpečení platby, 
+          prevenci podvodů atd.). Řídí se jejich 
+          <a href="https://stripe.com/cz/privacy" target="_blank" rel="noopener">zásadami ochrany soukromí</a>.
+        </li>
+        <li>
+          <strong>Google Fonts</strong><br>
+          Používáme písma z Google Fonts CDN. Google může při načítání písem nastavit technické cookies. 
+          Více informací: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Zásady Google</a>.
+        </li>
+      </ul>
+
+      <h2>4. Jak můžeš cookies a úložiště spravovat?</h2>
       <p>
-        Úložiště můžeš smazat v nastavení prohlížeče — ztratíš zapamatovaný přístup, ale můžeš znovu použít odkaz z
-        e-mailu nebo <a href="stahnout.html">vstup heslem</a>.
+        Většinu úložiště (localStorage) můžeš kdykoliv smazat v nastavení prohlížeče (Nastavení → Soukromí → 
+        Vymazat data prohlížení nebo Správa úložiště webu).
       </p>
-      <p>Více o osobních údajích: <a href="ochrana-osobnich-udaju.html">Zásady ochrany osobních údajů</a>.</p>
+      <p>
+        Po smazání ztratíš zapamatovaný přístup do aplikace, ale můžeš se přihlásit znovu přes odkaz z e-mailu 
+        nebo přes <a href="stahnout.html">vstup heslem</a>.
+      </p>
+      <p>
+        Cookies třetích stran (Stripe, Google) spravuješ přímo v jejich nastavení nebo přes nástroje prohlížeče.
+      </p>
+
+      <h2>5. Další informace</h2>
+      <p>
+        Více o tom, jak zpracováváme osobní údaje: 
+        <a href="ochrana-osobnich-udaju.html">Zásady ochrany osobních údajů</a>.
+      </p>
+      <p>
+        Tato stránka byla naposledy aktualizována: 2026.
+      </p>
     </main>
 
     <div id="site-legal-footer"></div>
