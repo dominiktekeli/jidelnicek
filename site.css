@@ -58,10 +58,14 @@ img {
   color: var(--text);
 }
 
-.nav__logo-mark {
-  width: 2.15rem;
-  height: 2.15rem;
+.nav__logo-fork {
+  width: 1.35rem;
+  height: auto;
   flex-shrink: 0;
+}
+
+.nav__logo-text {
+  letter-spacing: -0.02em;
 }
 
 .nav__logo-accent {
