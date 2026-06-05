@@ -2,4 +2,4 @@
 .DS_Store
 .env
 .env.local
-scripts/.ugc-tmp
+scripts/.ugc-tmp.deploy-log.txt
