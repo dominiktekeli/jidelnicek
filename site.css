@@ -988,6 +988,19 @@ section {
   overflow: hidden;
 }
 
+@media (max-width: 767px) {
+  .for-who__card {
+    grid-template-columns: 1fr;
+  }
+  .for-who__photo {
+    max-height: none;
+    aspect-ratio: 16 / 9;
+  }
+  .for-who__photo img {
+    object-position: center 25%;
+  }
+}
+
 .for-who__photo {
   margin: 0;
   aspect-ratio: 5 / 4;
@@ -2024,13 +2037,6 @@ body:has(.sticky-bar) {
 }
 
 @media (max-width: 480px) {
-  .for-who__photo {
-    max-height: 120px;
-    aspect-ratio: 4 / 3;
-  }
-  .for-who__photo img {
-    object-position: center 25%;
-  }
   .for-who__body {
     padding: 0.6rem 0.85rem 0.7rem;
   }
