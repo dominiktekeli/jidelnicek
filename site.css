@@ -50,26 +50,15 @@ img {
 .nav__logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 800;
-  font-size: 1.05rem;
-  line-height: 1.1;
   text-decoration: none;
-  color: var(--text);
+  line-height: 0;
 }
 
-.nav__logo-fork {
-  width: 1.35rem;
-  height: auto;
-  flex-shrink: 0;
-}
-
-.nav__logo-text {
-  letter-spacing: -0.02em;
-}
-
-.nav__logo-accent {
-  color: var(--mint-dark);
+.nav__logo-img {
+  display: block;
+  width: auto;
+  height: 1.35rem;
+  max-width: min(42vw, 8.5rem);
 }
 
 .nav__cta {

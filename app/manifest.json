@@ -5,21 +5,15 @@
   "start_url": "./",
   "display": "standalone",
   "background_color": "#fff8f3",
-  "theme_color": "#2d9a6a",
+  "theme_color": "#00D296",
   "lang": "cs",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "../images/logo-mark.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "../images/logo-app-icon.png",
+      "src": "../images/logo.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

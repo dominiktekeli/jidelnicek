@@ -44,27 +44,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;
   margin: 0.35rem 0 0.15rem;
 }
 
 .top__logo {
-  width: 2.75rem;
-  height: 2.75rem;
-  flex-shrink: 0;
-}
-
-.top__title {
-  margin: 0;
-  font-size: 1.65rem;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.02em;
-  text-align: left;
-}
-
-.top__title-accent {
-  color: var(--mint-dark);
+  display: block;
+  width: auto;
+  height: 1.5rem;
+  max-width: 90%;
 }
 
 .top__sub {
