@@ -2,6 +2,68 @@
 
 **Web:** https://jidelnicek-olive.vercel.app
 
+## Texty do Stripe (co kam zkopírovat)
+
+Payment Link **není** Shopify košík — nejde tam velký marketingový sloupec. Důležité texty ale nastavit jde:
+
+| Kde v Dashboardu | Co tam dát |
+|------------------|------------|
+| **Product** → tvůj produkt | Název + popis (zobrazí se v souhrnu objednávky) |
+| **Payment Link** → Upravit → stránka produktu | Stejný produkt, jednorázová platba |
+| **Settings → Branding** | Logo, barva tlačítka (mint `#2d9a6a`) |
+| **Settings → Checkout** | Kontakt, odkaz na obchodní podmínky / vrácení peněz |
+| **Payment Link → Po platbě** | Redirect na `dekujeme.html` |
+| **Settings → Emails** | Text v potvrzení platby (odkaz na jídelníček) |
+
+**Nevyplňuj** u Payment Linku: dodací adresu, telefon (pokud nepotřebuješ), předplatné.
+
+### Název produktu (Product name)
+
+```
+Klid v kuchyni — 4týdenní jídelníček
+```
+
+### Popis produktu (Product description) — zobrazí se u pokladny
+
+```
+4 týdny obědů a večeří v mobilu · nákupní seznamy · jedna platba 297 Kč · přístup navždy (žádné předplatné).
+
+Po zaplacení: okamžitý přístup přes e-mail a na stránce s odkazem do aplikace.
+```
+
+### Potvrzovací e-mail od Stripe (Settings → Emails → Successful payments)
+
+Do vlastního textu / footeru:
+
+```
+Děkujeme za nákup!
+
+Otevři jídelníček hned tady:
+https://jidelnicek-olive.vercel.app/dekujeme.html
+
+Na mobilu: po otevření Sdílet → Přidat na plochu.
+
+Záložní vstup (heslo z e-mailu / po objednávce):
+https://jidelnicek-olive.vercel.app/stahnout.html
+
+Potřebuješ pomoc? napiš na ahoj@tvujemail.cz
+```
+
+(Vyměň e-mail za skutečný z `config.js`.)
+
+### Checkout → zásady obchodu (Settings → Checkout)
+
+- **Support email:** tvůj e-mail
+- **Policy links:** až máš stránku obchodních podmínek / vrácení peněz (nebo odkaz na jednoduchou stránku na webu)
+
+Krátká věta k vrácení (pokud nabízíš garanci):
+
+```
+Nespokojenost do 14 dní — napiš na support e-mail, vrátíme platbu.
+```
+
+---
+
 ## 1. Redirect po platbě (povinné — bez toho to nefunguje)
 
 **Podrobný návod s obrázky kroků:** soubor `STRIPE-REDIRECT.md`
