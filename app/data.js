@@ -20,6 +20,12 @@ const WEEKS = [
         lunch: "Kuřecí řízek, bramborová kaše, okurka",
         dinner: "Zapečené těstoviny s mozzarellou a rajčaty",
         prep: "Večer nakrájet kuře, ráno obalit",
+        recipe: {
+          ingredients: ["4 kuřecí řízky (~600g)", "2 vejce", "strouhanka 100g", "mouka 50g", "brambory 1kg", "mléko 100ml", "máslo 30g", "1 okurka", "sůl, pepř, olej"],
+          steps: ["Večer: kuře nakrájej, obal ve mouce-vejci-strouhance, dej do lednice.", "Ráno: brambory uvař, rozmačkej s mlékem a máslem.", "Okurku nakrájej.", "Řízky osmaž na oleji 4-5 min z každé strany.", "Těstoviny podle návodu, přidej rajčata a mozzarellu, zapéct 10 min."],
+          time: "35 min",
+          note: "Klasika, kterou děti jedí do posledního kousku."
+        }
       },
       ut: {
         lunch: "Gulášová polévka, chléb, šunkový sendvič",
@@ -465,3 +471,115 @@ const WEEKS = [
     ],
   },
 ];
+
+const BREAKFAST_BONUS = {
+  id: "snidane",
+  emoji: "🥣",
+  title: "Rychlé snídaně pro chaotická rána",
+  subtitle: "5 receptů zdarma s nákupem — připrava max 10 min",
+  recipes: [
+    {
+      id: 1,
+      name: "Overnight oats s banánem a ořechy",
+      time: "5 min večer",
+      servings: "4 porce",
+      ingredients: [
+        "ovesné vločky 200 g",
+        "mléko nebo rostlinné 400 ml",
+        "banány 2 ks",
+        "ořechy nebo semínka 50 g",
+        "med nebo javorový sirup 2 lžíce",
+        "skořice špetka"
+      ],
+      steps: [
+        "Večer: vločky, mléko, med a skořici smíchej v míse nebo sklenicích.",
+        "Přidej nakrájený banán a polovinu ořechů, promíchej.",
+        "Zakryj a dej do lednice přes noc.",
+        "Ráno: přidej zbylý banán a ořechy, zamíchej. Hotovo za 30 vteřin."
+      ],
+      note: "Připrav večer, ráno jen vyndej. Děti milují sladkou verzi."
+    },
+    {
+      id: 2,
+      name: "Rychlý zelený smoothie",
+      time: "3 min",
+      servings: "4 sklenice",
+      ingredients: [
+        "mražený špenát nebo baby špenát 100 g",
+        "banány 2 ks",
+        "jablko 1 ks",
+        "jogurt bílý nebo rostlinný 300 g",
+        "voda nebo mléko 200 ml",
+        "med podle chuti"
+      ],
+      steps: [
+        "Všechny ingredience dej do mixéru.",
+        "Mixuj 1–2 minuty dohladka.",
+        "Rozděl do sklenic nebo lahví.",
+        "Pij hned nebo dej do lednice na dopoledne."
+      ],
+      note: "Zelenina schovaná, sladké od ovoce. Skvělé na cestu."
+    },
+    {
+      id: 3,
+      name: "Míchaná vajíčka se špenátem a sýrem",
+      time: "7 min",
+      servings: "4 porce",
+      ingredients: [
+        "vejce 8 ks",
+        "mléko 50 ml",
+        "čerstvý nebo mražený špenát 150 g",
+        "sýr (eidam nebo gouda) 100 g",
+        "sůl, pepř, máslo nebo olej"
+      ],
+      steps: [
+        "Vejce rozšlehej s mlékem, solí a pepřem.",
+        "Na pánvi rozehřej máslo, přidej špenát a restuj 1 min.",
+        "Přilij vajíčka a míchej na středním plameni 4–5 min.",
+        "Na závěr přidej nastrouhaný sýr a nech rozpustit.",
+        "Podávej s chlebem nebo rohlíkem."
+      ],
+      note: "Bílkoviny na start dne. Děti často jedí i se špenátem."
+    },
+    {
+      id: 4,
+      name: "Jogurtový parfait s ovocem a granolou",
+      time: "5 min",
+      servings: "4 sklenice",
+      ingredients: [
+        "bílý jogurt 500 g",
+        "mražené nebo čerstvé bobule 300 g",
+        "granola nebo ovesné vločky s medem 100 g",
+        "med nebo džem 2 lžíce"
+      ],
+      steps: [
+        "Do sklenic nebo misek vrstvěte: jogurt, ovoce, granola.",
+        "Opakujte 2–3 vrstvy.",
+        "Zakápněte medem.",
+        "Můžete připravit večer do uzavíratelných sklenic."
+      ],
+      note: "Žádný vaření. Krásně vypadá, děti si to sestaví samy."
+    },
+    {
+      id: 5,
+      name: "Rychlé banánové palačinky (mikrovlnka nebo pánev)",
+      time: "8 min",
+      servings: "8–10 malých",
+      ingredients: [
+        "banány 2 zralé ks",
+        "vejce 2 ks",
+        "ovesné vločky 100 g nebo mouka",
+        "mléko 50 ml",
+        "prášek do pečiva špetka",
+        "máslo nebo olej na smažení"
+      ],
+      steps: [
+        "Banány rozmačkej vidličkou.",
+        "Přidej vejce, vločky, mléko a prášek, promíchej na husté těsto.",
+        "Na pánvi nebo v mikrovlnce (v silikonové formě) peč 2–3 min z každé strany nebo 1,5 min v mikru.",
+        "Podávej s ovocem nebo jogurtem."
+      ],
+      note: "Bez cukru, sladké od banánu. Děti je milují jako dezert i snídani."
+    }
+  ]
+};

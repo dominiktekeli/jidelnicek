@@ -30,6 +30,7 @@
   let week = Number(localStorage.getItem(WEEK_KEY)) || 1;
   let mode = "food";
   let day = todayDayId();
+  let isBonus = localStorage.getItem("jidelnicek-bonus") === "1";
 
   const main = document.getElementById("main");
   const weekPicker = document.getElementById("week-picker");
@@ -72,19 +73,35 @@
   }
 
   function renderWeekPicker() {
-    weekPicker.innerHTML = WEEKS.map(
+    const weeksHtml = WEEKS.map(
       (w) => `
-      <button type="button" class="week-pick${w.id === week ? " week-pick--on" : ""}" data-week="${w.id}">
+      <button type="button" class="week-pick${w.id === week && !isBonus ? " week-pick--on" : ""}" data-week="${w.id}">
         <span class="week-pick__emoji">${w.emoji}</span>
         <span class="week-pick__num">Týden ${w.id}</span>
         <span class="week-pick__name">${esc(w.simple)}</span>
       </button>`
     ).join("");
 
+    const bonusHtml = `
+      <button type="button" class="week-pick week-pick--bonus${isBonus ? " week-pick--on" : ""}" data-bonus="true">
+        <span class="week-pick__emoji">${BREAKFAST_BONUS.emoji}</span>
+        <span class="week-pick__num">BONUS</span>
+        <span class="week-pick__name">Snídaně zdarma</span>
+      </button>`;
+
+    weekPicker.innerHTML = weeksHtml + bonusHtml;
+
     weekPicker.querySelectorAll(".week-pick").forEach((btn) => {
       btn.addEventListener("click", () => {
-        week = Number(btn.dataset.week);
-        localStorage.setItem(WEEK_KEY, String(week));
+        if (btn.dataset.bonus === "true") {
+          isBonus = true;
+          localStorage.setItem("jidelnicek-bonus", "1");
+        } else {
+          isBonus = false;
+          week = Number(btn.dataset.week);
+          localStorage.setItem(WEEK_KEY, String(week));
+          localStorage.removeItem("jidelnicek-bonus");
+        }
         renderWeekPicker();
         render();
       });
@@ -120,6 +137,18 @@
             <span class="meal-row__food">${esc(m.dinner)}</span>
           </div>
           <p class="meal-card__hint"><span>💡 Tip:</span> ${esc(m.prep)}</p>
+          ${m.recipe ? `
+            <div style="margin-top:0.6rem; padding-top:0.5rem; border-top:1px dashed #ddd;">
+              <p style="margin:0 0 0.3rem; font-weight:700; font-size:0.9rem;">Plný recept (${esc(m.recipe.time)}):</p>
+              <p style="margin:0 0 0.3rem; font-size:0.85rem;"><strong>Ingredience:</strong> ${m.recipe.ingredients.map(esc).join(", ")}</p>
+              <ol style="margin:0; padding-left:1.1rem; font-size:0.82rem; line-height:1.3;">
+                ${m.recipe.steps.map(s => `<li>${esc(s)}</li>`).join("")}
+              </ol>
+              ${m.recipe.note ? `<p style="margin:0.4rem 0 0; font-size:0.8rem; color:#2d9a6a;">💡 ${esc(m.recipe.note)}</p>` : ""}
+            </div>
+          ` : `
+            <p style="margin-top:0.5rem; font-size:0.8rem; color:#666;">Ingredience a přesný postup podle nákupního seznamu tohoto týdne (4 porce). Opakuj podle chuti — všechny recepty jsou tvé navždy.</p>
+          `}
         </div>
       </article>
     `;
@@ -179,31 +208,81 @@
     `;
   }
 
+  function renderBonus() {
+    const b = BREAKFAST_BONUS;
+    const recipesHtml = b.recipes.map(r => `
+      <article class="meal-card breakfast-card">
+        <div class="meal-card__inner">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <h2 class="meal-card__day" style="margin-bottom:0.2rem;">${esc(r.name)}</h2>
+              <p style="margin:0; font-size:0.85rem; color:#666;">${esc(r.time)} · ${esc(r.servings)}</p>
+            </div>
+            <span style="font-size:1.8rem;">🥣</span>
+          </div>
+          <p class="meal-card__hint" style="margin-top:0.6rem;"><strong>Ingredience:</strong></p>
+          <ul style="margin:0.3rem 0 0.6rem; padding-left:1.1rem; font-size:0.9rem; line-height:1.35;">
+            ${r.ingredients.map(i => `<li>${esc(i)}</li>`).join('')}
+          </ul>
+          <p class="meal-card__hint"><strong>Postup:</strong></p>
+          <ol style="margin:0.3rem 0 0.6rem; padding-left:1.1rem; font-size:0.9rem; line-height:1.35;">
+            ${r.steps.map(s => `<li>${esc(s)}</li>`).join('')}
+          </ol>
+          ${r.note ? `<p style="margin:0.4rem 0 0; font-size:0.85rem; color:#2d9a6a; font-weight:600;">💡 ${esc(r.note)}</p>` : ''}
+        </div>
+      </article>
+    `).join('');
+
+    return `
+      <div class="tip-hero" style="background:#fff3e0; border:1px solid #ffcc80;">
+        <p><strong>🎁 BONUS ZDARMA</strong> — 5 rychlých snídaní pro chaotická rána. Připrava max 10 min, většinou večer předem.</p>
+      </div>
+      ${recipesHtml}
+      <p style="text-align:center; margin-top:1rem; font-size:0.85rem; color:#666;">
+        Tyto recepty můžeš používat kdykoliv — přístup navždy, žádné omezení.
+      </p>
+    `;
+  }
+
   function render() {
-    if (mode === "food") main.innerHTML = renderFood();
-    else if (mode === "shop") main.innerHTML = renderShop();
-    else main.innerHTML = renderTip();
+    if (isBonus) {
+      main.innerHTML = renderBonus();
+    } else if (mode === "food") {
+      main.innerHTML = renderFood();
+    } else if (mode === "shop") {
+      main.innerHTML = renderShop();
+    } else {
+      main.innerHTML = renderTip();
+    }
 
-    main.querySelectorAll(".day-pill").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        day = btn.dataset.day;
-        render();
+    // day pills only for normal weeks
+    if (!isBonus) {
+      main.querySelectorAll(".day-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          day = btn.dataset.day;
+          render();
+        });
       });
-    });
 
-    main.querySelectorAll('.shop-row input[type="checkbox"]').forEach((cb) => {
-      cb.addEventListener("change", () => {
-        const data = getChecked();
-        if (cb.checked) data[cb.dataset.key] = true;
-        else delete data[cb.dataset.key];
-        setChecked(data);
-        render();
+      main.querySelectorAll('.shop-row input[type="checkbox"]').forEach((cb) => {
+        cb.addEventListener("change", () => {
+          const data = getChecked();
+          if (cb.checked) data[cb.dataset.key] = true;
+          else delete data[cb.dataset.key];
+          setChecked(data);
+          render();
+        });
       });
-    });
+    }
   }
 
   bottomBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      if (isBonus) {
+        isBonus = false;
+        localStorage.removeItem("jidelnicek-bonus");
+        renderWeekPicker();
+      }
       mode = btn.dataset.mode;
       bottomBtns.forEach((b) => b.classList.toggle("bottom__btn--on", b === btn));
       render();
