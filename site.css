@@ -483,43 +483,56 @@ img {
   font-weight: 800;
 }
 
-.transform__stage {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-
-.transform__card {
-  margin: 0;
+.transform__compare {
+  position: relative;
+  margin: 0.25rem 0 0;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
 
-.transform__card img {
+.transform__compare img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
 }
 
-.transform__arrow {
-  flex-shrink: 0;
-  font-size: 1.35rem;
-  font-weight: 700;
+.transform__badge {
+  position: absolute;
+  top: 0.65rem;
+  z-index: 2;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   line-height: 1;
-  color: var(--text-soft);
+  color: #fff;
+  background: rgba(28, 25, 23, 0.78);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.transform__badge--before {
+  left: 0.65rem;
+}
+
+.transform__badge--after {
+  right: 0.65rem;
 }
 
 @media (max-width: 380px) {
-  .transform__stage {
-    gap: 0.35rem;
+  .transform__badge {
+    top: 0.45rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.62rem;
   }
 
-  .transform__arrow {
-    font-size: 1.15rem;
+  .transform__badge--before {
+    left: 0.45rem;
+  }
+
+  .transform__badge--after {
+    right: 0.45rem;
   }
 }
 
