@@ -1115,6 +1115,13 @@ section {
   animation: pricing-pulse 2.4s ease-in-out infinite;
 }
 
+.pricing__pay-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+
 @keyframes pricing-pulse {
   0%,
   100% {
