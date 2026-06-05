@@ -647,6 +647,132 @@ section {
   font-weight: 500;
 }
 
+.bundle__intro {
+  margin: 0 0 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.bundle__intro strong {
+  color: var(--mint-dark);
+  font-weight: 800;
+}
+
+.bundle__item--highlight {
+  border-color: var(--mint);
+  background: linear-gradient(135deg, var(--mint-light) 0%, var(--card) 72%);
+}
+
+.bundle__item--highlight h3 {
+  color: var(--mint-dark);
+}
+
+/* Výhody a „recepty znovu“ napříč stránkou */
+.value-note {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--mint-light);
+  border-radius: 14px;
+  border: 1px solid rgba(94, 207, 154, 0.28);
+}
+
+.value-note--hero {
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.value-note--center {
+  text-align: center;
+}
+
+.value-note strong {
+  color: var(--mint-dark);
+  font-weight: 800;
+}
+
+.transform .value-note {
+  max-width: 26rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.perks-grid {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.perks-grid--hero {
+  max-width: 24rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.perks-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.5rem 0.55rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text);
+  background: var(--card);
+  border-radius: 12px;
+  border: 1px solid var(--mint-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.perks-grid li span:first-child {
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.perks-grid--full {
+  gap: 0.55rem;
+}
+
+.perks-grid--full li {
+  font-size: 0.88rem;
+  padding: 0.65rem 0.85rem;
+}
+
+.benefits {
+  padding-top: 1.5rem;
+}
+
+.benefits__lead {
+  margin: 0 0 1.15rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.benefits__lead strong {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.weeks-preview__foot {
+  margin: 1rem 0 0;
+}
+
 .weeks-preview__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -740,7 +866,7 @@ section {
   list-style: none;
   margin: 0 auto 1.25rem;
   padding: 0;
-  max-width: 22rem;
+  max-width: 26rem;
   text-align: left;
 }
 
@@ -937,6 +1063,18 @@ section {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
 }
 
+.pricing__repeat {
+  margin: 0.45rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.pricing__repeat strong {
+  font-weight: 800;
+}
+
 .pricing__perks-panel {
   margin: 0 1rem 1rem;
   padding: 0.55rem;
@@ -959,9 +1097,9 @@ section {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  padding: 0.6rem 0.5rem;
+  padding: 0.52rem 0.42rem;
   background: #fff;
   border-radius: 12px;
   color: var(--text);
@@ -1522,9 +1660,30 @@ section {
   box-shadow: 0 -8px 24px rgba(94, 207, 154, 0.15);
 }
 
-.sticky-bar__text span {
+.sticky-bar__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.sticky-bar__text strong {
+  font-size: 0.82rem;
+  line-height: 1.2;
+}
+
+.sticky-bar__sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  line-height: 1.2;
+}
+
+.sticky-bar__text #sticky-price,
+.sticky-bar__text > span:last-child {
   color: var(--mint-dark);
   font-weight: 800;
+  font-size: 0.95rem;
 }
 
 .sticky-bar__btn {
@@ -1550,6 +1709,9 @@ body:has(.sticky-bar) {
   }
   .weeks-preview__grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .perks-grid--full {
+    grid-template-columns: 1fr 1fr;
   }
   .demo__mockup {
     max-width: 320px;
