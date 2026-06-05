@@ -55,9 +55,7 @@
       '<div class="legal-footer__bottom">' +
       "<p>© " +
       year +
-      ", Klid v kuchyni · " +
-      name +
-      " · IČO " +
+      ", Klid v kuchyni · IČO " +
       ico +
       "</p>" +
       '<p class="legal-footer__mini">' +
