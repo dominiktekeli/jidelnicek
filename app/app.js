@@ -4,15 +4,39 @@
 
   const DAY_ORDER = ["ne", "po", "ut", "st", "ct", "pa", "so"];
 
-  const MEAL_IMAGES = {
-    po: "../images/hero-food.jpg",
-    ut: "../images/food-pasta.jpg",
-    st: "../images/food-groceries.jpg",
-    ct: "../images/hero-food.jpg",
-    pa: "../images/food-pasta.jpg",
-    so: "../images/food-groceries.jpg",
-    ne: "../images/hero-food.jpg",
-  };
+  function getLunchPhoto(lunch) {
+    if (!lunch) return "../images/hero-food.jpg";
+    const l = lunch.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove diacritics for matching
+    if (l.includes("rizek") || l.includes("kruti platky") || l.includes("platky") || l.includes("smazeny syr") || l.includes("rybi prsty") || l.includes("kureci riz ek") || l.includes("sekan")) {
+      return "../images/meals/meal-rizek.jpg";
+    }
+    if (l.includes("svickova")) {
+      return "../images/meals/meal-svickova.jpg";
+    }
+    if (l.includes("bolognese") || l.includes("spagety") || l.includes("testoviny") || l.includes("zbytek bolognese") || l.includes("zbytek lasagni") || l.includes("lasagne") || l.includes("curry") || l.includes("kokos")) {
+      return "../images/meals/meal-bolognese.jpg";
+    }
+    if (l.includes("gulas") || l.includes("gulasova") || l.includes("polevka") || l.includes("hrachova") || l.includes("fazolova") || l.includes("gul asova") || l.includes("cervene cocky") || l.includes("cocka") || l.includes("knedlick")) {
+      return "../images/meals/meal-gulas-polivka.jpg";
+    }
+    if (l.includes("pasta") || l.includes("zapek") || l.includes("zapecene") || l.includes("bramboraky") || l.includes("zapecene brambory") || l.includes("kuskus") || l.includes("chlebick") || l.includes("brambor")) {
+      return "../images/meals/meal-pasta-zapek.jpg";
+    }
+    if (l.includes("kure") || l.includes("kuraci") || l.includes("pecene kure") || l.includes("stir-fry") || l.includes("zape cene kure")) {
+      return "../images/meals/meal-rizek.jpg";
+    }
+    if (l.includes("losos") || l.includes("rybi") || l.includes("treska") || l.includes("fish") || l.includes("sushi")) {
+      return "../images/food-pasta.jpg";
+    }
+    if (l.includes("wrap") || l.includes("taco") || l.includes("burger") || l.includes("tortilla")) {
+      return "../images/food-pasta.jpg";
+    }
+    if (l.includes("kase")) {
+      return "../images/meals/meal-pasta-zapek.jpg";
+    }
+    // good default professional looking meal photo
+    return "../images/meals/meal-pasta-zapek.jpg";
+  }
 
   const CAT_EMOJI = {
     "Maso & ryby": "🥩",
@@ -121,7 +145,7 @@
         `<button type="button" class="day-pill${x.id === day ? " day-pill--on" : ""}" data-day="${x.id}">${x.short}</button>`
     ).join("");
 
-    const photo = MEAL_IMAGES[day] || "../images/hero-food.jpg";
+    const photo = m.lunchImage || getLunchPhoto(m.lunch) || "../images/hero-food.jpg";
 
     const lunchRecipe = m.recipe;
     const dinnerRecipe = m.recipe; // for now same recipe object covers both; in future we can split
@@ -177,7 +201,7 @@
       <div class="days">${pills}</div>
 
       <article class="meal-card">
-        <img class="meal-card__photo" src="${photo}" alt="" loading="lazy" />
+        <img class="meal-card__photo" src="${photo}" alt="${esc(m.lunch)}" loading="lazy" />
         <div class="meal-card__inner">
           <h2 class="meal-card__day">${esc(d.label)}</h2>
 
