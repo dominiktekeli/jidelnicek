@@ -1,0 +1,4 @@
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/shot-01.mp4'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/shot-02.mp4'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/shot-03.mp4'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/shot-04.mp4'

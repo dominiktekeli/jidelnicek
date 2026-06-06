@@ -1,6 +1,6 @@
-// https://jidelnicek-olive.vercel.app
+// https://klidvkuchyni.cz
 window.KLID_CONFIG = {
-  siteUrl: "https://jidelnicek-olive.vercel.app",
+  siteUrl: "https://klidvkuchyni.cz",
 
   // Stripe Payment Link — live
   checkoutUrl: "https://buy.stripe.com/bJe4gz7lP2iQ3Poend6Vq00",
@@ -8,7 +8,7 @@ window.KLID_CONFIG = {
   // Jazyk Stripe pokladny: cs = čeština (přidá se ?locale=cs k odkazu)
   stripeLocale: "cs",
 
-  thankYouUrl: "https://jidelnicek-olive.vercel.app/dekujeme.html",
+  thankYouUrl: "https://klidvkuchyni.cz/dekujeme.html",
 
   payhipUrl: "",
 

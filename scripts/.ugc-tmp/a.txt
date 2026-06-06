@@ -1,0 +1,6 @@
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/vo-01.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/sil-01.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/vo-02.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/sil-02.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/vo-03.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/sil-end.mp3'

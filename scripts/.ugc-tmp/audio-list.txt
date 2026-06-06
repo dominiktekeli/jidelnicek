@@ -1,0 +1,6 @@
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/vo-00.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/silence-00.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/vo-01.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/silence-01.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/vo-02.mp3'
+file '/Users/dominiktekeli/klid-v-kuchyni/scripts/.ugc-tmp/silence-end.mp3'
