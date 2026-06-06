@@ -18,7 +18,6 @@ const WEEKS = [
     meals: {
       po: {
         lunch: "Kuřecí řízek, bramborová kaše, okurka",
-        lunchImage: "../images/meals/lunch-w1-po-kureci-rizek.jpg",
         dinner: "Zapečené těstoviny s mozzarellou a rajčaty",
         prep: "Večer nakrájet kuře, ráno obalit",
         recipe: {
@@ -30,7 +29,6 @@ const WEEKS = [
       },
       ut: {
         lunch: "Gulášová polévka, chléb, šunkový sendvič",
-        lunchImage: "../images/meals/lunch-w1-ut-gulasova-polevka.jpg",
         dinner: "Pečený losos, rýže, brokolice na páře",
         prep: "Losos marinovat 15 min ráno",
         recipe: {
@@ -42,7 +40,6 @@ const WEEKS = [
       },
       st: {
         lunch: "Špagety bolognese (dvojitá porce na pátek)",
-        lunchImage: "../images/meals/lunch-w1-st-spagety-bolognese.jpg",
         dinner: "Sýrové palačinky, ovoce",
         prep: "Omáčku uvařit odpoledne, zmrazit půlku",
         recipe: {
@@ -54,7 +51,6 @@ const WEEKS = [
       },
       ct: {
         lunch: "Fazolová polévka, topinky s česnekem",
-        lunchImage: "../images/meals/lunch-w1-ct-fazolova-polevka.jpg",
         dinner: "Kuřecí stir-fry, nudle",
         prep: "Zeleninu nakrájet do krabiček",
         recipe: {
@@ -66,7 +62,6 @@ const WEEKS = [
       },
       pa: {
         lunch: "Zbytek bolognese, salát z ledového salátu",
-        lunchImage: "../images/meals/lunch-w1-pa-zbytek-bolognese.jpg",
         dinner: "Domácí pizza (koupené těsto), zelenina",
         prep: "Těsto vyndat ráno z lednice",
         recipe: {
@@ -78,7 +73,6 @@ const WEEKS = [
       },
       so: {
         lunch: "Svíčková z tašky (omáčka) + knedlík z mikrovlnky",
-        lunchImage: "../images/meals/meal-svickova.jpg",
         dinner: "Grilované klobásy, brambory, hořčice",
         prep: "Nákup v pátek odpoledne",
         recipe: {
@@ -90,7 +84,6 @@ const WEEKS = [
       },
       ne: {
         lunch: "Smažený sýr, brambory, tatarka",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Lehká zeleninová polévka, toast",
         prep: "Odpočinek — minimum vaření",
         recipe: {
@@ -183,7 +176,6 @@ const WEEKS = [
     meals: {
       po: {
         lunch: "Krůtí plátky, bramborová kaše, kyselá okurka",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Polévka z červené čočky, celozrnný chléb",
         prep: "Čočku namočit ráno",
         recipe: {
@@ -214,7 +206,6 @@ const WEEKS = [
       },
       ut: {
         lunch: "Wrapy s kuřetem, zeleninou a jogurtovým dresinkem",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Pečená zelenina s halloumi",
         prep: "Zeleninu nakrájet, uložit do mísy",
         recipe: {
@@ -226,7 +217,6 @@ const WEEKS = [
       },
       st: {
         lunch: "Rybí prsty + hrášek + bramborová kaše",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Kuřecí curry s rýží (jemné pro děti)",
         prep: "Curry koření smíchat předem do skleničky",
         recipe: {
@@ -238,7 +228,6 @@ const WEEKS = [
       },
       ct: {
         lunch: "Špenátové noky s máslem a parmazánem",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Těstovinový salát s tuňákem",
         prep: "Salát uvařit večer, ráno jen vyndat",
         recipe: {
@@ -250,7 +239,6 @@ const WEEKS = [
       },
       pa: {
         lunch: "Zbytek curry",
-        lunchImage: "../images/meals/meal-bolognese.jpg",
         dinner: "Burgery z mletého krůtího, pečené hranolky",
         prep: "Hranolky nakrájet, namočit ve vodě",
         recipe: {
@@ -262,7 +250,6 @@ const WEEKS = [
       },
       so: {
         lunch: "Pečené kuře (celé), brambory, mrkev",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Omeleta se zeleninou",
         prep: "Kuře marinovat v sobotu ráno",
         recipe: {
@@ -274,7 +261,6 @@ const WEEKS = [
       },
       ne: {
         lunch: "Ovesná kaše s ovocem a ořechy (brunch)",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Zeleninový krém, toast s avokádem",
         prep: "Ořechy nasekat, ovoce připravit",
         recipe: {
@@ -365,7 +351,6 @@ const WEEKS = [
     meals: {
       po: {
         lunch: "Fazolová polévka z víkendu (pokud máte) nebo hrachová",
-        lunchImage: "../images/meals/lunch-w1-ct-fazolova-polevka.jpg",
         dinner: "Špenátové těstoviny s vejcem",
         prep: "Vejce uvařit předem na 8 min",
         recipe: {
@@ -377,7 +362,6 @@ const WEEKS = [
       },
       ut: {
         lunch: "Bramboráky, kefír",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Kuřecí vývar + nudle s zeleninou",
         prep: "Vývar z kostí — vařit pasivně 2 h",
         recipe: {
@@ -389,7 +373,6 @@ const WEEKS = [
       },
       st: {
         lunch: "Zapečené brambory s cottage a šunkou",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Líné lasagne (bez vaření těstovin)",
         prep: "Lasagne složit večer, ráno jen zapéct",
         recipe: {
@@ -401,7 +384,6 @@ const WEEKS = [
       },
       ct: {
         lunch: "Kuskus s grilovanou zeleninou",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Mleté maso na paprice (po maďarsku), rýže",
         prep: "Kuskus připravit za 5 min",
         recipe: {
@@ -413,7 +395,6 @@ const WEEKS = [
       },
       pa: {
         lunch: "Zbytek lasagní",
-        lunchImage: "../images/meals/meal-bolognese.jpg",
         dinner: "Smažený květák, bramborová kaše",
         prep: "Květák obalit ráno, večer jen osmažit",
         recipe: {
@@ -425,7 +406,6 @@ const WEEKS = [
       },
       so: {
         lunch: "Sekaná pečeně, brambory, kyselá okurka",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Palačinky (sladké i slané)",
         prep: "Sekanou připravit v pátek večer",
         recipe: {
@@ -437,7 +417,6 @@ const WEEKS = [
       },
       ne: {
         lunch: "Chlebíčky — vajíčková pomazánka, šunka",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Zeleninový salát s cizrnou",
         prep: "Pomazánku uvařit v neděli dopoledne",
         recipe: {
@@ -525,7 +504,6 @@ const WEEKS = [
     meals: {
       po: {
         lunch: "Kuřecí kokosové curry s rýží",
-        lunchImage: "../images/meals/meal-bolognese.jpg",
         dinner: "Zeleninová polévka, topinky",
         prep: "Curry uvařit dvojitou porci",
         recipe: {
@@ -537,7 +515,6 @@ const WEEKS = [
       },
       ut: {
         lunch: "Tacos / tortilla bowls (mleté maso, fazole)",
-        lunchImage: "../images/meals/meal-pasta-zapek.jpg",
         dinner: "Pečené filety z tresky, bramborová kaše",
         prep: "Taco koření smíchat doma",
         recipe: {
@@ -549,7 +526,6 @@ const WEEKS = [
       },
       st: {
         lunch: "Sushi bowl (rýže, losos uzený, okurka, avokádo)",
-        lunchImage: "../images/food-pasta.jpg",
         dinner: "Krupicová kaše s ovocem (děti milují)",
         prep: "Rýži uvařit předem",
         recipe: {
@@ -561,7 +537,6 @@ const WEEKS = [
       },
       ct: {
         lunch: "Zapečené kuře s paprikou a cibulí",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Těstoviny aglio olio s cherry rajčaty",
         prep: "Kuře marinovat v jogurtu",
         recipe: {
@@ -573,7 +548,6 @@ const WEEKS = [
       },
       pa: {
         lunch: "Zbytek kuřete, tortilla wrap",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Fish & chips z trouby (bez fritézy)",
         prep: "Rybu obalit, nechat v lednici",
         recipe: {
@@ -585,7 +559,6 @@ const WEEKS = [
       },
       so: {
         lunch: "Burger party — hovězí i vegetariánské placky",
-        lunchImage: "../images/meals/meal-rizek.jpg",
         dinner: "Domácí popcorn, ovoce, board sýrů",
         prep: "Nakupte extra pečivo v pátek",
         recipe: {
@@ -597,7 +570,6 @@ const WEEKS = [
       },
       ne: {
         lunch: "Knedlíčková polévka (kupní knedlíčky OK)",
-        lunchImage: "../images/meals/meal-gulas-polivka.jpg",
         dinner: "Lehká večeře — salát, vajíčka na měkko",
         prep: "Polévku uvařit z mražené zeleniny",
         recipe: {
