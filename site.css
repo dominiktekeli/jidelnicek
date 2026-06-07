@@ -1123,7 +1123,7 @@ section {
 }
 
 .pricing__payment-trust {
-  margin-top: 0.85rem;
+  margin-top: 0.5rem;
   text-align: center;
   color: #555;
 }
@@ -1132,7 +1132,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .pay-badge {
@@ -1394,7 +1394,7 @@ section {
 
 .pricing__social {
   margin: 0 1rem 0.85rem;
-  padding: 0.75rem 0.65rem;
+  padding: 0.55rem 0.65rem;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   text-align: center;
@@ -1402,18 +1402,18 @@ section {
 
 .pricing__avatars {
   list-style: none;
-  margin: 0 auto 0.55rem;
+  margin: 0 auto 0.35rem;
   padding: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 280px;
+  max-width: 300px;
 }
 
 .pricing__avatars li {
-  width: 36px;
-  height: 36px;
-  margin-left: -10px;
+  width: 42px;
+  height: 42px;
+  margin-left: -12px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid #fff;
