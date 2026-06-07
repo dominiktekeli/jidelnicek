@@ -1732,7 +1732,19 @@ section {
   color: #444;
 }
 
-/* Mini review cards for "ZOBRAZIT VÍCE" (avatar + name + varied stars, no text) */
+/* Mini review cards - now integrated normally at top of reviews section */
+.reviews__additional {
+  margin: 0.5rem 0 0.7rem;
+}
+
+.reviews__additional .reviews__more-label {
+  text-align: center;
+  margin-bottom: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #555;
+}
+
 .reviews__mini-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
