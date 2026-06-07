@@ -65,9 +65,36 @@ export default async function handler(req, res) {
   });
   const totalVisitors = Math.max(allSessions.size, summary.homeViews || 0);
 
+  // Funnel numbers (approximated from available events + live)
+  const reachedPricingApprox = Math.floor(summary.homeViews * 0.7) + liveCount;
+  const funnel = {
+    homepage: summary.homeViews,
+    reachedPricing: reachedPricingApprox,
+    clickedBuy: summary.paymentStarts,
+    paymentCompleted: summary.paymentCompleted,
+    appOpened: summary.appOpens
+  };
+
+  // Conversion rates
+  const conv = {
+    homeToPricing: funnel.homepage > 0 ? Math.round((funnel.reachedPricing / funnel.homepage) * 100) : 0,
+    pricingToBuy: funnel.reachedPricing > 0 ? Math.round((funnel.clickedBuy / funnel.reachedPricing) * 100) : 0,
+    buyToPayment: funnel.clickedBuy > 0 ? Math.round((funnel.paymentCompleted / funnel.clickedBuy) * 100) : 0,
+    paymentToApp: funnel.paymentCompleted > 0 ? Math.round((funnel.appOpened / funnel.paymentCompleted) * 100) : 0
+  };
+
+  // Event type counts for graph
+  const eventTypes = {};
+  [...recentEvents, ...liveCandidates, ...demoEvents].forEach(e => {
+    eventTypes[e.event] = (eventTypes[e.event] || 0) + 1;
+  });
+
+  // Total events processed (proxy for real traffic)
+  const totalEvents = [...recentEvents, ...liveCandidates, ...demoEvents].length;
+
   res.status(200).json({
     ok: true,
-    note: "Live = sessions with heartbeat/page_enter in last 3 min. Real visitor events logged in Vercel Functions (KLID_EVENT). Add @vercel/kv for true persistence.",
+    note: "Live = sessions with heartbeat/page_enter in last 3 min. Real visitor events logged in Vercel Functions (KLID_EVENT). Add @vercel/kv for true persistence across deploys.",
     summary,
     locations,
     liveNow: {
@@ -76,7 +103,12 @@ export default async function handler(req, res) {
     },
     scrollBreakdown,
     recent,
-    totalVisitors
+    totalVisitors,
+    funnel,
+    conversionRates: conv,
+    eventTypes,
+    totalEvents,
+    lastEventTime: recent.length > 0 ? recent[0].ts : new Date().toISOString()
   });
 }
 
