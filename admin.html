@@ -261,7 +261,8 @@
       // basic cards
       document.getElementById('today-count').textContent = d.todayVisitors || 0;
       document.getElementById('total-visitors').textContent = d.totalVisitors || 0;
-      document.getElementById('live-now-card').textContent = d.liveNow?.count || 0;
+      const liveEl = document.getElementById('live-count') || document.getElementById('live-now-card');
+      if (liveEl) liveEl.textContent = d.liveNow?.count || 0;
       document.getElementById('orders-count').textContent = d.funnel?.paymentCompleted || 0;
 
       // funnel basic
@@ -305,7 +306,8 @@
       const l = d.liveNow || {count:0, byLocation:{}};
       if (l.count > 0) {
         ld.innerHTML = `Aktivní: ${l.count} <br> ${l.byLocation.home ? '🏠 ' + l.byLocation.home + ' na webu ' : ''} ${l.byLocation.app ? '📱 ' + l.byLocation.app + ' v appce' : ''}`;
-        document.getElementById('live-now-card').textContent = l.count;
+        const liveEl2 = document.getElementById('live-count') || document.getElementById('live-now-card');
+        if (liveEl2) liveEl2.textContent = l.count;
       } else {
         ld.textContent = 'Žádní aktivní návštěvníci v posledních 60s.';
       }
