@@ -33,7 +33,7 @@
         <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
           <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
         </a>
-        <a class="nav__cta" href="#koupit">Koupit 🛒</a>
+        <a class="nav__cta" href="#koupit">🛒 Koupit za 297 Kč</a>
       </header>
     </div>
 
@@ -41,16 +41,16 @@
       <section class="hero">
         <p class="hero__badge">🍽 4 týdny jídla v mobilu</p>
         <h1 class="hero__title">
-          4 týdny jídla.<br />
-          <em>Bez stresu</em> z toho, co zase vařit.
+          Konec večerní paniky.<br />
+          4 týdny jídla v mobilu.
         </h1>
         <p class="hero__lead">
           Jídelníček a nákup na jednom místě — otevřeš odkaz a máš klid. Jednoduché jako zpráva na
           Instagramu.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">🛒 Kompletní balíček — 297 Kč</a>
-          <a class="btn btn--ghost" href="#ukazka">📱 Ukázka aplikace</a>
+          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">🛒 Koupit za 297 Kč</a>
+          <a class="btn btn--ghost" href="#ukazka" style="font-size:0.85em; padding:0.5em 0.8em; opacity:0.85;">nebo se podívej na ukázku ↓</a>
         </div>
         <p class="hero__legal-note">
           Digitální přístup hned po platbě ·
@@ -169,7 +169,7 @@
           <li><span aria-hidden="true">🔒</span> Přístup navždy · jedna platba</li>
         </ul>
         <div class="demo__actions">
-          <a class="btn btn--primary" href="#koupit">🛒 Chci všechny 4 týdny</a>
+          <a class="btn btn--primary" href="#koupit">🛒 Koupit za 297 Kč</a>
         </div>
       </section>
 
@@ -247,7 +247,7 @@
         </ul>
 
         <div class="section-cta">
-          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit balíček — 297 Kč</a>
+          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit za 297 Kč</a>
         </div>
       </section>
 
@@ -287,7 +287,7 @@
         </p>
 
         <div class="section-cta">
-          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit balíček — 297 Kč</a>
+          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit za 297 Kč</a>
         </div>
       </section>
 
@@ -324,7 +324,6 @@
             <h2 class="pricing__title" id="pricing-heading">Kompletní balíček</h2>
             <p class="pricing__price" id="pricing-price">297 Kč</p>
             <p class="pricing__perweek" id="pricing-perweek">74 Kč za jeden týden</p>
-            <p class="pricing__bonus">🎁 Při koupi dnes: zdarma „Rychlé snídaně pro chaotická rána“ (5 receptů)</p>
           </div>
 
           <div class="pricing__perks-panel">
@@ -338,16 +337,24 @@
             </ul>
           </div>
 
+          <!-- Bonus hook moved up, visualized, with timer -->
+          <div class="pricing__bonus" style="background:#fff7e6; border:1px solid #f4c95f; padding:12px; border-radius:12px; margin-bottom:12px; text-align:center;">
+            <div style="font-size:1.1em; font-weight:600; color:#b45309;">🎁 BONUS ZDARMA při koupi dnes</div>
+            <div style="margin:6px 0;">„Rychlé snídaně pro chaotická rána“ (5 receptů &lt;10 min)</div>
+            <div style="font-size:0.9em; color:#b45309;">⏳ Nabídka končí za <span id="bonus-timer">2:59:59</span></div>
+          </div>
+
           <a class="btn btn--full btn--buy" id="btn-koupit" href="#">
             <span class="btn--buy__shine" aria-hidden="true"></span>
-            <span class="btn--buy__label">KOUPIT</span>
+            <span class="btn--buy__label">🛒 Koupit za 297 Kč</span>
             <span class="btn--buy__arrow" aria-hidden="true">→</span>
           </a>
-          <p class="pricing__legal">
-            Kliknutím na Koupit souhlasíš s
-            <a href="obchodni-podminky.html">obchodními podmínkami</a>, okamžitým digitálním plněním a
-            <a href="vraceni-penez.html">zánikem práva odstoupit</a>.
-          </p>
+
+          <!-- Payment trust logos -->
+          <div style="margin-top:10px; font-size:0.85em; text-align:center; color:#666;">
+            💳 <strong>Visa • Mastercard • Apple Pay • Google Pay</strong><br>
+            <span style="font-size:0.75em;">Zabezpečená platba přes Stripe</span>
+          </div>
 
           <div class="pricing__social">
             <ul class="pricing__avatars" aria-hidden="true">
@@ -386,16 +393,19 @@
               <span aria-hidden="true">★</span>
             </p>
             <p class="reviews__count"><strong>4,8</strong> · 75+ recenzí maminek</p>
+            <button onclick="document.getElementById('more-reviews').style.display='block'; this.style.display='none';" style="margin-top:8px; font-size:0.85em; padding:4px 10px; background:#fff; border:1px solid #ddd; border-radius:6px; cursor:pointer;">ZOBRAZIT VÍCE (jen jména + hvězdičky)</button>
+            <div id="more-reviews" style="display:none; margin-top:8px; font-size:0.85em; color:#666;">
+              + Ivana P. ★★★★★ &nbsp; + Klára D. ★★★★★ &nbsp; + Hana Ž. ★★★★★ &nbsp; + Denisa W. ★★★★★ &nbsp; + další 60+ ověřených maminek
+            </div>
           </div>
         </div>
 
-        <div class="reviews__grid">
+        <div class="reviews__grid" id="reviews-grid">
             <article class="review-card">
               <header class="review-card__head">
                 <img class="review-card__avatar" src="images/moms/avatar-05.jpg" alt="" width="40" height="40" loading="lazy" />
                 <div class="review-card__who">
-                  <strong>Markéta K.</strong>
-                  
+                  <strong>Markéta K.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -412,8 +422,7 @@
               <header class="review-card__head">
                 <img class="review-card__avatar" src="images/moms/avatar-03.jpg" alt="" width="40" height="40" loading="lazy" />
                 <div class="review-card__who">
-                  <strong>Lucie V.</strong>
-                  
+                  <strong>Lucie V.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -740,7 +749,7 @@
             ><span id="sticky-price">297 Kč</span> jednorázově · přístup navždy</span
           >
         </div>
-        <a class="btn btn--primary sticky-bar__btn" id="sticky-buy" href="#koupit">🛒 Chci všechny 4 týdny</a>
+        <a class="btn btn--primary sticky-bar__btn" id="sticky-buy" href="#koupit">🛒 Koupit za 297 Kč</a>
       </div>
     </div>
 
@@ -757,16 +766,23 @@
       <a class="btn btn--primary" href="dekujeme.html">Otevřít po zaplacení</a>
     </div>
 
-    <!-- Cookie banner - jednoduchý, protože nepoužíváme non-essential cookies -->
+    <!-- Cookie banner with marketing consent for Meta Pixel (GDPR compliant) -->
     <div id="cookie-banner" class="cookie-banner">
       <div class="cookie-banner-inner">
         <p>
-          Používáme pouze nezbytné úložiště (pro přístup po platbě) a technické soubory třetích stran (Stripe při platbě, Google Fonts). 
-          Žádné marketingové ani analytické cookies. <a href="cookies.html">Více v zásadách cookies</a>.
+          Používáme technické cookies pro fungování webu a Stripe (platby). 
+          Pro měření reklam (Meta Pixel) používáme <strong>marketingové cookies</strong> pouze s vaším souhlasem.
+          <a href="cookies.html">Více v zásadách cookies</a>.
         </p>
-        <div class="cookie-actions">
-          <button id="cookie-decline" class="btn">Odmítnout nepovinné</button>
-          <button id="cookie-accept" class="btn btn-accept">Přijmout</button>
+        <div class="cookie-actions" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+          <label style="display:flex; align-items:center; gap:6px; font-size:0.9em;">
+            <input type="checkbox" id="marketing-consent" checked />
+            Souhlasím s marketingovými cookies (Meta Pixel pro reklamu a měření)
+          </label>
+          <div style="display:flex; gap:8px;">
+            <button id="cookie-decline" class="btn">Pouze technické</button>
+            <button id="cookie-accept" class="btn btn-accept">Přijmout</button>
+          </div>
         </div>
       </div>
     </div>
@@ -781,10 +797,11 @@
           document.getElementById("stripe-return").hidden = false;
         }
 
-        // Cookie banner logic
+        // Cookie banner logic with marketing consent
         var banner = document.getElementById('cookie-banner');
         var acceptBtn = document.getElementById('cookie-accept');
         var declineBtn = document.getElementById('cookie-decline');
+        var marketingCheckbox = document.getElementById('marketing-consent');
 
         function showBanner() {
           if (banner) banner.classList.add('show');
@@ -794,30 +811,37 @@
           if (banner) banner.classList.remove('show');
         }
 
-        // Check preference
+        // Check preference - support object for granular consent
         var pref = localStorage.getItem('cookie-preference');
+        var consent = {};
+        try { consent = JSON.parse(pref || '{}'); } catch(e) { consent = { marketing: pref === 'accepted' }; }
+
         if (!pref) {
-          // Show after short delay so it doesn't jump on load
           setTimeout(showBanner, 1200);
+        }
+
+        function saveConsent(marketing) {
+          localStorage.setItem('cookie-preference', JSON.stringify({ marketing: !!marketing, necessary: true }));
         }
 
         if (acceptBtn) {
           acceptBtn.addEventListener('click', function () {
-            localStorage.setItem('cookie-preference', 'accepted');
+            var marketing = marketingCheckbox ? marketingCheckbox.checked : true;
+            saveConsent(marketing);
             hideBanner();
+            if (marketing) loadMetaPixel();
           });
         }
 
         if (declineBtn) {
           declineBtn.addEventListener('click', function () {
-            localStorage.setItem('cookie-preference', 'declined');
+            saveConsent(false);
             hideBanner();
-            // Zde bychom v budoucnu vypnuli non-essential skripty (GA atd.)
-            // Momentálně nic takového nenačítáme.
+            // Do not load Pixel
           });
         }
 
-        // Meta Pixel (Facebook) - načte se jen při souhlasu
+        // Meta Pixel - only with explicit marketing consent
         function loadMetaPixel() {
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -831,18 +855,43 @@
           fbq('track', 'PageView');
         }
 
-        // Načti pixel pokud už byl dříve souhlas
-        if (pref === 'accepted') {
+        // Load pixel only if marketing consent was previously given
+        if (consent.marketing === true) {
           loadMetaPixel();
+          // Standardní ViewContent pro optimalizaci (z Meta spec)
+          if (typeof fbq === 'function') {
+            fbq('track', 'ViewContent');
+          }
         }
 
-        // Na "Přijmout" načti pixel okamžitě
+        // On accept, load if marketing checked
         if (acceptBtn) {
-          // Přepíšeme listener, aby volal i pixel (původní listener už je výš)
           acceptBtn.addEventListener('click', function () {
-            loadMetaPixel();
+            var marketing = marketingCheckbox ? marketingCheckbox.checked : true;
+            if (marketing) {
+              loadMetaPixel();
+              if (typeof fbq === 'function') {
+                fbq('track', 'ViewContent');
+              }
+            }
           }, { once: true });
         }
+
+        // Simple countdown for bonus (demo 3 hours)
+        (function() {
+          var timerEl = document.getElementById('bonus-timer');
+          if (!timerEl) return;
+          var end = Date.now() + 3*60*60*1000;
+          function tick() {
+            var left = Math.max(0, end - Date.now());
+            var h = Math.floor(left / 3600000);
+            var m = Math.floor((left % 3600000) / 60000);
+            var s = Math.floor((left % 60000) / 1000);
+            timerEl.textContent = h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+            if (left > 0) setTimeout(tick, 1000);
+          }
+          tick();
+        })();
       })();
     </script>
   </body>

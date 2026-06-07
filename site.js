@@ -33,11 +33,10 @@
     BUY_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
-      /* Hero a sticky rovnou na Stripe; jinak kotva na ceník */
-      if (ready && id !== "btn-koupit") {
+      if (ready && url) {
         el.href = url;
       } else {
-        el.href = ready ? url : "#koupit";
+        el.href = "#koupit";
       }
       /* Stejné okno = na mobilu se po Stripe vrátí zpět snáze */
     });
@@ -50,6 +49,20 @@
       const pricing = document.querySelector(".pricing__card");
       if (pricing) pricing.appendChild(warn);
     }
+
+    // Fire Meta Pixel InitiateCheckout on buy click if marketing consent
+    BUY_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('click', function() {
+          if (window.marketingConsent && window.marketingConsent()) {
+            if (typeof fbq === 'function') {
+              fbq('track', 'InitiateCheckout');
+            }
+          }
+        });
+      }
+    });
   }
 
   function wirePrice() {
@@ -60,7 +73,7 @@
     const heroBuy = document.getElementById("btn-koupit-hero");
     const num = parseInt(String(p).replace(/\D/g, ""), 10);
     if (priceEl) priceEl.textContent = p;
-    if (heroBuy) heroBuy.textContent = "🛒 Kompletní balíček — " + p;
+    if (heroBuy) heroBuy.textContent = "🛒 Koupit za " + p;
     if (stickyPrice) stickyPrice.textContent = p;
     if (perWeekEl && num > 0) {
       perWeekEl.textContent = Math.round(num / 4) + " Kč za jeden týden";

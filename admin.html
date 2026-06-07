@@ -3,597 +3,440 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard • Klid v kuchyni</title>
+  <title>Admin • Klid v kuchyni</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="tracking.js"></script>
   <link rel="icon" href="images/favicon-32x32.png">
   <style>
-    :root { --accent: #e8a0a0; }
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f9f5f0; color: #3f2e2e; }
-    .sidebar { background: #fff; border-right: 1px solid #f0e6e0; }
-    .card { background: #fff; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .nav-item { padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 14px; }
-    .nav-item.active { background: #f8e8e8; color: #c2416f; font-weight: 500; }
-    .metric-card { background: #fff; border-radius: 12px; padding: 16px; border: 1px solid #f0e6e0; }
-    .section-header { font-size: 13px; color: #8a6f6f; font-weight: 500; }
-    table { font-size: 13px; }
-    .badge { font-size: 11px; padding: 1px 8px; border-radius: 9999px; }
-    .pink { color: #c2416f; }
-    .beige { background: #f9f5f0; }
+    body { font-family: system-ui, sans-serif; }
+    .metric { transition: all .2s; }
+    .live-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
   </style>
 </head>
-<body>
-  <div class="flex min-h-screen">
-    <!-- Sidebar -->
-    <div class="w-64 sidebar p-4 flex flex-col">
-      <div class="flex items-center gap-2 mb-6 px-2">
-        <div class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center text-pink-600 text-sm font-bold">AI</div>
+<body class="bg-zinc-950 text-zinc-200">
+  <!-- Login Gate -->
+  <div id="login-gate" class="min-h-screen flex items-center justify-center">
+    <div class="max-w-sm w-full mx-4 bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center text-xl">🍽</div>
         <div>
-          <div class="font-semibold text-pink-600">Klid v kuchyni</div>
-          <div class="text-[10px] text-pink-400 -mt-1">ADMIN</div>
+          <div class="font-semibold text-xl">Klid v kuchyni</div>
+          <div class="text-emerald-400 text-sm">Admin</div>
         </div>
       </div>
-
-      <div class="text-xs text-pink-400 mb-1 px-2">s Nikol</div>
-
-      <nav class="space-y-1 text-sm flex-1">
-        <a href="#" onclick="showSection('dashboard')" class="nav-item active" data-section="dashboard">
-          <span>📊</span> <span>Dashboard</span>
-        </a>
-        <a href="#" onclick="showSection('live')" class="nav-item" data-section="live">
-          <span class="text-green-500">●</span> <span>Live návštěvnost</span>
-        </a>
-        <a href="#" onclick="showSection('analytics')" class="nav-item" data-section="analytics">
-          <span>📈</span> <span>Analytika</span>
-        </a>
-        <a href="#" class="nav-item"><span>📦</span> <span>Objednávky</span></a>
-        <a href="#" class="nav-item"><span>🌐</span> <span>Zprávy z webu</span></a>
-        <a href="#" class="nav-item"><span>✉️</span> <span>Email centrum</span></a>
-        <a href="#" class="nav-item">
-          <span>⭐</span> <span>Recenze</span> <span class="ml-auto text-[10px] bg-pink-200 text-pink-600 px-1.5 rounded-full">2</span>
-        </a>
-        <a href="#" class="nav-item"><span>📣</span> <span>Meta Ads</span></a>
-        <a href="#" class="nav-item"><span>📄</span> <span>E-book PDF</span></a>
-        <a href="#" class="nav-item"><span>🎁</span> <span>Bonusy upload</span></a>
-        <a href="#" class="nav-item"><span>🎓</span> <span>Skool komunita</span></a>
-      </nav>
-
-      <div class="mt-auto pt-4 border-t text-xs">
-        <div class="flex items-center gap-2 px-2 py-1">
-          <div class="w-6 h-6 bg-pink-200 rounded-full"></div>
-          <div>
-            <div class="text-pink-600 text-sm">s Nikol</div>
-            <div class="text-[10px] text-pink-400">admin@klidvkuchyni.cz</div>
-          </div>
-        </div>
-        <div class="px-2 mt-2 text-pink-400 hover:text-pink-600 cursor-pointer" onclick="logout()">Odhlásit se</div>
+      <h1 class="text-2xl font-semibold mb-1">Přihlášení</h1>
+      <p class="text-zinc-400 text-sm mb-6">Zadej heslo</p>
+      <div>
+        <input id="pw" type="password" class="w-full bg-zinc-950 border border-zinc-700 focus:border-emerald-500 rounded-2xl px-4 py-3 text-lg outline-none mb-4" placeholder="Heslo">
+        <button onclick="login()" class="w-full bg-emerald-500 hover:bg-emerald-600 rounded-2xl py-3 font-medium">Přihlásit</button>
       </div>
+      <p class="text-[11px] text-zinc-500 mt-4 text-center">Prozatím: klidadmin (změň v kódu)</p>
     </div>
+  </div>
 
-    <!-- Main -->
-    <div class="flex-1 p-8 bg-[#f9f5f0]">
-      <!-- Basic Dashboard -->
-      <div id="section-dashboard">
-        <div class="flex items-center justify-between mb-2">
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+    <div class="max-w-6xl mx-auto p-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center text-xl">🍽</div>
           <div>
-            <h1 class="text-3xl font-semibold">Dashboard - Klid v kuchyni</h1>
-            <div class="text-sm text-pink-400">Základní přehled o lidech, návštěvách, objednávkách a reálných datech (kde klikají)</div>
-          </div>
-          <div class="flex items-center gap-2 text-xs">
-            <div class="flex items-center gap-1 px-3 py-1 bg-white rounded-full border">
-              <span class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></span>
-              <span>Auto-refresh každých 60s</span>
-            </div>
-            <button onclick="refreshAll()" class="px-3 py-1 bg-white rounded-full border hover:bg-pink-50">Refresh</button>
-            <span class="text-pink-400">poslední: <span id="last-updated">—</span></span>
+            <div class="font-semibold text-2xl">Klid v kuchyni — Admin</div>
+            <div class="text-emerald-400 text-sm -mt-1">Základní přehled (reálná data z trackingu)</div>
           </div>
         </div>
-
-        <!-- Basic Overview Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div class="metric-card border-l-4 border-emerald-500">
-            <div class="text-xs text-emerald-600 font-medium">DNES NA WEBU</div>
-            <div id="dnes-visitors" class="text-4xl font-bold mt-1">—</div>
-            <div class="text-xs">unikátních návštěv <button onclick="pripsatToday()" class="ml-2 text-[10px] px-1 py-0 bg-emerald-100 text-emerald-700 rounded">připsat</button></div>
+        <div class="flex items-center gap-3 text-sm">
+          <div class="px-3 py-1 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-2">
+            <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+            <span>Auto-refresh 60s</span>
           </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400 font-medium">CELKEM NÁVŠTĚV</div>
-            <div id="total-visitors-card" class="text-4xl font-bold mt-1">—</div>
-            <div class="text-xs">unikátních session</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-emerald-400 font-medium">LIVE TEĎ</div>
-            <div id="live-now-card" class="text-4xl font-bold mt-1">—</div>
-            <div class="text-xs">aktivních (posledních 60s)</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400 font-medium">OBJEDNÁVKY (PLATBY)</div>
-            <div id="orders-card" class="text-4xl font-bold mt-1">—</div>
-            <div class="text-xs">dokončených plateb</div>
-          </div>
-        </div>
-
-        <!-- Funnel / Kde lidi klikají -->
-        <div class="mb-6">
-          <h2 class="font-semibold mb-2">Funnel & kde lidi klikají (reálná data)</h2>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-            <div class="p-3 bg-white rounded border">
-              <div class="text-xs">Homepage views</div>
-              <div id="funnel-home-basic" class="text-2xl font-bold">—</div>
-            </div>
-            <div class="p-3 bg-white rounded border">
-              <div class="text-xs">Reached pricing/demo</div>
-              <div id="funnel-pricing-basic" class="text-2xl font-bold">—</div>
-              <div id="funnel-pricing-pct-basic" class="text-[10px] text-emerald-600">—%</div>
-            </div>
-            <div class="p-3 bg-white rounded border">
-              <div class="text-xs">Clicked Buy (klik na koupit)</div>
-              <div id="funnel-buy-basic" class="text-2xl font-bold">—</div>
-              <div id="funnel-buy-pct-basic" class="text-[10px] text-emerald-600">—%</div>
-            </div>
-            <div class="p-3 bg-white rounded border">
-              <div class="text-xs">Payment completed (objednávky)</div>
-              <div id="funnel-payment-basic" class="text-2xl font-bold">—</div>
-              <div id="funnel-payment-pct-basic" class="text-[10px] text-emerald-600">—%</div>
-            </div>
-            <div class="p-3 bg-white rounded border">
-              <div class="text-xs">App opened</div>
-              <div id="funnel-app-basic" class="text-2xl font-bold">—</div>
-              <div id="funnel-app-pct-basic" class="text-[10px] text-emerald-600">—%</div>
-            </div>
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1">Kliky a konverze z reálného trackingu (buy_clicked, payment_completed, app_opened, scroll)</div>
-        </div>
-
-        <!-- Warning -->
-        <div class="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded-2xl mb-6 text-sm flex items-start gap-2">
-          <span>⚠️</span>
-          <div>
-            <span class="font-medium">Vyžaduje pozornost</span><br>
-            6× pending objednávka starší než 1 hodinu — možná Stripe webhook nedorazil
-          </div>
-        </div>
-
-        <!-- Metrics -->
-        <div class="grid grid-cols-4 gap-4 mb-6">
-          <div class="metric-card">
-            <div class="text-xs text-pink-400 font-medium">DNES</div>
-            <div id="dnes-amount" class="text-3xl font-semibold mt-1">0 Kč</div>
-            <div id="dnes-orders" class="text-xs text-pink-400">0× návštěva</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400 font-medium">TENTO TÝDEN <span class="text-green-500 text-[10px]">↑ 38 %</span></div>
-            <div id="tyden-amount" class="text-3xl font-semibold mt-1">999 Kč</div>
-            <div id="tyden-orders" class="text-xs text-pink-400">1× návštěva</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400 font-medium">TENTO MĚSÍC <span class="text-green-500 text-[10px]">↑ 94 %</span></div>
-            <div id="mesic-amount" class="text-3xl font-semibold mt-1">999 Kč</div>
-            <div id="mesic-orders" class="text-xs text-pink-400">1× návštěva</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400 font-medium">LIFETIME</div>
-            <div id="lifetime-amount" class="text-3xl font-semibold mt-1">16 689 Kč</div>
-            <div id="lifetime-orders" class="text-xs text-pink-400">28× návštěva · průměr 596 Kč</div>
-          </div>
-        </div>
-
-        <!-- Chart + Activity -->
-        <div class="grid grid-cols-5 gap-4">
-          <div class="col-span-3 card p-4">
-            <div class="flex justify-between text-sm mb-2">
-              <div><span class="font-medium">Návštěvy — posledních 14 dní</span></div>
-              <div class="text-xs text-pink-400">6× · 2 610 Kč</div>
-            </div>
-            <canvas id="chart-revenue" height="90"></canvas>
-          </div>
-          <div class="col-span-2 card p-4">
-            <div class="font-medium mb-2 text-sm">Aktivita</div>
-            <div id="activity-list" class="text-xs space-y-1"></div>
-          </div>
+          <button onclick="refresh()" class="px-4 py-1.5 bg-zinc-900 hover:bg-zinc-800 rounded-2xl border border-zinc-700">Obnovit</button>
+          <button onclick="simulateVisit()" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-2xl">Simulate visit (test push)</button>
+          <button onclick="logout()" class="px-4 py-1.5 text-zinc-400 hover:text-zinc-200">Odhlásit</button>
         </div>
       </div>
 
-      <!-- Analytika Section -->
-      <div id="section-analytics" class="hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h1 class="text-3xl font-semibold">Analytika</h1>
-          <div class="flex gap-1 text-xs">
-            <button class="px-3 py-1 rounded-full bg-white border text-pink-600">Dnes</button>
-            <button class="px-3 py-1 rounded-full bg-pink-100 text-pink-600">7 dní</button>
-            <button class="px-3 py-1 rounded-full bg-white border">30 dní</button>
-            <button class="px-3 py-1 rounded-full bg-white border">90 dní</button>
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-zinc-900 border border-emerald-500/30 rounded-3xl p-5">
+          <div class="text-emerald-400 text-xs font-medium mb-1">DNES NA WEBU</div>
+          <div id="today-count" class="text-5xl font-semibold">—</div>
+          <div class="text-xs text-zinc-400 mt-1 flex items-center gap-2">
+            unikátních návštěv 
+            <button onclick="pripsatDnes()" class="text-emerald-400 hover:text-emerald-300 underline">připsat</button>
           </div>
+          <div id="credited-today" class="text-[10px] text-emerald-400 mt-1 hidden">Připsáno: <span id="credited-val"></span></div>
         </div>
-
-        <!-- Backfill -->
-        <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 mb-6 text-sm">
-          <div class="flex justify-between items-start">
-            <div>
-              <div class="font-medium">Backfill historických orders</div>
-              <div class="text-xs text-yellow-600">Propoj už zaplacené objednávky s jejich session daty (přes UTM + timing window). Označí návštěvy z /dekujeme jako paid. Idempotentní.</div>
-            </div>
-            <button onclick="runBackfill()" class="px-4 py-1 bg-pink-600 text-white text-xs rounded-full">Spustit backfill</button>
-          </div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+          <div class="text-zinc-400 text-xs font-medium mb-1">CELKEM NÁVŠTĚV</div>
+          <div id="total-visitors" class="text-5xl font-semibold">—</div>
+          <div class="text-xs text-zinc-400 mt-1">unikátních session (vše)</div>
         </div>
-
-        <!-- Analytics Metrics -->
-        <div class="grid grid-cols-4 gap-4 mb-6">
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">NÁVŠTĚV</div>
-            <div id="a-navstev" class="text-3xl font-semibold">115</div>
-            <div class="text-xs">54%</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">ENGAGED (&gt;15s)</div>
-            <div id="a-engaged" class="text-3xl font-semibold">62</div>
-            <div class="text-xs">54%</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">OTEVŘELA KOŠÍK</div>
-            <div id="a-kosik" class="text-3xl font-semibold">8</div>
-            <div class="text-xs">7%</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">NÁKUPŮ</div>
-            <div id="a-nakupu" class="text-3xl font-semibold">1</div>
-            <div class="text-xs">CR 0.9%</div>
-          </div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+          <div class="text-zinc-400 text-xs font-medium mb-1">LIVE TEĎ</div>
+          <div id="live-count" class="text-5xl font-semibold">—</div>
+          <div class="text-xs text-emerald-400 mt-1">aktivních (posledních 60s)</div>
         </div>
-
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">CART → BUY</div>
-            <div id="a-cartbuy" class="text-3xl font-semibold">12.5%</div>
-            <div class="text-xs">1/8</div>
-          </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">AVG. ČAS DO NÁKUPU</div>
-            <div id="a-avgcas" class="text-3xl font-semibold">4 min</div>
-            <div class="text-xs">z 1 nákupů</div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          <div class="card p-4">
-            <div class="font-medium mb-2">Top zdroje</div>
-            <div id="top-zdroje" class="text-xs space-y-1"></div>
-          </div>
-          <div class="card p-4">
-            <div class="font-medium mb-2">Top stránky</div>
-            <div id="top-stranky" class="text-xs space-y-1"></div>
-          </div>
-        </div>
-
-        <!-- Visits Table -->
-        <div class="mt-6">
-          <div class="flex gap-2 mb-2 text-xs">
-            <button onclick="filterTable('all')" class="px-3 py-1 rounded-full bg-black text-white text-xs">Všechny</button>
-            <button onclick="filterTable('engaged')" class="px-3 py-1 rounded-full bg-white border text-xs">Engaged</button>
-            <button onclick="filterTable('kosik')" class="px-3 py-1 rounded-full bg-white border text-xs">Otevřela košík</button>
-            <button onclick="filterTable('nakoupila')" class="px-3 py-1 rounded-full bg-white border text-xs">Nakoupila</button>
-          </div>
-          <table class="w-full text-xs">
-            <thead class="text-pink-400">
-              <tr>
-                <th class="text-left p-2">PRVNÍ NÁVŠTĚVA</th>
-                <th class="text-left p-2">ZAŘÍZENÍ</th>
-                <th class="text-left p-2">ZDROJ</th>
-                <th class="text-left p-2">CESTA</th>
-                <th class="text-left p-2">PVS</th>
-                <th class="text-left p-2">ČAS</th>
-                <th class="text-left p-2">SCROLL</th>
-                <th class="text-left p-2">STAV</th>
-                <th class="text-left p-2">AKCE</th>
-              </tr>
-            </thead>
-            <tbody id="visits-table" class="text-xs"></tbody>
-          </table>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+          <div class="text-zinc-400 text-xs font-medium mb-1">OBJEDNÁVKY (PLATBY)</div>
+          <div id="orders-count" class="text-5xl font-semibold">—</div>
+          <div class="text-xs text-zinc-400 mt-1">dokončených plateb</div>
         </div>
       </div>
 
-      <!-- Live Section -->
-      <div id="section-live" class="hidden">
-        <h1 class="text-3xl font-semibold mb-1">Live návštěvnost</h1>
-        <div class="text-sm text-pink-400 mb-4">Heartbeat každých 30s. Online = poslední aktivita do 60s.</div>
-
-        <div class="grid grid-cols-4 gap-4 mb-6">
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">Online teď</div>
-            <div id="live-online" class="text-3xl font-semibold text-green-500">1</div>
+      <!-- Funnel / Kde lidi klikají -->
+      <div class="mb-8">
+        <h2 class="font-semibold text-lg mb-3">Funnel — kde lidi klikají (reálná data)</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
+            <div class="text-xs text-zinc-400">Homepage views</div>
+            <div id="funnel-home" class="text-3xl font-semibold">—</div>
           </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">Unique 24h</div>
-            <div id="live-unique" class="text-3xl font-semibold">0</div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
+            <div class="text-xs text-zinc-400">Reached pricing / demo</div>
+            <div id="funnel-pricing" class="text-3xl font-semibold">—</div>
+            <div id="funnel-pricing-pct" class="text-emerald-400 text-xs">—%</div>
           </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">V košíku 24h</div>
-            <div id="live-kosik" class="text-3xl font-semibold">0</div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
+            <div class="text-xs text-zinc-400">Clicked Buy</div>
+            <div id="funnel-buy" class="text-3xl font-semibold">—</div>
+            <div id="funnel-buy-pct" class="text-emerald-400 text-xs">—%</div>
           </div>
-          <div class="metric-card">
-            <div class="text-xs text-pink-400">Koupily 24h · CR 0.0%</div>
-            <div id="live-koupily" class="text-3xl font-semibold">0</div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
+            <div class="text-xs text-zinc-400">Payment completed (objednávky)</div>
+            <div id="funnel-payment" class="text-3xl font-semibold">—</div>
+            <div id="funnel-payment-pct" class="text-emerald-400 text-xs">—%</div>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
+            <div class="text-xs text-zinc-400">App opened</div>
+            <div id="funnel-app" class="text-3xl font-semibold">—</div>
+            <div id="funnel-app-pct" class="text-emerald-400 text-xs">—%</div>
           </div>
         </div>
+        <div class="text-[10px] text-zinc-500 mt-2">Data z reálného trackingu (page_view, buy_clicked, payment_completed, app_opened, scroll)</div>
+      </div>
 
-        <table class="w-full text-xs">
-          <thead>
-            <tr class="text-pink-400">
-              <th class="text-left p-2">STAV</th>
-              <th class="text-left p-2">STRÁNKA</th>
-              <th class="text-left p-2">STRÁVILA</th>
-              <th class="text-left p-2">ZDROJ</th>
-              <th class="text-left p-2">ZAŘÍZENÍ</th>
-              <th class="text-left p-2">SESSION</th>
-            </tr>
-          </thead>
-          <tbody id="live-table"></tbody>
-        </table>
-        <div class="text-[10px] text-pink-400 mt-2">Žádná osobní data se nesledují — jen anonymní session ID, IP a UA pro analytiku. Aktivuje se až po souhlasu s cookies.</div>
+      <!-- Graphs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+          <div class="font-medium mb-3">Kde se lidé pohybují (Locations)</div>
+          <canvas id="chart-locs" height="120"></canvas>
+        </div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+          <div class="font-medium mb-3">Scroll depth (jak daleko čtou)</div>
+          <canvas id="chart-scroll" height="120"></canvas>
+        </div>
+      </div>
+
+      <!-- Kompletní seznam (přesně tvůj text) -->
+      <div class="bg-zinc-900 border border-zinc-700 rounded-3xl p-6 mb-8">
+        <h3 class="font-semibold mb-3 text-emerald-400">Vše, co potřebuji sledovat, abych viděl, jestli stránka + funnel + app fungují (kompletní seznam + aktuální čísla)</h3>
+        <ul class="space-y-1 text-sm">
+          <li>• <strong>Homepage views</strong> – kolik lidí přišlo na úvodní stránku: <span id="val-homepage" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Reached pricing / demo</strong> – kolik scrollovalo nebo vidělo ukázku appky: <span id="val-pricing" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Clicked Buy</strong> – kolik kliklo na tlačítko koupit: <span id="val-buy" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Payment completed</strong> – kolik dokončilo platbu (297 Kč): <span id="val-payment" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>App opened</strong> – kolik otevřelo aplikaci po platbě: <span id="val-app" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Scroll depth (25/50/75/100%)</strong> – jak daleko lidé čtou stránku: <span id="val-scroll" class="font-mono text-emerald-400">25%: — | 50%: — | 75%: — | 100%: —</span></li>
+          <li>• <strong>Live sessions</strong> – kolik lidí je právě teď aktivních (heartbeat): <span id="val-live" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Total visitors</strong> – celkový počet unikátních lidí na stránce: <span id="val-total" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Total events</strong> – kolik eventů celkem (všechny interakce): <span id="val-events" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Last event time</strong> – kdy naposledy někdo interagoval: <span id="val-last" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Conversion rates</strong> mezi kroky funnelu (v %): <span id="val-conv" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Event types distribution</strong> – jaké akce lidé dělají: <span id="val-types" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Locations</strong> – kolik je na home / v platbě / v appce: <span id="val-locs" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Recent activity log</strong> – posledních 10–12 událostí v reálném čase (viz tabulka níže)</li>
+          <li>• <strong>Kolik lidí bylo dnes na webu</strong> – <span id="val-today" class="font-mono text-emerald-400">—</span> <button onclick="pripsatDnes()" class="ml-2 text-xs px-2 py-0.5 bg-emerald-600 hover:bg-emerald-500 rounded">připsat</button></li>
+        </ul>
+        <div class="mt-3 text-xs text-zinc-400">Všechna data přicházejí přes tracking.js → /api/track → /api/stats. Reálné eventy od návštěvníků (z reklam) vidíš v logách Vercel Functions (KLID_EVENT) a v bufferu adminu.</div>
+      </div>
+
+      <!-- Recent + Live details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 class="font-semibold text-lg mb-3">Recent activity (poslední události)</h2>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-zinc-800 text-zinc-400 text-xs">
+                  <th class="text-left px-4 py-2">Čas</th>
+                  <th class="text-left px-4 py-2">Událost</th>
+                  <th class="text-left px-4 py-2">Stránka</th>
+                  <th class="text-left px-4 py-2">Detaily</th>
+                </tr>
+              </thead>
+              <tbody id="recent-table" class="divide-y divide-zinc-800"></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h2 class="font-semibold text-lg mb-3">Live teď (kdo je aktivní)</h2>
+          <div id="live-details" class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">
+            Žádní aktivní návštěvníci v posledních 60s.
+          </div>
+          <div class="text-[10px] text-zinc-500 mt-2">Heartbeat každých 30s. Cink při nové aktivitě.</div>
+        </div>
+      </div>
+
+      <div class="mt-8 text-xs text-zinc-500">
+        Pro test v anonymu: otevři hlavní stránku v incognitu, proveď akce (scroll, klik buy), pak klikni "Simulate visit" v adminu. Uvidíš okamžitý push a čísla v seznamu + "dnes na webu".<br>
+        Pro reálné z reklam: eventy chodí do Vercel logs (KLID_EVENT) — tam máš přesný počet pro "kolik lidí bylo dnes" a můžeš připsat.
       </div>
     </div>
   </div>
 
   <script>
+    const ADMIN_PASSWORD = "klidadmin";
     let currentData = null;
+    let lastLive = 0;
     let charts = {};
 
-    async function fetchData() {
+    function login() {
+      const v = document.getElementById('pw').value.trim();
+      if (v === ADMIN_PASSWORD) {
+        localStorage.setItem('klid-admin', '1');
+        document.getElementById('login-gate').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        init();
+      } else {
+        alert('Špatné heslo');
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('klid-admin');
+      location.reload();
+    }
+
+    function checkLogin() {
+      if (localStorage.getItem('klid-admin') === '1') {
+        document.getElementById('login-gate').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        init();
+      }
+    }
+
+    async function fetchReal() {
       try {
-        const res = await fetch('/api/stats');
-        currentData = await res.json();
-        return currentData;
-      } catch (e) {
-        // Fallback demo data matching the screenshots
+        const r = await fetch('/api/stats');
+        if (!r.ok) throw 0;
+        return await r.json();
+      } catch(e) {
+        // minimal fallback so UI works for testing
         return {
-          dashboard: {
-            dnes: { amount: 0, orders: 0, label: "0 Kč" },
-            tyden: { amount: 999, orders: 1, change: -38, label: "999 Kč" },
-            mesic: { amount: 999, orders: 1, change: 94, label: "999 Kč" },
-            lifetime: { amount: 16689, orders: 28, avg: 596, label: "16 689 Kč" },
-            chartData: [
-              {label: "25.5.", value: 1200}, {label: "27.5.", value: 800}, {label: "29.5.", value: 2400},
-              {label: "31.5.", value: 1100}, {label: "2.6.", value: 2610}, {label: "4.6.", value: 1400}, {label: "6.6.", value: 700}
-            ],
-            activity: [
-              {name: "Lucie Antalová začala interakci", time: "3 d", email: "antalovlucie@email.cz"},
-              {name: "Denis Šmatar začal interakci", time: "4 d", email: "dsmatar6@gmail.com"},
-              {name: "Peter Rajčan začal interakci", time: "4 d", email: "peterrrajcan30@gmail.com"},
-              {name: "natalie hakova začala interakci", time: "6 d", email: "chainyounger@gmail.com"},
-              {name: "Dominik Tekeli — platba selhala", time: "6 d", email: "dominik@filipcek.cz"}
-            ]
-          },
-          analytics: {
-            navstev: 115, engaged: 62, otevrela_kosik: 8, nakupu: 1,
-            cart_buy: "12.5%", avg_cas: "4 min",
-            top_zdroje: [
-              {name: "ig", visits: 67, nakupu: 0},
-              {name: "fb", visits: 38, nakupu: 1},
-              {name: "direct", visits: 10, nakupu: 0}
-            ],
-            top_stranky: [
-              {path: "/", count: 102},
-              {path: "/kosik", count: 8},
-              {path: "/prihlaseni", count: 2},
-              {path: "/balicek", count: 1},
-              {path: "/dekujeme", count: 1},
-              {path: "/obchodni-podminky", count: 1}
-            ]
-          },
-          live: {
-            online: 1, unique24h: 0, vKosiku: 0, koupily: 0,
-            visitors: [
-              {stav: "browse", stranka: "/ (úvod)", stravila: "39:78:9:27", zdroj: "fb: 120248755968290119", zarizeni: "Mac", session: "f35c8ecc"}
-            ]
-          },
-          visits: [
-            {prvni: "04.06.26 6:57", device: "Android", zdroj: "ig", cesta: "/", pvs: 1, cas: "36s", scroll: "43%", stav: "ENGAGED", akce: "detail"},
-            {prvni: "04.06.26 6:49", device: "Android", zdroj: "fb", cesta: "/", pvs: 1, cas: "17s", scroll: "54%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 6:15", device: "Android", zdroj: "ig", cesta: "/", pvs: 1, cas: "3s", scroll: "31%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 5:59", device: "Android", zdroj: "fb", cesta: "/", pvs: 2, cas: "2 min", scroll: "70%", stav: "ENGAGED", akce: "detail"},
-            {prvni: "04.06.26 5:56", device: "Android", zdroj: "ig", cesta: "/", pvs: 4, cas: "10 min", scroll: "100%", stav: "ENGAGED", akce: "detail"},
-            {prvni: "04.06.26 5:48", device: "Android", zdroj: "ig", cesta: "/", pvs: 1, cas: "10s", scroll: "0%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 5:35", device: "Android", zdroj: "ig", cesta: "/", pvs: 3, cas: "30s", scroll: "11%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 5:29", device: "Android", zdroj: "fb", cesta: "/", pvs: 1, cas: "1 min", scroll: "68%", stav: "ENGAGED", akce: "detail"},
-            {prvni: "04.06.26 4:18", device: "Android", zdroj: "fb", cesta: "/", pvs: 1, cas: "29s", scroll: "65%", stav: "ENGAGED", akce: "detail"},
-            {prvni: "04.06.26 4:08", device: "iOS", zdroj: "ig", cesta: "/", pvs: 1, cas: "28s", scroll: "46%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 3:48", device: "Android", zdroj: "ig", cesta: "/", pvs: 3, cas: "30s", scroll: "11%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 3:35", device: "iOS", zdroj: "ig", cesta: "/", pvs: 3, cas: "30s", scroll: "11%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 3:28", device: "Android", zdroj: "ig", cesta: "/kosik", pvs: 3, cas: "16s", scroll: "100%", stav: "KOŠÍK", akce: "detail"},
-            {prvni: "04.06.26 1:29", device: "iOS", zdroj: "ig", cesta: "/", pvs: 1, cas: "12s", scroll: "44%", stav: "—", akce: "detail"},
-            {prvni: "04.06.26 1:08", device: "iOS", zdroj: "ig", cesta: "/", pvs: 1, cas: "28s", scroll: "93%", stav: "ENGAGED", akce: "detail"},
-            {prvni: "03.06.26 23:48", device: "Android", zdroj: "ig", cesta: "/", pvs: 6, cas: "24s", scroll: "100%", stav: "—", akce: "detail"},
-            {prvni: "03.06.26 21:05", device: "iOS", zdroj: "fb", cesta: "/", pvs: 1, cas: "5s", scroll: "6%", stav: "—", akce: "detail"},
-            {prvni: "03.06.26 21:02", device: "iOS", zdroj: "ig", cesta: "/", pvs: 3, cas: "20s", scroll: "1%", stav: "—", akce: "detail"},
-            {prvni: "03.06.26 20:52", device: "iOS", zdroj: "direct", cesta: "/", pvs: 1, cas: "2 min", scroll: "100%", stav: "ENGAGED", akce: "detail"}
-          ]
+          todayVisitors: 0,
+          totalVisitors: 0,
+          liveNow: {count: 0, byLocation: {}},
+          funnel: {homepage:0, reachedPricing:0, clickedBuy:0, paymentCompleted:0, appOpened:0},
+          scrollBreakdown: {'25':0,'50':0,'75':0,'100':0},
+          locations: {home:0, payment:0, app:0},
+          totalEvents: 0,
+          lastEventTime: null,
+          recent: [],
+          conversionRates: {},
+          eventTypes: {}
         };
       }
     }
 
-    function renderDashboard(d) {
-      // Cards
-      document.getElementById('dnes-amount').textContent = d.dnes.label || '0 Kč';
-      document.getElementById('dnes-orders').textContent = `${d.dnes.orders || 0}× návštěva`;
-      document.getElementById('tyden-amount').textContent = d.tyden.label || '999 Kč';
-      document.getElementById('tyden-orders').textContent = `${d.tyden.orders || 0}× návštěva`;
-      document.getElementById('mesic-amount').textContent = d.mesic.label || '999 Kč';
-      document.getElementById('mesic-orders').textContent = `${d.mesic.orders || 0}× návštěva`;
-      document.getElementById('lifetime-amount').textContent = d.lifetime.label || '16 689 Kč';
-      document.getElementById('lifetime-orders').textContent = `${d.lifetime.orders || 0}× návštěva · průměr ${d.lifetime.avg || 596} Kč`;
+    function playCink() {
+      try {
+        const a = new (AudioContext || webkitAudioContext)();
+        const o = a.createOscillator();
+        const g = a.createGain();
+        o.frequency.value = 880;
+        g.gain.value = 0.2;
+        o.connect(g); g.connect(a.destination);
+        o.start();
+        setTimeout(() => { g.gain.linearRampToValueAtTime(0.001, a.currentTime + 0.35); setTimeout(() => o.stop(), 400); }, 60);
+      } catch(e){}
+    }
 
-      // Chart
-      const ctx = document.getElementById('chart-revenue');
-      if (ctx && d.chartData) {
-        if (window._chart) window._chart.destroy();
-        window._chart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: d.chartData.map(x => x.label),
-            datasets: [{ label: 'Návštěvy', data: d.chartData.map(x => x.value), backgroundColor: '#f9a8d4' }]
-          },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    function updateUI(d) {
+      currentData = d;
+
+      // basic cards
+      document.getElementById('today-count').textContent = d.todayVisitors || 0;
+      document.getElementById('total-visitors').textContent = d.totalVisitors || 0;
+      document.getElementById('live-now-card').textContent = d.liveNow?.count || 0;
+      document.getElementById('orders-count').textContent = d.funnel?.paymentCompleted || 0;
+
+      // funnel basic
+      const f = d.funnel || {};
+      document.getElementById('funnel-home').textContent = f.homepage || 0;
+      document.getElementById('funnel-pricing').textContent = f.reachedPricing || 0;
+      document.getElementById('funnel-buy').textContent = f.clickedBuy || 0;
+      document.getElementById('funnel-payment').textContent = f.paymentCompleted || 0;
+      document.getElementById('funnel-app').textContent = f.appOpened || 0;
+
+      const c = d.conversionRates || {};
+      document.getElementById('funnel-pricing-pct').textContent = (c.homeToPricing||0) + '%';
+      document.getElementById('funnel-buy-pct').textContent = (c.pricingToBuy||0) + '%';
+      document.getElementById('funnel-payment-pct').textContent = (c.buyToPayment||0) + '%';
+      document.getElementById('funnel-app-pct').textContent = (c.paymentToApp||0) + '%';
+
+      // complete list vals
+      const set = (id,v) => { const el = document.getElementById(id); if(el) el.textContent = v ?? '—'; };
+      set('val-homepage', f.homepage || d.summary?.homeViews);
+      set('val-pricing', f.reachedPricing);
+      set('val-buy', f.clickedBuy);
+      set('val-payment', f.paymentCompleted);
+      set('val-app', f.appOpened);
+      const sb = d.scrollBreakdown || {};
+      set('val-scroll', `25%: ${sb['25']||0} | 50%: ${sb['50']||0} | 75%: ${sb['75']||0} | 100%: ${sb['100']||0}`);
+      set('val-live', d.liveNow?.count);
+      set('val-total', d.totalVisitors);
+      set('val-events', d.totalEvents);
+      const lt = document.getElementById('val-last');
+      if(lt && d.lastEventTime) lt.textContent = new Date(d.lastEventTime).toLocaleString('cs-CZ');
+      const cv = d.conversionRates || {};
+      set('val-conv', `home→pricing ${cv.homeToPricing||0}% | pricing→buy ${cv.pricingToBuy||0}% | buy→payment ${cv.buyToPayment||0}% | payment→app ${cv.paymentToApp||0}%`);
+      const et = d.eventTypes || {};
+      set('val-types', Object.entries(et).map(([k,v])=>`${k}:${v}`).join(' '));
+      const lc = d.locations || {};
+      set('val-locs', `home:${lc.home||0} platba:${lc.payment||0} app:${lc.app||0}`);
+      set('val-today', d.todayVisitors || '—');
+
+      // live details
+      const ld = document.getElementById('live-details');
+      const l = d.liveNow || {count:0, byLocation:{}};
+      if (l.count > 0) {
+        ld.innerHTML = `Aktivní: ${l.count} <br> ${l.byLocation.home ? '🏠 ' + l.byLocation.home + ' na webu ' : ''} ${l.byLocation.app ? '📱 ' + l.byLocation.app + ' v appce' : ''}`;
+        document.getElementById('live-now-card').textContent = l.count;
+      } else {
+        ld.textContent = 'Žádní aktivní návštěvníci v posledních 60s.';
+      }
+
+      // recent table
+      const tb = document.getElementById('recent-table');
+      tb.innerHTML = '';
+      (d.recent || []).slice(0,12).forEach(ev => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-zinc-800';
+        const t = new Date(ev.ts).toLocaleTimeString('cs-CZ');
+        tr.innerHTML = `<td class="px-4 py-1.5 text-zinc-400">${t}</td><td class="px-4 py-1.5 text-emerald-400">${ev.event}</td><td class="px-4 py-1.5">${ev.page||'—'}</td><td class="px-4 py-1.5 text-zinc-400">${ev.percent!=null ? ev.percent+'%' : (ev.test?'test':'')}</td>`;
+        tb.appendChild(tr);
+      });
+
+      // graphs
+      renderGraphs(d);
+
+      // cink if live increased
+      if (l.count > lastLive) playCink();
+      lastLive = l.count || 0;
+
+      document.getElementById('last-updated').textContent = new Date().toLocaleTimeString('cs-CZ');
+    }
+
+    function renderGraphs(d) {
+      // destroy old
+      Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+      charts = {};
+
+      const locs = d.locations || {home:0, payment:0, app:0};
+      const lc = document.getElementById('chart-locs');
+      if (lc) {
+        charts.locs = new Chart(lc, {
+          type: 'doughnut',
+          data: { labels: ['Home','Platba','App'], datasets: [{data: [locs.home||0, locs.payment||0, locs.app||0], backgroundColor: ['#10b981','#3b82f6','#8b5cf6'] }] },
+          options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{color:'#a1a1aa'}}} }
         });
       }
 
-      // Activity
-      const act = document.getElementById('activity-list');
-      if (act && d.activity) {
-        act.innerHTML = d.activity.map(a => `<div class="flex justify-between"><span>${a.name}</span><span class="text-pink-400">${a.time}</span></div>`).join('');
+      const sb = d.scrollBreakdown || {};
+      const sc = document.getElementById('chart-scroll');
+      if (sc) {
+        charts.scroll = new Chart(sc, {
+          type: 'bar',
+          data: { labels:['25%','50%','75%','100%'], datasets: [{label:'Počet', data:[sb['25']||0,sb['50']||0,sb['75']||0,sb['100']||0], backgroundColor:'#10b981', borderRadius:4 }] },
+          options: { responsive:true, maintainAspectRatio:false, scales:{y:{beginAtZero:true, ticks:{color:'#a1a1aa'}}, x:{ticks:{color:'#a1a1aa'}}}, plugins:{legend:{display:false}} }
+        });
       }
     }
 
-    function renderAnalytics(a) {
-      document.getElementById('a-navstev').textContent = a.navstev || 115;
-      document.getElementById('a-engaged').textContent = a.engaged || 62;
-      document.getElementById('a-kosik').textContent = a.otevrela_kosik || 8;
-      document.getElementById('a-nakupu').textContent = a.nakupu || 1;
-      document.getElementById('a-cartbuy').innerHTML = `${a.cart_buy || '12.5%'}<div class="text-xs">1/8</div>`;
-      document.getElementById('a-avgcas').innerHTML = `${a.avg_cas || '4 min'}<div class="text-xs">z 1 nákupů</div>`;
-
-      const tz = document.getElementById('top-zdroje');
-      if (tz && a.top_zdroje) tz.innerHTML = a.top_zdroje.map(z => `<div class="flex justify-between"><span>${z.name}</span><span>${z.visits} návštěv · ${z.nakupu} nákupů</span></div>`).join('');
-
-      const ts = document.getElementById('top-stranky');
-      if (ts && a.top_stranky) ts.innerHTML = a.top_stranky.map(s => `<div class="flex justify-between"><span>${s.path}</span><span>${s.count}</span></div>`).join('');
+    async function refresh() {
+      const d = await fetchReal();
+      updateUI(d);
     }
 
-    function renderLive(l) {
-      document.getElementById('live-online').textContent = l.online || 1;
-      document.getElementById('live-unique').textContent = l.unique24h || 0;
-      document.getElementById('live-kosik').textContent = l.vKosiku || 0;
-      document.getElementById('live-koupily').textContent = l.koupily || 0;
+    async function simulateVisit() {
+      // real push via API
+      const ev = { ts: new Date().toISOString(), event: 'heartbeat', page: 'home', session: 'test-' + Date.now(), test: true };
+      await fetch('/api/track', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(ev) });
 
-      const tb = document.getElementById('live-table');
-      if (tb && l.visitors) {
-        tb.innerHTML = l.visitors.map(v => `
-          <tr class="border-b">
-            <td class="p-2"><span class="badge bg-green-100 text-green-600">${v.stav}</span></td>
-            <td class="p-2">${v.stranka}</td>
-            <td class="p-2">${v.stravila}</td>
-            <td class="p-2">${v.zdroj}</td>
-            <td class="p-2">${v.zarizeni}</td>
-            <td class="p-2 font-mono text-xs">${v.session}</td>
-          </tr>
-        `).join('');
+      // also local for immediate UI
+      if (window.KLID && window.KLID.track) window.KLID.track('heartbeat', {page:'home', test:true});
+
+      // bump local currentData for immediate numbers
+      if (currentData) {
+        currentData.todayVisitors = (currentData.todayVisitors || 0) + 1;
+        currentData.totalVisitors = (currentData.totalVisitors || 0) + 1;
+        currentData.liveNow = currentData.liveNow || {count:0, byLocation:{}};
+        currentData.liveNow.count = (currentData.liveNow.count || 0) + 1;
+        currentData.liveNow.byLocation.home = (currentData.liveNow.byLocation.home || 0) + 1;
+        if (!currentData.recent) currentData.recent = [];
+        currentData.recent.unshift(ev);
+        if (currentData.recent.length > 12) currentData.recent.length = 12;
       }
+
+      await refresh();
+      playCink();
     }
 
-    let allVisits = [];
-    function renderVisitsTable(vs) {
-      allVisits = vs || [];
-      const tb = document.getElementById('visits-table');
-      if (!tb) return;
-      tb.innerHTML = allVisits.map(v => `
-        <tr class="border-b text-xs">
-          <td class="p-2">${v.prvni}</td>
-          <td class="p-2">📱 ${v.device}</td>
-          <td class="p-2">${v.zdroj}</td>
-          <td class="p-2">${v.cesta}</td>
-          <td class="p-2">${v.pvs}</td>
-          <td class="p-2">${v.cas}</td>
-          <td class="p-2">${v.scroll}</td>
-          <td class="p-2"><span class="badge ${v.stav === 'ENGAGED' ? 'bg-pink-100 text-pink-600' : v.stav === 'KOŠÍK' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}">${v.stav}</span></td>
-          <td class="p-2 text-pink-500 cursor-pointer" onclick="alert('Detail pro ${v.prvni}')">${v.akce}</td>
-        </tr>
-      `).join('');
+    function pripsatDnes() {
+      const num = document.getElementById('val-today').textContent || document.getElementById('today-count').textContent;
+      const msg = `Připsáno: ${num} lidí dnes na webu (z adminu)`;
+      console.log(msg);
+      alert(msg);
+      // show credited
+      const cred = document.getElementById('credited-today');
+      if (cred) cred.classList.remove('hidden');
+      const v = document.getElementById('credited-val');
+      if (v) v.textContent = num;
     }
 
-    function filterTable(type) {
-      const tb = document.getElementById('visits-table');
-      if (!tb || !allVisits.length) return;
-      let filtered = allVisits;
-      if (type === 'engaged') filtered = allVisits.filter(v => v.stav === 'ENGAGED');
-      if (type === 'kosik') filtered = allVisits.filter(v => v.stav === 'KOŠÍK');
-      if (type === 'nakoupila') filtered = allVisits.filter(v => v.stav === 'NAKOUPILA');
-      tb.innerHTML = filtered.map(v => `
-        <tr class="border-b text-xs">
-          <td class="p-2">${v.prvni}</td>
-          <td class="p-2">📱 ${v.device}</td>
-          <td class="p-2">${v.zdroj}</td>
-          <td class="p-2">${v.cesta}</td>
-          <td class="p-2">${v.pvs}</td>
-          <td class="p-2">${v.cas}</td>
-          <td class="p-2">${v.scroll}</td>
-          <td class="p-2"><span class="badge ${v.stav === 'ENGAGED' ? 'bg-pink-100 text-pink-600' : v.stav === 'KOŠÍK' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}">${v.stav}</span></td>
-          <td class="p-2 text-pink-500 cursor-pointer" onclick="alert('Detail pro ${v.prvni}')">${v.akce}</td>
-        </tr>
-      `).join('');
+    function playCinkOnLiveIncrease(newCount) {
+      if (newCount > lastLive) playCink();
+      lastLive = newCount;
     }
 
-    function renderAll(d) {
-      if (!d) return;
+    async function init() {
+      const d = await fetchReal();
+      updateUI(d);
 
-      // Dashboard
-      if (d.dashboard) renderDashboard(d.dashboard);
-
-      // Analytics
-      if (d.analytics) renderAnalytics(d.analytics);
-
-      // Live
-      if (d.live) renderLive(d.live);
-
-      // Visits table
-      if (d.visits) renderVisitsTable(d.visits);
-
-      // Update last updated
-      const lu = document.getElementById('last-updated');
-      if (lu) lu.textContent = new Date().toLocaleTimeString('cs-CZ', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-
-      // Populate the complete list the user wants
-      const f = d.dashboard || {};
-      // Approximate the numbers for the list from available data
-      const homepage = f.dnes ? (f.dnes.amount || 0) : 115;
-      document.getElementById('val-homepage').textContent = homepage;
-      // ... (fill other val- from data as before, using d.analytics etc.)
-    }
-
-    async function refreshAll() {
-      const data = await fetchData();
-      renderAll(data);
-    }
-
-    function showSection(sec) {
-      document.querySelectorAll('[id^="section-"]').forEach(el => el.classList.add('hidden'));
-      const target = document.getElementById('section-' + sec);
-      if (target) target.classList.remove('hidden');
-
-      // highlight nav
-      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-      const nav = document.querySelector(`[data-section="${sec}"]`);
-      if (nav) nav.classList.add('active');
-    }
-
-    function runBackfill() {
-      alert('Backfill spuštěn (demo). V reálném provozu by propojilo UTM z tracking s platbami přes Stripe webhook /dekujeme.');
-      // Could call a real endpoint here
-    }
-
-    function logout() {
-      // Simple for now
-      window.location.href = '/';
-    }
-
-    // Boot
-    window.addEventListener('load', async () => {
-      // Tailwind script already in head via CDN
-
-      const data = await fetchData();
-      renderAll(data);
-
-      // Auto refresh
+      // fast poll for "push" feel during testing
       setInterval(async () => {
-        const fresh = await fetchData();
-        renderAll(fresh);
-      }, 60000);
+        if (document.visibilityState === 'visible') {
+          const fresh = await fetchReal();
+          updateUI(fresh);
+        }
+      }, 5000);
 
-      // Show dashboard by default
-      showSection('dashboard');
+      // keyboard r = refresh
+      document.addEventListener('keydown', e => { if (e.key.toLowerCase()==='r') refresh(); });
+    }
 
-      // Expose for testing
-      window.KLID_ADMIN_REFRESH = refreshAll;
-    });
+    function loginCheck() {
+      if (localStorage.getItem('klid-admin') === '1') {
+        document.getElementById('login-gate').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        init();
+      }
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem('klid-admin') === '1') {
+        document.getElementById('login-gate').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        init();
+      }
+    };
+
+    // expose for console testing
+    window.KLID_ADMIN = { refresh, simulateVisit, pripsatDnes };
   </script>
 </body>
 </html>

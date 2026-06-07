@@ -56,6 +56,27 @@
     return 'home';
   }
 
+  function getDevice() {
+    const ua = navigator.userAgent || '';
+    if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+    if (/Android/i.test(ua)) return 'Android';
+    if (/Mobi|Tablet/i.test(ua)) return 'Mobile';
+    return 'Desktop';
+  }
+
+  function getUtmSource() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('utm_source') || params.get('source') || 'direct';
+    } catch (e) {
+      return 'direct';
+    }
+  }
+
+  function getPath() {
+    return window.location.pathname + window.location.search;
+  }
+
   // Public API
   KLID.track = function (event, data = {}) {
     log(event, data);
@@ -67,8 +88,14 @@
 
   // Auto page view
   function trackPageView() {
+    const device = getDevice();
+    const utm = getUtmSource();
+    const path = getPath();
     log('page_view', {
       referrer: document.referrer || 'direct',
+      device,
+      utm_source: utm,
+      path,
       userAgent: navigator.userAgent.substring(0, 60)
     });
   }
@@ -157,15 +184,33 @@
   let heartbeatInterval = null;
 
   function sendHeartbeat() {
-    KLID.track('heartbeat', { page: getPageType() });
+    const device = getDevice();
+    const utm = getUtmSource();
+    const path = getPath();
+    KLID.track('heartbeat', { 
+      page: getPageType(),
+      device,
+      utm_source: utm,
+      path,
+      time_on_page: Date.now() - (window._klidStart || Date.now())
+    });
   }
 
   function startHeartbeat() {
     if (heartbeatInterval) clearInterval(heartbeatInterval);
+    window._klidStart = Date.now();
+    const device = getDevice();
+    const utm = getUtmSource();
+    const path = getPath();
     // Send initial enter
-    KLID.track('page_enter', { page: getPageType() });
-    // Heartbeat every 45s to keep "live" status
-    heartbeatInterval = setInterval(sendHeartbeat, 45000);
+    KLID.track('page_enter', { 
+      page: getPageType(),
+      device,
+      utm_source: utm,
+      path 
+    });
+    // Heartbeat every 30s to match screenshot
+    heartbeatInterval = setInterval(sendHeartbeat, 30000);
 
     // Best-effort leave on unload
     window.addEventListener('beforeunload', () => {
@@ -174,7 +219,10 @@
           ts: new Date().toISOString(),
           session: SESSION_ID,
           event: 'page_leave',
-          page: getPageType()
+          page: getPageType(),
+          device,
+          utm_source: utm,
+          path
         });
         navigator.sendBeacon('/api/track', payload);
       } catch (e) {}
