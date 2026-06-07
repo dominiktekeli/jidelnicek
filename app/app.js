@@ -348,4 +348,11 @@
 
   renderWeekPicker();
   render();
+
+  // Track that user successfully entered the app (for admin overview)
+  if (window.KLID && window.KLID.track) {
+    try {
+      window.KLID.track('app_opened', { week: week });
+    } catch (e) {}
+  }
 })();
