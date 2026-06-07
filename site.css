@@ -1129,28 +1129,7 @@ section {
   color: #555;
 }
 
-.pricing__guarantee {
-  margin: 0.5rem 1rem;
-  padding: 0.6rem 0.8rem;
-  background: #e6f7e6;
-  border: 1px solid #2d9a6a;
-  border-radius: 10px;
-  font-size: 0.78rem;
-  line-height: 1.35;
-  color: #1a5f3a;
-  text-align: left;
-}
 
-.pricing__guarantee strong {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 0.15rem;
-}
-
-.pricing__guarantee a {
-  color: #1a5f3a;
-  text-decoration: underline;
-}
 
 .lead-magnet {
   max-width: 360px;
@@ -1398,18 +1377,7 @@ section {
   text-underline-offset: 2px;
 }
 
-.hero__legal-note {
-  margin: 0.5rem 0 0;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-soft);
-  text-align: center;
-}
 
-.hero__legal-note a {
-  color: var(--mint-dark);
-  font-weight: 700;
-}
 
 .pricing__pay {
   margin: 0 1rem 0.85rem;
