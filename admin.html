@@ -6,6 +6,7 @@
   <title>Admin • Klid v kuchyni</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="tracking.js"></script>
   <link rel="icon" href="images/favicon-32x32.png">
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; }
@@ -123,6 +124,10 @@
           Žádní aktivní návštěvníci v posledních 3 minutách.
         </div>
         <div class="text-[10px] text-zinc-500 mt-1">Aktualizuje se automaticky • cink na novou aktivitu</div>
+        <div class="mt-3 flex gap-2">
+          <button onclick="simulateEvent()" class="text-xs px-3 py-1 bg-zinc-800 hover:bg-zinc-700 rounded-xl border border-zinc-700">Simulate site visit (test push)</button>
+          <button onclick="forceRefresh()" class="text-xs px-3 py-1 bg-zinc-800 hover:bg-zinc-700 rounded-xl border border-zinc-700">Force refresh now</button>
+        </div>
       </div>
 
       <!-- TOTAL VISITORS -->
@@ -541,6 +546,57 @@
       document.getElementById('loc-app-count').textContent = locs.app || '—';
       const avgScrollForLoc = data.summary?.avgScroll || 0;
       document.getElementById('loc-home-scroll').textContent = avgScrollForLoc ? avgScrollForLoc + '%' : '—%';
+
+      // Show last push time
+      const pushNote = document.getElementById('last-push-note');
+      if (pushNote) pushNote.textContent = 'Last data push: ' + new Date().toLocaleTimeString('cs-CZ');
+    }
+
+    window.simulateEvent = function() {
+      // Send via local tracking if available (for same browser)
+      if (window.KLID && window.KLID.track) {
+        window.KLID.track('page_view', {page: 'home', test: true});
+        window.KLID.track('heartbeat', {page: 'home', test: true});
+        window.KLID.track('scroll_depth', {page: 'home', percent: Math.floor(Math.random()*100), test: true});
+      }
+      // Direct to API
+      const testEvent = {
+        ts: new Date().toISOString(),
+        event: 'heartbeat',
+        page: 'home',
+        session: 'incognito-test-' + Date.now(),
+        test: true
+      };
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(testEvent)
+      }).then(() => {
+        // immediate local update for tester
+        if (currentData) {
+          if (!currentData.recent) currentData.recent = [];
+          currentData.recent.unshift(testEvent);
+          if (currentData.recent.length > 12) currentData.recent.pop();
+          if (!currentData.liveNow) currentData.liveNow = {count: 0, byLocation: {}};
+          currentData.liveNow.count = (currentData.liveNow.count || 0) + 1;
+          currentData.liveNow.byLocation.home = (currentData.liveNow.byLocation.home || 0) + 1;
+        }
+        refreshData();
+        playCink();
+      });
+    };
+
+    window.forceRefresh = function() {
+      refreshData();
+    };
+
+    // Make polling faster for live feel (every 5s during testing)
+    function startFastPolling() {
+      setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          refreshData();
+        }
+      }, 5000);
     }
 
     function initDashboard() {
@@ -587,10 +643,8 @@
 
       refreshData();
 
-      // Auto refresh
-      setInterval(() => {
-        if (document.visibilityState === "visible") refreshData();
-      }, 20000);
+      // Fast polling for live "push" feel (5s)
+      startFastPolling();
 
       document.addEventListener("keydown", (e) => {
         if (e.key.toLowerCase() === "r") refreshData();

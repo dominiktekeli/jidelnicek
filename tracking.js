@@ -52,6 +52,7 @@
     if (path.includes('dekujeme')) return 'thankyou';
     if (path.includes('stahnout')) return 'access';
     if (path.includes('kontakt') || path.includes('podminky')) return 'legal';
+    if (path.includes('/admin')) return 'admin';
     return 'home';
   }
 

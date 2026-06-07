@@ -1,7 +1,9 @@
 // Vercel Serverless Function: /api/track
 // Receives tracking events from the site and app.
-// For now logs them (visible in Vercel Dashboard > Functions > Logs).
-// Later: connect to KV/Supabase for persistent storage.
+// Stores recent events in-memory for live presence (per function instance).
+// Also logs to Vercel logs. For durable storage use @vercel/kv.
+
+let recentEvents = []; // in-memory ring buffer
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,21 +13,29 @@ export default async function handler(req, res) {
   try {
     const event = await req.json();
 
-    // Log for visibility in Vercel logs (real data source for now)
-    console.log('KLID_EVENT', JSON.stringify({
+    const enriched = {
       ...event,
-      receivedAt: new Date().toISOString(),
-      ip: req.headers['x-forwarded-for'] || 'unknown'
-    }));
+      receivedAt: new Date().toISOString()
+    };
 
-    // TODO: For real persistence, uncomment and set up @vercel/kv
+    // Keep last ~300 events
+    recentEvents.push(enriched);
+    if (recentEvents.length > 300) recentEvents.shift();
+
+    // Always log for visibility (Vercel dashboard > Functions > logs)
+    console.log('KLID_EVENT', JSON.stringify(enriched));
+
+    // TODO: uncomment for real persistence
     // import { kv } from '@vercel/kv';
-    // await kv.lpush('klid:events', event);
-    // await kv.ltrim('klid:events', 0, 999); // keep last 1000
+    // await kv.lpush('klid:events', enriched);
+    // await kv.ltrim('klid:events', 0, 999);
 
     res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Track error', err);
-    res.status(200).json({ ok: true }); // don't break tracking
+    res.status(200).json({ ok: true });
   }
 }
+
+// Expose for stats endpoint (same module in serverless)
+export { recentEvents };
