@@ -152,11 +152,40 @@
     }
   }
 
+  // Heartbeat for "live" presence
+  let heartbeatInterval = null;
+
+  function sendHeartbeat() {
+    KLID.track('heartbeat', { page: getPageType() });
+  }
+
+  function startHeartbeat() {
+    if (heartbeatInterval) clearInterval(heartbeatInterval);
+    // Send initial enter
+    KLID.track('page_enter', { page: getPageType() });
+    // Heartbeat every 45s to keep "live" status
+    heartbeatInterval = setInterval(sendHeartbeat, 45000);
+
+    // Best-effort leave on unload
+    window.addEventListener('beforeunload', () => {
+      try {
+        const payload = JSON.stringify({
+          ts: new Date().toISOString(),
+          session: SESSION_ID,
+          event: 'page_leave',
+          page: getPageType()
+        });
+        navigator.sendBeacon('/api/track', payload);
+      } catch (e) {}
+    });
+  }
+
   // Initialize
   function init() {
     trackPageView();
     setupScrollTracking();
     setupHomeInteractions();
+    startHeartbeat();
 
     // Expose for debugging
     window.__KLID_DEBUG = { getEvents: KLID.getEvents, track: KLID.track };

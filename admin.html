@@ -110,6 +110,21 @@
         </div>
       </div>
 
+      <!-- LIVE NOW -->
+      <div id="live-section" class="mb-8 bg-zinc-900 border border-emerald-500/30 rounded-3xl p-5">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-400">🟢</span>
+            <span class="font-semibold">Právě live</span>
+          </div>
+          <span id="live-count" class="text-2xl font-semibold text-emerald-400">0</span>
+        </div>
+        <div id="live-details" class="text-sm text-zinc-400">
+          Žádní aktivní návštěvníci v posledních 3 minutách.
+        </div>
+        <div class="text-[10px] text-zinc-500 mt-1">Aktualizuje se automaticky • cink na novou aktivitu</div>
+      </div>
+
       <!-- Where are people right now -->
       <div class="mb-8">
         <div class="flex items-center justify-between mb-3">
@@ -330,6 +345,33 @@
       }
     }
 
+    let lastLiveCount = 0;
+    let lastActivityTs = 0;
+
+    function playCink() {
+      try {
+        const audio = new (window.AudioContext || window.webkitAudioContext)();
+        const o = audio.createOscillator();
+        const g = audio.createGain();
+        o.type = 'sine';
+        o.frequency.value = 880;
+        g.gain.value = 0.18;
+        const filter = audio.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 1400;
+
+        o.connect(filter);
+        filter.connect(g);
+        g.connect(audio.destination);
+
+        o.start();
+        setTimeout(() => {
+          g.gain.linearRampToValueAtTime(0.0001, audio.currentTime + 0.4);
+          setTimeout(() => { o.stop(); audio.close(); }, 450);
+        }, 70);
+      } catch (e) {}
+    }
+
     async function refreshData() {
       const data = await fetchRealData();
       currentData = data;
@@ -338,6 +380,35 @@
       updateScrollBreakdownFromData(data);
       renderActivityFromData(data);
       renderGraphs(data);
+
+      // LIVE NOW
+      const live = data.liveNow || { count: 0, byLocation: {} };
+      const countEl = document.getElementById('live-count');
+      const detailsEl = document.getElementById('live-details');
+      const section = document.getElementById('live-section');
+
+      countEl.textContent = live.count || 0;
+
+      if (live.count > 0) {
+        const locs = live.byLocation || {};
+        const parts = [];
+        if (locs.home) parts.push(`🏠 ${locs.home} na webu`);
+        if (locs.app) parts.push(`📱 ${locs.app} v appce`);
+        if (locs.thankyou || locs.payment) parts.push(`💳 v platbě`);
+        detailsEl.innerHTML = parts.join(' • ') || 'Někdo je online';
+        section.classList.add('!border-emerald-500', 'shadow-[0_0_0_1px_#10b981]');
+      } else {
+        detailsEl.textContent = 'Žádní aktivní návštěvníci v posledních 3 minutách.';
+        section.classList.remove('!border-emerald-500', 'shadow-[0_0_0_1px_#10b981]');
+      }
+
+      // Cink on new live activity
+      const latest = (data.recent && data.recent[0]) ? new Date(data.recent[0].ts).getTime() : 0;
+      if ((live.count > lastLiveCount && live.count > 0) || (latest > lastActivityTs && live.count > 0)) {
+        playCink();
+      }
+      lastLiveCount = live.count || 0;
+      if (latest) lastActivityTs = latest;
 
       const noteEl = document.getElementById('data-note');
       if (noteEl) noteEl.textContent = data.note || '';
