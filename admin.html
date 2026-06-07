@@ -125,6 +125,13 @@
         <div class="text-[10px] text-zinc-500 mt-1">Aktualizuje se automaticky • cink na novou aktivitu</div>
       </div>
 
+      <!-- TOTAL VISITORS -->
+      <div class="mb-8 bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+        <div class="text-xs text-zinc-400 mb-1">CELKEM LIDÍ NA STRÁNCE (page views / unique sessions)</div>
+        <div id="total-visitors" class="text-5xl font-bold text-emerald-400">—</div>
+        <div class="text-xs text-zinc-400 mt-1">Připsáno z reálných eventů (z /api/stats + logů)</div>
+      </div>
+
       <!-- Where are people right now -->
       <div class="mb-8">
         <div class="flex items-center justify-between mb-3">
@@ -413,6 +420,10 @@
       const noteEl = document.getElementById('data-note');
       if (noteEl) noteEl.textContent = data.note || '';
       document.getElementById("last-updated").textContent = "právě teď";
+
+      // Total visitors
+      const totalEl = document.getElementById('total-visitors');
+      if (totalEl) totalEl.textContent = data.totalVisitors || '—';
     }
 
     function initDashboard() {

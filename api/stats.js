@@ -58,6 +58,13 @@ export default async function handler(req, res) {
     .sort((a, b) => (b.ts || '').localeCompare(a.ts || ''))
     .slice(0, 10);
 
+  // "Kolik lidí bylo na stránce" - total unique sessions (real from buffer when available)
+  const allSessions = new Set();
+  [...recentEvents, ...liveCandidates].forEach(e => {
+    if (e.session) allSessions.add(e.session);
+  });
+  const totalVisitors = Math.max(allSessions.size, summary.homeViews || 0);
+
   res.status(200).json({
     ok: true,
     note: "Live = sessions with heartbeat/page_enter in last 3 min. Real visitor events logged in Vercel Functions (KLID_EVENT). Add @vercel/kv for true persistence.",
@@ -68,7 +75,8 @@ export default async function handler(req, res) {
       byLocation
     },
     scrollBreakdown,
-    recent
+    recent,
+    totalVisitors
   });
 }
 
