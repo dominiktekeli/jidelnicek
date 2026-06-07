@@ -255,4 +255,15 @@
     setTimeout(showLiveJoin, 52000);
   }, 9500);
 
+  // ZOBRAZIT VÍCE - reveals more full-size reviews (same style and size as the original ones above)
+  // Placed under the main grid, unified look
+  const moreBtn = document.getElementById('reviews-more-btn');
+  const moreReviews = document.getElementById('more-reviews');
+  if (moreBtn && moreReviews) {
+    moreBtn.addEventListener('click', function () {
+      moreReviews.style.display = 'block';
+      moreBtn.style.display = 'none';
+    });
+  }
+
 })();
