@@ -58,7 +58,18 @@ export default async function handler(req, res) {
     .sort((a, b) => (b.ts || '').localeCompare(a.ts || ''))
     .slice(0, 10);
 
-  // "Kolik lidí bylo na stránce" - total unique sessions (real from buffer when available)
+  // "Kolik lidí bylo dnes na webu"
+  const todayStr = new Date().toISOString().split('T')[0];
+  const todaySessions = new Set();
+  [...recentEvents, ...liveCandidates].forEach(e => {
+    const ts = e.ts || e.receivedAt || '';
+    if (e.session && ts.startsWith(todayStr)) {
+      todaySessions.add(e.session);
+    }
+  });
+  const todayVisitors = todaySessions.size;
+
+  // Total unique sessions overall
   const allSessions = new Set();
   [...recentEvents, ...liveCandidates].forEach(e => {
     if (e.session) allSessions.add(e.session);
@@ -104,6 +115,7 @@ export default async function handler(req, res) {
     scrollBreakdown,
     recent,
     totalVisitors,
+    todayVisitors,
     funnel,
     conversionRates: conv,
     eventTypes,

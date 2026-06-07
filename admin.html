@@ -180,6 +180,7 @@
           <li>• <strong>Clicked Buy</strong> – kolik kliklo na tlačítko koupit: <span id="val-buy" class="font-mono text-emerald-400">—</span></li>
           <li>• <strong>Payment completed</strong> – kolik dokončilo platbu (297 Kč): <span id="val-payment" class="font-mono text-emerald-400">—</span></li>
           <li>• <strong>App opened</strong> – kolik otevřelo aplikaci po platbě: <span id="val-app" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Kolik lidí bylo dnes na webu</strong> – <span id="val-today" class="font-mono text-emerald-400">—</span> <button onclick="pripsatToday()" class="ml-2 text-xs px-2 py-0.5 bg-emerald-600 hover:bg-emerald-500 rounded">připsat</button></li>
           <li>• <strong>Scroll depth (25/50/75/100%)</strong> – jak daleko lidé čtou stránku: <span id="val-scroll" class="font-mono text-emerald-400">25%: — | 50%: — | 75%: — | 100%: —</span></li>
           <li>• <strong>Live sessions</strong> – kolik lidí je právě teď aktivních (heartbeat): <span id="val-live" class="font-mono text-emerald-400">—</span></li>
           <li>• <strong>Total visitors</strong> – celkový počet unikátních lidí na stránce: <span id="val-total" class="font-mono text-emerald-400">—</span></li>
@@ -540,6 +541,8 @@
       const locs = data.locations || {};
       setText('val-locs', `home:${locs.home||0} payment:${locs.payment||0} app:${locs.app||0}`);
 
+      setText('val-today', data.todayVisitors || '—');
+
       // Update location cards
       document.getElementById('loc-home-count').textContent = locs.home || '—';
       document.getElementById('loc-payment-count').textContent = locs.payment || '—';
@@ -588,6 +591,14 @@
 
     window.forceRefresh = function() {
       refreshData();
+    };
+
+    window.pripsatToday = function() {
+      const num = document.getElementById('val-today').textContent;
+      const msg = `Připsáno: ${num} lidí dnes na webu (z adminu)`;
+      console.log(msg);
+      alert(msg + '\n(Zkontroluj console nebo si to zapiš ručně.)');
+      // Could extend to send to another endpoint or localStorage total
     };
 
     // Make polling faster for live feel (every 5s during testing)
