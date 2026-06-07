@@ -1747,6 +1747,29 @@ section {
   align-items: stretch;
 }
 
+/* For the additional reviews under ZOBRAZIT VÍCE: photo fills the block, minimal header (no avatar, no name) */
+.reviews__more-grid .review-card__photo {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  flex: 1;
+}
+
+.reviews__more-grid .review-card__photo img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.reviews__more-grid .review-card__head {
+  margin-bottom: 0.2rem;
+}
+
+.reviews__more-grid .review-card__text {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
 .review-mini {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
