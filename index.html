@@ -421,10 +421,6 @@
               <span aria-hidden="true">★</span>
             </p>
             <p class="reviews__count"><strong>4,8</strong> · 75+ recenzí maminek</p>
-            <button onclick="document.getElementById('more-reviews').style.display='block'; this.style.display='none';" style="margin-top:8px; font-size:0.85em; padding:4px 10px; background:#fff; border:1px solid #ddd; border-radius:6px; cursor:pointer;">ZOBRAZIT VÍCE (jen jména + hvězdičky)</button>
-            <div id="more-reviews" style="display:none; margin-top:8px; font-size:0.85em; color:#666;">
-              + Ivana P. ★★★★★ &nbsp; + Klára D. ★★★★★ &nbsp; + Hana Ž. ★★★★★ &nbsp; + Denisa W. ★★★★★ &nbsp; + další 60+ ověřených maminek
-            </div>
           </div>
         </div>
 
@@ -727,6 +723,51 @@
               </p>
             </article>
 
+        </div>
+
+        <!-- Branded "ZOBRAZIT VÍCE" button below all reviews + minimal name-only list -->
+        <div class="reviews__more">
+          <button type="button" class="btn btn--primary reviews__more-btn" id="reviews-more-btn">
+            ZOBRAZIT VÍCE
+          </button>
+
+          <div id="reviews-more-names" class="reviews__more-names" style="display:none;">
+            <p class="reviews__more-label">A další ověřené maminky:</p>
+            <div class="reviews__names-list">
+              <span>Markéta K.</span>
+              <span>Lucie V.</span>
+              <span>Ivana P.</span>
+              <span>Klára D.</span>
+              <span>Hana Ž.</span>
+              <span>Denisa W.</span>
+              <span>Petra N.</span>
+              <span>Jana S.</span>
+              <span>Tereza M.</span>
+              <span>Simona R.</span>
+              <span>Veronika F.</span>
+              <span>Eliška N.</span>
+              <span>Nikola S.</span>
+              <span>Martina U.</span>
+              <span>Lenka H.</span>
+              <span>Katka P.</span>
+              <span>Iva T.</span>
+              <span>Alena B.</span>
+              <span>Barbora M.</span>
+              <span>Michaela K.</span>
+              <span>Zuzana L.</span>
+              <span>Radka S.</span>
+              <span>Pavlína T.</span>
+              <span>Monika H.</span>
+              <span>Jitka V.</span>
+              <span>Dagmar R.</span>
+              <span>Eva K.</span>
+              <span>Kristýna P.</span>
+              <span>Andrea N.</span>
+              <span>Marie L.</span>
+              <span>Adéla S.</span>
+              <span class="reviews__names-more">+ 45 dalších</span>
+            </div>
+          </div>
         </div>
       </section>
 

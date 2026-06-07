@@ -1694,6 +1694,55 @@ section {
   }
 }
 
+/* "ZOBRAZIT VÍCE" pod recenzemi + jen jména (bez textu, avatarů, hvězd) */
+.reviews__more {
+  margin-top: 0.9rem;
+  text-align: center;
+}
+
+.reviews__more-btn {
+  min-height: 40px;
+  padding: 0.5rem 1.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(46, 154, 106, 0.28);
+}
+
+.reviews__more-names {
+  margin-top: 0.7rem;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviews__more-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.01em;
+}
+
+.reviews__names-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.15rem 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #555;
+  font-weight: 500;
+}
+
+.reviews__names-list span {
+  white-space: nowrap;
+}
+
+.reviews__names-more {
+  font-weight: 700;
+  color: #444;
+}
+
 .faq__item {
   margin-bottom: 0.55rem;
   padding: 1rem 1.05rem;

@@ -254,4 +254,15 @@
     setTimeout(showLiveJoin, 24000);
     setTimeout(showLiveJoin, 52000);
   }, 9500);
+
+  // Reviews "ZOBRAZIT VÍCE" button below the grid (brand style)
+  // Reveals additional names only — no review text, no profile pics, no stars
+  const reviewsMoreBtn = document.getElementById('reviews-more-btn');
+  const reviewsMoreNames = document.getElementById('reviews-more-names');
+  if (reviewsMoreBtn && reviewsMoreNames) {
+    reviewsMoreBtn.addEventListener('click', function () {
+      reviewsMoreNames.style.display = 'block';
+      reviewsMoreBtn.style.display = 'none';
+    });
+  }
 })();
