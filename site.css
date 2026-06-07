@@ -1743,6 +1743,57 @@ section {
   color: #444;
 }
 
+/* Mini review cards for "ZOBRAZIT VÍCE" (avatar + name + varied stars, no text) */
+.reviews__mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 0.45rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.review-mini {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  padding: 0.55rem 0.6rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  font-size: 0.78rem;
+}
+
+.review-mini__head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.review-mini__avatar {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e8f5e9;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-mini__name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.1;
+}
+
+.review-mini__stars {
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: #f5b301;
+  line-height: 1;
+}
+
 .faq__item {
   margin-bottom: 0.55rem;
   padding: 1rem 1.05rem;
