@@ -73,12 +73,12 @@
 
     <!-- Main -->
     <div class="flex-1 p-8 bg-[#f9f5f0]">
-      <!-- Dashboard Section -->
+      <!-- Basic Dashboard -->
       <div id="section-dashboard">
         <div class="flex items-center justify-between mb-2">
           <div>
-            <h1 class="text-3xl font-semibold">Dashboard</h1>
-            <div class="text-sm text-pink-400">Reálný přehled · klikni cokoliv pro detail</div>
+            <h1 class="text-3xl font-semibold">Dashboard - Klid v kuchyni</h1>
+            <div class="text-sm text-pink-400">Základní přehled o lidech, návštěvách, objednávkách a reálných datech (kde klikají)</div>
           </div>
           <div class="flex items-center gap-2 text-xs">
             <div class="flex items-center gap-1 px-3 py-1 bg-white rounded-full border">
@@ -88,6 +88,62 @@
             <button onclick="refreshAll()" class="px-3 py-1 bg-white rounded-full border hover:bg-pink-50">Refresh</button>
             <span class="text-pink-400">poslední: <span id="last-updated">—</span></span>
           </div>
+        </div>
+
+        <!-- Basic Overview Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div class="metric-card border-l-4 border-emerald-500">
+            <div class="text-xs text-emerald-600 font-medium">DNES NA WEBU</div>
+            <div id="dnes-visitors" class="text-4xl font-bold mt-1">—</div>
+            <div class="text-xs">unikátních návštěv <button onclick="pripsatToday()" class="ml-2 text-[10px] px-1 py-0 bg-emerald-100 text-emerald-700 rounded">připsat</button></div>
+          </div>
+          <div class="metric-card">
+            <div class="text-xs text-pink-400 font-medium">CELKEM NÁVŠTĚV</div>
+            <div id="total-visitors-card" class="text-4xl font-bold mt-1">—</div>
+            <div class="text-xs">unikátních session</div>
+          </div>
+          <div class="metric-card">
+            <div class="text-xs text-emerald-400 font-medium">LIVE TEĎ</div>
+            <div id="live-now-card" class="text-4xl font-bold mt-1">—</div>
+            <div class="text-xs">aktivních (posledních 60s)</div>
+          </div>
+          <div class="metric-card">
+            <div class="text-xs text-pink-400 font-medium">OBJEDNÁVKY (PLATBY)</div>
+            <div id="orders-card" class="text-4xl font-bold mt-1">—</div>
+            <div class="text-xs">dokončených plateb</div>
+          </div>
+        </div>
+
+        <!-- Funnel / Kde lidi klikají -->
+        <div class="mb-6">
+          <h2 class="font-semibold mb-2">Funnel & kde lidi klikají (reálná data)</h2>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div class="p-3 bg-white rounded border">
+              <div class="text-xs">Homepage views</div>
+              <div id="funnel-home-basic" class="text-2xl font-bold">—</div>
+            </div>
+            <div class="p-3 bg-white rounded border">
+              <div class="text-xs">Reached pricing/demo</div>
+              <div id="funnel-pricing-basic" class="text-2xl font-bold">—</div>
+              <div id="funnel-pricing-pct-basic" class="text-[10px] text-emerald-600">—%</div>
+            </div>
+            <div class="p-3 bg-white rounded border">
+              <div class="text-xs">Clicked Buy (klik na koupit)</div>
+              <div id="funnel-buy-basic" class="text-2xl font-bold">—</div>
+              <div id="funnel-buy-pct-basic" class="text-[10px] text-emerald-600">—%</div>
+            </div>
+            <div class="p-3 bg-white rounded border">
+              <div class="text-xs">Payment completed (objednávky)</div>
+              <div id="funnel-payment-basic" class="text-2xl font-bold">—</div>
+              <div id="funnel-payment-pct-basic" class="text-[10px] text-emerald-600">—%</div>
+            </div>
+            <div class="p-3 bg-white rounded border">
+              <div class="text-xs">App opened</div>
+              <div id="funnel-app-basic" class="text-2xl font-bold">—</div>
+              <div id="funnel-app-pct-basic" class="text-[10px] text-emerald-600">—%</div>
+            </div>
+          </div>
+          <div class="text-[10px] text-gray-500 mt-1">Kliky a konverze z reálného trackingu (buy_clicked, payment_completed, app_opened, scroll)</div>
         </div>
 
         <!-- Warning -->
