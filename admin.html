@@ -166,61 +166,36 @@
           <div class="mt-4 text-xs text-zinc-400">Funnel conversion: Pokud vidíš čísla klesající pomalu a app opened > 0 = stránka + platba + app fungují.</div>
         </div>
 
-      </div>
-
-      <!-- WHAT I TRACK - complete list with current numbers -->
-      <div class="bg-zinc-900 border border-zinc-700 rounded-3xl p-6 mb-8">
+      <!-- Complete monitoring list -->
+      <div class="bg-zinc-900 border border-zinc-700 rounded-3xl p-6">
         <h3 class="font-semibold mb-3 text-emerald-400">Vše, co potřebuji sledovat, abych viděl, jestli stránka + funnel + app fungují (kompletní seznam + aktuální čísla)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 text-sm">
-          <ul class="space-y-1 text-zinc-300">
-            <li>• <strong>Homepage views</strong> – kolik lidí přišlo na úvodní stránku <span class="text-emerald-400">(viz výše)</span></li>
-            <li>• <strong>Reached pricing / demo</strong> – kolik scrollovalo nebo vidělo ukázku appky</li>
-            <li>• <strong>Clicked Buy</strong> – kolik kliklo na tlačítko koupit</li>
-            <li>• <strong>Payment completed</strong> – kolik dokončilo platbu (297 Kč)</li>
-            <li>• <strong>App opened</strong> – kolik otevřelo aplikaci po platbě</li>
-            <li>• <strong>Scroll depth</strong> (25/50/75/100%) – jak daleko lidé čtou stránku</li>
-            <li>• <strong>Live sessions</strong> – kolik lidí je právě teď aktivních (heartbeat)</li>
-          </ul>
-          <ul class="space-y-1 text-zinc-300">
-            <li>• <strong>Total visitors</strong> – celkový počet unikátních lidí na stránce</li>
-            <li>• <strong>Total events</strong> – kolik eventů celkem (všechny interakce)</li>
-            <li>• <strong>Last event time</strong> – kdy naposledy někdo interagoval</li>
-            <li>• <strong>Conversion rates</strong> mezi kroky funnelu (v %)</li>
-            <li>• <strong>Event types distribution</strong> – jaké akce lidé dělají</li>
-            <li>• <strong>Locations</strong> – kolik je na home / v platbě / v appce</li>
-            <li>• <strong>Recent activity log</strong> – posledních 10–12 událostí v reálném čase</li>
-          </ul>
-        </div>
+        <ul class="space-y-1 text-sm">
+          <li>• <strong>Homepage views</strong> – kolik lidí přišlo na úvodní stránku: <span id="val-homepage" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Reached pricing / demo</strong> – kolik scrollovalo nebo vidělo ukázku appky: <span id="val-pricing" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Clicked Buy</strong> – kolik kliklo na tlačítko koupit: <span id="val-buy" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Payment completed</strong> – kolik dokončilo platbu (297 Kč): <span id="val-payment" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>App opened</strong> – kolik otevřelo aplikaci po platbě: <span id="val-app" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Scroll depth (25/50/75/100%)</strong> – jak daleko lidé čtou stránku: <span id="val-scroll" class="font-mono text-emerald-400">25%: — | 50%: — | 75%: — | 100%: —</span></li>
+          <li>• <strong>Live sessions</strong> – kolik lidí je právě teď aktivních (heartbeat): <span id="val-live" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Total visitors</strong> – celkový počet unikátních lidí na stránce: <span id="val-total" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Total events</strong> – kolik eventů celkem (všechny interakce): <span id="val-events" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Last event time</strong> – kdy naposledy někdo interagoval: <span id="val-last" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Conversion rates</strong> mezi kroky funnelu (v %): <span id="val-conv" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Event types distribution</strong> – jaké akce lidé dělají: <span id="val-types" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Locations</strong> – kolik je na home / v platbě / v appce: <span id="val-locs" class="font-mono text-emerald-400">—</span></li>
+          <li>• <strong>Recent activity log</strong> – posledních 10–12 událostí v reálném čase (viz tabulka výše)</li>
+        </ul>
         <div class="mt-3 text-xs text-zinc-400">Všechna data přicházejí přes tracking.js → /api/track → /api/stats. Reálné eventy od návštěvníků (z reklam) vidíš v logách Vercel Functions (KLID_EVENT) a v bufferu adminu.</div>
       </div>
     </div>
 
-        <!-- Additional numbers -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
-            <div class="text-xs text-zinc-400">Celkový počet eventů</div>
-            <div id="total-events" class="text-2xl font-semibold">—</div>
-          </div>
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
-            <div class="text-xs text-zinc-400">Poslední aktivita</div>
-            <div id="last-event" class="text-sm font-mono">—</div>
-          </div>
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
-            <div class="text-xs text-zinc-400">Unikátní session (celkem)</div>
-            <div id="total-unique" class="text-2xl font-semibold">—</div>
-          </div>
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
-            <div class="text-xs text-zinc-400">Live sessions teď</div>
-            <div id="live-sessions-now" class="text-2xl font-semibold text-emerald-400">—</div>
-          </div>
-        </div>
       </div>
 
       <!-- Where are people right now -->
       <div class="mb-8">
         <div class="flex items-center justify-between mb-3">
           <h2 class="font-semibold text-lg">Kde se lidé právě pohybují</h2>
-          <span class="text-xs px-2 py-1 bg-zinc-800 rounded-xl">Demo / Reálná data přes console</span>
+          <span class="text-xs px-2 py-1 bg-zinc-800 rounded-xl">Reálná data z /api/stats</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -228,18 +203,18 @@
             <div class="flex justify-between items-start">
               <div>
                 <div class="text-emerald-400 text-sm">🏠 Domovská stránka</div>
-                <div id="loc-home-count" class="text-3xl font-semibold mt-1">12</div>
+                <div id="loc-home-count" class="text-3xl font-semibold mt-1">—</div>
               </div>
               <div class="text-right text-xs text-zinc-500">nejvíce</div>
             </div>
-            <div class="mt-3 text-xs text-zinc-400">Scroll průměr: <span id="loc-home-scroll">68%</span></div>
+            <div class="mt-3 text-xs text-zinc-400">Scroll průměr: <span id="loc-home-scroll">—%</span></div>
           </div>
 
           <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
             <div class="flex justify-between items-start">
               <div>
                 <div class="text-emerald-400 text-sm">💳 Platba / Stripe</div>
-                <div id="loc-payment-count" class="text-3xl font-semibold mt-1">4</div>
+                <div id="loc-payment-count" class="text-3xl font-semibold mt-1">—</div>
               </div>
             </div>
             <div class="mt-3 text-xs text-zinc-400">Lidé, kteří klikli na koupit</div>
@@ -249,7 +224,7 @@
             <div class="flex justify-between items-start">
               <div>
                 <div class="text-emerald-400 text-sm">📱 V aplikaci</div>
-                <div id="loc-app-count" class="text-3xl font-semibold mt-1">3</div>
+                <div id="loc-app-count" class="text-3xl font-semibold mt-1">—</div>
               </div>
             </div>
             <div class="mt-3 text-xs text-zinc-400">Aktivní uživatelé s přístupem</div>
@@ -533,6 +508,39 @@
       setText('total-unique', data.totalVisitors);
       const liveNowEl = document.getElementById('live-sessions-now');
       if (liveNowEl) liveNowEl.textContent = data.liveNow?.count ?? '—';
+
+      // Populate the complete monitoring list with current numbers
+      setText('val-homepage', f.homepage || data.summary?.homeViews);
+      setText('val-pricing', f.reachedPricing);
+      setText('val-buy', f.clickedBuy);
+      setText('val-payment', f.paymentCompleted);
+      setText('val-app', f.appOpened);
+
+      const sb = data.scrollBreakdown || {};
+      const scrollStr = `25%: ${sb['25']||0} | 50%: ${sb['50']||0} | 75%: ${sb['75']||0} | 100%: ${sb['100']||0}`;
+      setText('val-scroll', scrollStr);
+
+      setText('val-live', data.liveNow?.count);
+      setText('val-total', data.totalVisitors);
+      setText('val-events', data.totalEvents);
+      const lastTimeEl = document.getElementById('val-last');
+      if (lastTimeEl && data.lastEventTime) lastTimeEl.textContent = new Date(data.lastEventTime).toLocaleString('cs-CZ');
+
+      const convStr = `home→pricing: ${c.homeToPricing||0}% | pricing→buy: ${c.pricingToBuy||0}% | buy→payment: ${c.buyToPayment||0}% | payment→app: ${c.paymentToApp||0}%`;
+      setText('val-conv', convStr);
+
+      const types = data.eventTypes || {};
+      setText('val-types', Object.keys(types).map(k => `${k}:${types[k]}`).join(', '));
+
+      const locs = data.locations || {};
+      setText('val-locs', `home:${locs.home||0} payment:${locs.payment||0} app:${locs.app||0}`);
+
+      // Update location cards
+      document.getElementById('loc-home-count').textContent = locs.home || '—';
+      document.getElementById('loc-payment-count').textContent = locs.payment || '—';
+      document.getElementById('loc-app-count').textContent = locs.app || '—';
+      const avgScrollForLoc = data.summary?.avgScroll || 0;
+      document.getElementById('loc-home-scroll').textContent = avgScrollForLoc ? avgScrollForLoc + '%' : '—%';
     }
 
     function initDashboard() {
