@@ -445,6 +445,19 @@
     }
 
     async function refreshData() {
+      // Merge local browser events (from tracking.js loaded on admin) for self-visibility in same browser
+      if (window.KLID && window.KLID.getEvents) {
+        const local = window.KLID.getEvents();
+        if (currentData && currentData.recent) {
+          local.forEach(ev => {
+            if (!currentData.recent.some(e => e.ts === ev.ts && e.event === ev.event)) {
+              currentData.recent.unshift(ev);
+            }
+          });
+          if (currentData.recent.length > 12) currentData.recent.length = 12;
+        }
+      }
+
       const data = await fetchRealData();
       currentData = data;
 
