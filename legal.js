@@ -57,6 +57,7 @@
       year +
       ", Klid v kuchyni · IČO " +
       ico +
+      (cfg.legalAddress ? " · " + cfg.legalAddress : "") +
       "</p>" +
       '<p class="legal-footer__mini">' +
       bottom +
@@ -74,18 +75,7 @@
       el.textContent = ico;
     });
     document.querySelectorAll("[data-legal-address]").forEach((el) => {
-      if (cfg.legalAddress && !cfg.legalAddress.includes("DOPLNI")) {
-        el.textContent = cfg.legalAddress;
-      } else {
-        // Obejít zobrazení adresy pokud není doplněna — pro marketing
-        const parentP = el.closest("p");
-        if (parentP) {
-          parentP.innerHTML = parentP.innerHTML.replace(/,?\s*adresa místa podnikání:?\s*<span[^>]*><\/span>/gi, "");
-          parentP.innerHTML = parentP.innerHTML.replace(/Adresa místa podnikání:?\s*<span[^>]*><\/span>/gi, "");
-        }
-        const li = el.closest("li");
-        if (li) li.style.display = "none";
-      }
+      el.textContent = cfg.legalAddress || "Praha, Česká republika";
     });
     document.querySelectorAll("[data-legal-email]").forEach((el) => {
       if (email) {

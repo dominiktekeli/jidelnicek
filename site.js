@@ -266,4 +266,19 @@
     });
   }
 
+  // Lead magnet form (simple UX, no backend)
+  const leadForm = document.getElementById('lead-form');
+  const leadSuccess = document.getElementById('lead-success');
+  if (leadForm && leadSuccess) {
+    leadForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('lead-email').value.trim();
+      if (!email) return;
+      leadForm.style.display = 'none';
+      leadSuccess.style.display = 'block';
+      leadSuccess.textContent = 'Děkujeme! Ukázku jsme poslali na ' + email + ' (zkontroluj spam).';
+      // Optional: could window.open a PDF link here in real
+    });
+  }
+
 })();

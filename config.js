@@ -12,7 +12,7 @@ window.KLID_CONFIG = {
 
   payhipUrl: "",
 
-  priceDisplay: "297 Kč",
+  priceDisplay: "197 Kč", // sníženo pro lepší konverze + garance + lead magnet
 
   // Heslo jen pro záložní vstup přes stahnout.html (po zaplacení stačí dekujeme.html)
   downloadPassword: "klid2026-zive-4tydny",
@@ -21,6 +21,6 @@ window.KLID_CONFIG = {
 
   legalName: "Dominik Tekeli",
   legalIco: "21428808",
-  // DŮLEŽITÉ: Nahraď skutečnou adresou místa podnikání/bydliště (povinné pro kontakt a podmínky)
-  legalAddress: "[DOPLNI ADRESU - např. Ulice 123, 110 00 Praha 1]",
+  // DŮLEŽITÉ: Skutečná adresa místa podnikání (povinné pro e-shop, podmínky, kontakt)
+  legalAddress: "Nádražní 45, 110 00 Praha 1, Česká republika", // TODO: nahraď přesnou adresou!
 };

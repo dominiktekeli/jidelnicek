@@ -33,7 +33,7 @@
         <a class="nav__logo" href="./" aria-label="Klid v kuchyni — domů">
           <img class="nav__logo-img" src="images/logo.svg" alt="Klid v kuchyni" width="132" height="24" decoding="async" />
         </a>
-        <a class="nav__cta" href="#koupit">🛒 Koupit za 297 Kč</a>
+        <a class="nav__cta" href="#koupit">🛒 Koupit za 197 Kč</a>
       </header>
     </div>
 
@@ -49,7 +49,7 @@
           Instagramu.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">🛒 Koupit za 297 Kč</a>
+          <a class="btn btn--primary" id="btn-koupit-hero" href="#koupit">🛒 Koupit za 197 Kč</a>
           <a class="btn btn--ghost" href="#ukazka" style="font-size:0.85em; padding:0.5em 0.8em; opacity:0.85;">nebo se podívej na ukázku ↓</a>
         </div>
         <p class="hero__legal-note">
@@ -169,7 +169,7 @@
           <li><span aria-hidden="true">🔒</span> Přístup navždy · jedna platba</li>
         </ul>
         <div class="demo__actions">
-          <a class="btn btn--primary" href="#koupit">🛒 Koupit za 297 Kč</a>
+          <a class="btn btn--primary" href="#koupit">🛒 Koupit za 197 Kč</a>
         </div>
       </section>
 
@@ -195,7 +195,7 @@
       <section class="bundle" id="balicek">
         <h2 class="section-title">📦 Co dostaneš v balíčku</h2>
         <p class="bundle__intro">
-          Jedna platba <strong>297 Kč</strong> — celý měsíc jídla v mobilu. Ne předplatné, ne
+          Jedna platba <strong>197 Kč</strong> — celý měsíc jídla v mobilu. Ne předplatné, ne
           „vyprší za měsíc“. <strong>Přístup navždy</strong> — oblíbené večeře, které dává smysl opakovat.
         </p>
         <ul class="bundle__list">
@@ -247,7 +247,7 @@
         </ul>
 
         <div class="section-cta">
-          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit za 297 Kč</a>
+          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit za 197 Kč</a>
         </div>
       </section>
 
@@ -270,7 +270,7 @@
           <li><span aria-hidden="true">☕</span> Méně paniky v 17:00 — víš co vařit</li>
         </ul>
         <p class="value-note value-note--center">
-          <strong>74 Kč za týden</strong> jídla v hlavě — a pak znovu, bez další platby.
+          <strong>49 Kč za týden</strong> jídla v hlavě — a pak znovu, bez další platby.
         </p>
       </section>
 
@@ -287,7 +287,7 @@
         </p>
 
         <div class="section-cta">
-          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit za 297 Kč</a>
+          <a href="#koupit" class="btn btn--primary section-cta__btn">🛒 Koupit za 197 Kč</a>
         </div>
       </section>
 
@@ -317,13 +317,27 @@
         </div>
       </section>
 
+      <section class="lead-magnet" id="lead-magnet" aria-label="Ukázka zdarma">
+        <div class="lead-magnet__card">
+          <div>
+            <h3>🎁 Získej 1. týden jídelníčku zdarma (PDF)</h3>
+            <p>7 dnů obědů + večeří + nákupní seznam. Žádný spam. Odhlásit kdykoliv.</p>
+          </div>
+          <form id="lead-form" class="lead-form">
+            <input type="email" id="lead-email" placeholder="Tvůj email" required />
+            <button type="submit" class="btn btn--primary">Pošlete mi ukázku zdarma</button>
+          </form>
+          <p id="lead-success" class="lead-success" style="display:none">Děkujeme! Ukázku jsme poslali na tvůj email (zkontroluj spam).</p>
+        </div>
+      </section>
+
       <section class="pricing" id="koupit" aria-labelledby="pricing-heading">
         <div class="pricing__card">
           <div class="pricing__hero">
             <p class="pricing__urgency">Připojilo se již přes 75 maminek</p>
             <h2 class="pricing__title" id="pricing-heading">Kompletní balíček</h2>
-            <p class="pricing__price" id="pricing-price">297 Kč</p>
-            <p class="pricing__perweek" id="pricing-perweek">74 Kč za jeden týden</p>
+            <p class="pricing__price" id="pricing-price">197 Kč</p>
+            <p class="pricing__perweek" id="pricing-perweek">49 Kč za jeden týden</p>
           </div>
 
           <div class="pricing__perks-panel">
@@ -337,11 +351,10 @@
             </ul>
           </div>
 
-          <!-- Bonus - simple and clean -->
+          <!-- Bonus - simple and clean (bez countdownu) -->
           <div class="pricing__bonus">
-            <strong>🎁 BONUS ZDARMA při koupi dnes</strong><br>
-            „Rychlé snídaně pro chaotická rána“<br>
-            <span style="color:#b45309;">⏳ Nabídka končí za <span id="bonus-timer">2:59:59</span></span>
+            <strong>🎁 BONUS ZDARMA při koupi</strong><br>
+            „Rychlé snídaně pro chaotická rána“
           </div>
 
           <a class="btn btn--full btn--buy" id="btn-koupit" href="#">
@@ -378,6 +391,11 @@
             </div>
           </div>
 
+          <div class="pricing__guarantee">
+            <strong>✅ 30 dní spokojenosti nebo vrátíme peníze</strong>
+            <span>Pokud ti jídelníček nebude sedět, napiš do 30 dnů na <a href="mailto:klidvkuchyni@gmail.com">klidvkuchyni@gmail.com</a> a vrátíme ti 100 % (197 Kč).</span>
+          </div>
+
           <div class="pricing__social">
             <ul class="pricing__avatars" aria-hidden="true">
               <li><img src="images/moms/avatar-01.jpg" alt="" width="80" height="80" loading="lazy" /></li>
@@ -397,6 +415,9 @@
               <p class="pricing__social-text">
                 <strong>Doporučuje 75+ maminek</strong>
                 <span>Už mají klid v kuchyni — ty můžeš taky</span>
+              </p>
+              <p class="pricing__contact">
+                Otázky? <a href="mailto:klidvkuchyni@gmail.com">klidvkuchyni@gmail.com</a>
               </p>
             </div>
           </div>
@@ -710,14 +731,11 @@
         <div id="more-reviews" style="display:none;">
           <p class="reviews__more-label">A další maminky, které to mají:</p>
           <div class="reviews__more-grid">
-            <!-- Additional reviews under ZOBRAZIT VÍCE: no avatars, no names (bez profilovek, jmena maminek), verified on all, 1 sentence text, photo fills the block -->
+            <!-- Additional reviews under ZOBRAZIT VÍCE: no photos (smazány), with names + verified on all, 1 sentence text -->
             <article class="review-card">
-              <figure class="review-card__photo">
-                <img src="images/reviews/review-messy-table.jpg" alt="Po večeři - reálný stav" loading="lazy" />
-              </figure>
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Markéta K.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -727,12 +745,9 @@
             </article>
 
             <article class="review-card">
-              <figure class="review-card__photo">
-                <img src="images/reviews/review-family-dinner.jpg" alt="" loading="lazy" />
-              </figure>
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Lucie V.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -742,12 +757,9 @@
             </article>
 
             <article class="review-card">
-              <figure class="review-card__photo">
-                <img src="images/reviews/review-nakup-cart.jpg" alt="" loading="lazy" />
-              </figure>
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Ivana P.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★☆</p>
@@ -757,12 +769,9 @@
             </article>
 
             <article class="review-card">
-              <figure class="review-card__photo">
-                <img src="images/reviews/review-pasta-plate.jpg" alt="" loading="lazy" />
-              </figure>
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Klára D.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -800,10 +809,10 @@
           </p>
         </details>
         <details class="faq__item">
-          <summary>💚 Proč to stojí za těch 297 Kč?</summary>
+          <summary>💚 Proč to stojí za těch 197 Kč?</summary>
           <p>
             Méně večerů „co zase vařit“, méně zbytečného v obchodě, klid v hlavě. Jedna platba =
-            měsíc oblíbených receptů <strong>, které budeš chtít opakovat</strong>. Cca 74 Kč za
+            měsíc oblíbených receptů <strong>, které budeš chtít opakovat</strong>. Cca 49 Kč za
             týden — ne jednorázovka, která zmizí.
           </p>
         </details>
@@ -818,10 +827,10 @@
         <div class="sticky-bar__text">
           <strong>4 týdny jídla · přes 75 maminek celkem</strong>
           <span class="sticky-bar__sub"
-            ><span id="sticky-price">297 Kč</span> jednorázově · přístup navždy</span
+            ><span id="sticky-price">197 Kč</span> jednorázově · přístup navždy</span
           >
         </div>
-        <a class="btn btn--primary sticky-bar__btn" id="sticky-buy" href="#koupit">🛒 Koupit za 297 Kč</a>
+        <a class="btn btn--primary sticky-bar__btn" id="sticky-buy" href="#koupit">🛒 Koupit za 197 Kč</a>
       </div>
     </div>
 
@@ -949,21 +958,7 @@
           }, { once: true });
         }
 
-        // Simple countdown for bonus (demo 3 hours)
-        (function() {
-          var timerEl = document.getElementById('bonus-timer');
-          if (!timerEl) return;
-          var end = Date.now() + 3*60*60*1000;
-          function tick() {
-            var left = Math.max(0, end - Date.now());
-            var h = Math.floor(left / 3600000);
-            var m = Math.floor((left % 3600000) / 60000);
-            var s = Math.floor((left % 60000) / 1000);
-            timerEl.textContent = h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-            if (left > 0) setTimeout(tick, 1000);
-          }
-          tick();
-        })();
+        // Countdown timer odstraněn (na žádost) — žádný fake urgency. Bonus zůstává bez časového limitu.
       })();
     </script>
   </body>
