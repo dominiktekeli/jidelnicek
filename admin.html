@@ -87,6 +87,15 @@
         </div>
       </div>
 
+      <!-- Vercel Analytics (oficiální data z Vercel dashboardu) -->
+      <div class="mb-8">
+        <h2 class="font-semibold text-lg mb-3">Vercel Analytics (oficiální)</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="vercel-stats">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Načítání dat z Vercel Analytics... (pokud token není nastaven, zůstane prázdné)</div>
+        </div>
+        <div class="text-[10px] text-zinc-500 mt-2">Data z Vercel Analytics (page views, unique visitors, top pages atd.). Zapnuto v Vercel projektu → Analytics.</div>
+      </div>
+
       <!-- Funnel / Kde lidi klikají -->
       <div class="mb-8">
         <h2 class="font-semibold text-lg mb-3">Funnel — kde lidi klikají (reálná data)</h2>
@@ -325,6 +334,33 @@
 
       // graphs
       renderGraphs(d);
+
+      // Vercel Analytics (official)
+      const vercelEl = document.getElementById('vercel-stats');
+      if (vercelEl && d.vercelAnalytics) {
+        const va = d.vercelAnalytics;
+        let html = '';
+        if (va.data && Array.isArray(va.data)) {
+          va.data.forEach(item => {
+            if (item.key && (item.total != null || item.value != null)) {
+              const val = item.total ?? item.value;
+              html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
+                <div class="text-xs text-zinc-400">${item.key}</div>
+                <div class="text-2xl font-semibold">${val}</div>
+              </div>`;
+            }
+          });
+        } else if (va.visitors || va.pageViews || va.uniqueVisitors) {
+          if (va.visitors != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Visitors</div><div class="text-2xl font-semibold">${va.visitors}</div></div>`;
+          if (va.pageViews != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Page Views</div><div class="text-2xl font-semibold">${va.pageViews}</div></div>`;
+          if (va.uniqueVisitors != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Unique Visitors</div><div class="text-2xl font-semibold">${va.uniqueVisitors}</div></div>`;
+        } else {
+          html = `<div class="text-xs text-zinc-400">Data: <pre class="overflow-auto">${JSON.stringify(va, null, 2).slice(0,300)}...</pre></div>`;
+        }
+        if (html) vercelEl.innerHTML = html;
+      } else if (vercelEl) {
+        vercelEl.innerHTML = `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Žádná data (token VERCEL_ANALYTICS_TOKEN nebo VERCEL_TOKEN není nastaven v Vercel env, nebo Analytics není zapnuté pro projekt).</div>`;
+      }
 
       // cink if live increased
       if (l.count > lastLive) playCink();

@@ -14,6 +14,25 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Vercel Analytics (official, enabled in Vercel dashboard)
+  let vercelAnalytics = null;
+  try {
+    const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN;
+    const projectId = process.env.VERCEL_PROJECT_ID;
+    if (token && projectId) {
+      const nowSec = Math.floor(Date.now() / 1000);
+      const fromSec = nowSec - 86400 * 2; // last ~2 days
+      const resAnalytics = await fetch(`https://api.vercel.com/v1/projects/${projectId}/analytics?from=${fromSec}&to=${nowSec}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (resAnalytics.ok) {
+        vercelAnalytics = await resAnalytics.json();
+      }
+    }
+  } catch (e) {
+    console.error('Vercel Analytics fetch error:', e);
+  }
+
   // Pull events from track module if available in this invocation (helps cross /api/track and /api/stats in same container)
   let events = recentEvents;
   try {
@@ -124,9 +143,10 @@ export default async function handler(req, res) {
     recent,
     conversionRates,
     eventTypes,
+    vercelAnalytics,  // official Vercel Analytics data (if VERCEL_ANALYTICS_TOKEN or VERCEL_TOKEN is set in env)
     // keep some of the previous shape for compatibility if any other consumer
     ok: true,
-    note: "Fixed pipeline: events from /api/track now visible in admin via shared buffer. Phone visits should appear after refresh/heartbeat."
+    note: "Fixed pipeline: events from /api/track now visible in admin via shared buffer. Phone visits should appear after refresh/heartbeat. Vercel Analytics included if token configured."
   });
 }
 
