@@ -237,7 +237,7 @@
             <span class="bundle__icon" aria-hidden="true">🥣</span>
             <div>
               <h3>Bonus: Rychlé snídaně pro chaotická rána</h3>
-              <p>Při koupi dnes zdarma 5 rychlých receptů (připrava max 10 min).</p>
+              <p>Při koupi dnes zdarma.</p>
             </div>
           </li>
           <li class="bundle__item">
@@ -320,20 +320,6 @@
         </div>
       </section>
 
-      <section class="lead-magnet" id="lead-magnet" aria-label="Ukázka zdarma">
-        <div class="lead-magnet__card">
-          <div>
-            <h3>🎁 Získej 1. týden jídelníčku zdarma (PDF)</h3>
-            <p>7 dnů obědů + večeří + nákupní seznam. Žádný spam. Odhlásit kdykoliv.</p>
-          </div>
-          <form id="lead-form" class="lead-form">
-            <input type="email" id="lead-email" placeholder="Tvůj email" required />
-            <button type="submit" class="btn btn--primary">Pošlete mi ukázku zdarma</button>
-          </form>
-          <p id="lead-success" class="lead-success" style="display:none">Děkujeme! Ukázku jsme poslali na tvůj email (zkontroluj spam).</p>
-        </div>
-      </section>
-
       <section class="pricing" id="koupit" aria-labelledby="pricing-heading">
         <div class="pricing__card">
           <div class="pricing__hero">
@@ -356,8 +342,11 @@
 
           <!-- Bonus - simple and clean (bez countdownu) -->
           <div class="pricing__bonus">
-            <strong>🎁 Při koupi dnes zdarma</strong><br>
-            „Rychlé snídaně pro chaotická rána“
+            <div class="pricing__bonus__top">
+              <span class="pricing__bonus__icon" aria-hidden="true">🎁</span>
+              <strong>Při koupi dnes zdarma</strong>
+            </div>
+            <p class="pricing__bonus__name">„Rychlé snídaně pro chaotická rána“</p>
           </div>
 
           <a class="btn btn--full btn--buy" id="btn-koupit" href="#">
@@ -733,7 +722,7 @@
             <article class="review-card">
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <strong>Markéta K.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Markéta K.</strong>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -745,7 +734,7 @@
             <article class="review-card">
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <strong>Lucie V.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Lucie V.</strong>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -757,7 +746,7 @@
             <article class="review-card">
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <strong>Ivana P.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Ivana P.</strong>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★☆</p>
@@ -769,7 +758,7 @@
             <article class="review-card">
               <header class="review-card__head">
                 <div class="review-card__who">
-                  <strong>Klára D.</strong> <span style="font-size:0.7em; background:#d1fae5; color:#065f46; padding:1px 4px; border-radius:3px;">✓ Ověřeno</span>
+                  <strong>Klára D.</strong>
                 </div>
               </header>
               <p class="review-card__stars" aria-hidden="true">★★★★★</p>
@@ -955,6 +944,18 @@
             }
           }, { once: true });
         }
+
+        // Expose global check for other scripts (site.js etc.) - must match localStorage format
+        window.marketingConsent = function() {
+          try {
+            var pref = localStorage.getItem('cookie-preference');
+            if (!pref) return false;
+            var c = JSON.parse(pref);
+            return !!c.marketing;
+          } catch(e) {
+            return pref === 'accepted';
+          }
+        };
 
         // Countdown timer odstraněn (na žádost) — žádný fake urgency. Bonus zůstává bez časového limitu.
       })();

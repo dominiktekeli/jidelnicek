@@ -50,14 +50,20 @@
       if (pricing) pricing.appendChild(warn);
     }
 
-    // Fire Meta Pixel InitiateCheckout on buy click if marketing consent
+    // Fire Meta Pixel InitiateCheckout on buy click (BEFORE redirect to Stripe)
+    // This is critical for Meta "Přechod k zaplacení" optimization - must fire on click, not after navigation
     BUY_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener('click', function() {
           if (window.marketingConsent && window.marketingConsent()) {
             if (typeof fbq === 'function') {
-              fbq('track', 'InitiateCheckout');
+              fbq('track', 'InitiateCheckout', {
+                value: 297,
+                currency: 'CZK',
+                content_name: 'Klid v kuchyni',
+                content_ids: ['klid-balicek']
+              });
             }
           }
         });
@@ -263,21 +269,6 @@
     moreBtn.addEventListener('click', function () {
       moreReviews.style.display = 'block';
       moreBtn.style.display = 'none';
-    });
-  }
-
-  // Lead magnet form (simple UX, no backend)
-  const leadForm = document.getElementById('lead-form');
-  const leadSuccess = document.getElementById('lead-success');
-  if (leadForm && leadSuccess) {
-    leadForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const email = document.getElementById('lead-email').value.trim();
-      if (!email) return;
-      leadForm.style.display = 'none';
-      leadSuccess.style.display = 'block';
-      leadSuccess.textContent = 'Děkujeme! Ukázku jsme poslali na ' + email + ' (zkontroluj spam).';
-      // Optional: could window.open a PDF link here in real
     });
   }
 
