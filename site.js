@@ -51,11 +51,13 @@
     }
 
     // Fire Meta Pixel InitiateCheckout on buy click (BEFORE redirect to Stripe)
-    // This is critical for Meta "Přechod k zaplacení" optimization - must fire on click, not after navigation
+    // Race-condition safe: preventDefault + delay navigation so the pixel request has time to leave
+    // (fixes 30-60% loss on direct <a href=stripe> navigation)
     BUY_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) {
-        el.addEventListener('click', function() {
+        el.addEventListener('click', function(e) {
+          const targetUrl = el.href;
           if (window.marketingConsent && window.marketingConsent()) {
             if (typeof fbq === 'function') {
               fbq('track', 'InitiateCheckout', {
@@ -65,6 +67,12 @@
                 content_ids: ['klid-balicek']
               });
             }
+          }
+          if (targetUrl && targetUrl.startsWith('http')) {
+            e.preventDefault();
+            setTimeout(function() {
+              window.location.href = targetUrl;
+            }, 300);
           }
         });
       }
