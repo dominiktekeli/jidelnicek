@@ -30,7 +30,7 @@ export default async function handler(req, res) {
   };
 
   try {
-    const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN || 'scl_fMK6CDzCHoFtEBFHScYNw';
+    const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN;
     const projectId = process.env.VERCEL_PROJECT_ID;
     const teamId = process.env.VERCEL_TEAM_ID;
 
