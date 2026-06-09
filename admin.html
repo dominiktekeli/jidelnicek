@@ -69,7 +69,7 @@
 
       <div class="mb-4 p-3 bg-emerald-900/30 border border-emerald-700 rounded-2xl text-xs text-emerald-300">
         ✅ Admin je propojen s Vercel Web Analytics přes <code>VERCEL_ANALYTICS_TOKEN</code> + <code>VERCEL_PROJECT_ID</code> (+ teamId).<br>
-        Nastav je v Vercel Project → Settings → Environment Variables (doporučeno pro produkci).
+        <strong>Po přidání/úpravě env vars proveď Redeploy projektu</strong> (jinak funkce vidí staré hodnoty).
       </div>
 
       <!-- Top Metrics -->
@@ -355,9 +355,35 @@
 
       // Top metrics from Vercel + custom
       const va = d.vercelAnalytics || {};
-      const vVisitors = va.visitors ?? va.uniqueVisitors ?? (va.data?.find?.(x => /visitor|unique/i.test(x.key||''))?.total) ?? d.totalVisitors ?? 0;
-      const vPageViews = va.pageViews ?? (va.data?.find?.(x => /page/i.test(x.key||''))?.total) ?? d.totalPageViews ?? 0;
-      const vBounce = va.bounceRate ?? (va.data?.find?.(x => /bounce/i.test(x.key||''))?.value) ?? d.bounceRate ?? '—';
+      // Try hard to find the numbers in various common shapes the Analytics API can return
+      const findMetric = (obj, patterns) => {
+        if (!obj) return undefined;
+        for (const p of patterns) {
+          if (obj[p] != null) return obj[p];
+        }
+        if (Array.isArray(obj.data)) {
+          for (const item of obj.data) {
+            const key = (item.key || item.name || '').toLowerCase();
+            if (patterns.some(pat => key.includes(pat.toLowerCase()))) {
+              return item.total ?? item.value ?? item.count ?? item.visitors ?? item.pageViews;
+            }
+          }
+        }
+        // deep search (last resort)
+        try {
+          const str = JSON.stringify(obj);
+          for (const pat of patterns) {
+            const re = new RegExp(`"${pat}"\\s*:\\s*([0-9.]+)`, 'i');
+            const m = str.match(re);
+            if (m) return parseFloat(m[1]);
+          }
+        } catch (e) {}
+        return undefined;
+      };
+
+      const vVisitors = findMetric(va, ['visitors', 'uniqueVisitors', 'unique_visitors']) ?? d.totalVisitors ?? 0;
+      const vPageViews = findMetric(va, ['pageViews', 'page_views', 'pageviews']) ?? d.totalPageViews ?? 0;
+      const vBounce = findMetric(va, ['bounceRate', 'bounce_rate', 'bounce']) ?? d.bounceRate ?? '—';
 
       const vVisitorsEl = document.getElementById('vercel-visitors');
       if (vVisitorsEl) vVisitorsEl.textContent = vVisitors;
