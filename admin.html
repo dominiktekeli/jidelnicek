@@ -97,11 +97,66 @@
 
       <!-- Vercel Analytics (oficiální data z Vercel dashboardu) -->
       <div class="mb-8">
-        <h2 class="font-semibold text-lg mb-3">Vercel Analytics (oficiální)</h2>
+        <h2 class="font-semibold text-lg mb-3">Vercel Analytics (oficiální) + Custom Traffic</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="vercel-stats">
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Načítání dat z Vercel Analytics... (pokud token není nastaven, zůstane prázdné)</div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Načítání...</div>
         </div>
-        <div class="text-[10px] text-zinc-500 mt-2">Data z Vercel Analytics (page views, unique visitors, top pages atd.). Zapnuto v Vercel projektu → Analytics.</div>
+        <div class="text-[10px] text-zinc-500 mt-2">Kombinace oficiálních Vercel dat (když je token) + first-party tracking (referrers, UTM, tech, bounce approx).</div>
+      </div>
+
+      <!-- Rich Traffic Sources like the screenshot -->
+      <div class="mb-8">
+        <h2 class="font-semibold text-lg mb-3">Traffic Sources & Audience</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <!-- Referrers -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">Referrers (Meta heavy)</div>
+            <div id="referrers-list" class="text-sm space-y-1"></div>
+          </div>
+
+          <!-- UTM -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">UTM Campaigns / Sources</div>
+            <div id="utm-list" class="text-sm space-y-1"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <!-- Devices -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">Devices</div>
+            <div id="devices-list" class="text-sm space-y-1"></div>
+          </div>
+
+          <!-- OS -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">Operating Systems</div>
+            <div id="os-list" class="text-sm space-y-1"></div>
+          </div>
+
+          <!-- Browsers -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">Browsers</div>
+            <div id="browsers-list" class="text-sm space-y-1"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Top Pages -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">Top Pages / Routes</div>
+            <div id="pages-list" class="text-sm space-y-1"></div>
+          </div>
+
+          <!-- Key Metrics -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+            <div class="font-medium mb-2 text-sm">Key Metrics (custom + Vercel)</div>
+            <div class="grid grid-cols-2 gap-3 text-sm" id="traffic-metrics">
+              <!-- filled by JS -->
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Funnel / Kde lidi klikají -->
@@ -343,32 +398,38 @@
       // graphs
       renderGraphs(d);
 
-      // Vercel Analytics (official)
+      // Vercel Analytics (official) + rich custom
       const vercelEl = document.getElementById('vercel-stats');
-      if (vercelEl && d.vercelAnalytics) {
-        const va = d.vercelAnalytics;
+      if (vercelEl) {
+        const va = d.vercelAnalytics || {};
         let html = '';
-        if (va.data && Array.isArray(va.data)) {
-          va.data.forEach(item => {
+
+        // Try to render nice cards like the screenshot
+        const vVisitors = va.visitors ?? va.uniqueVisitors ?? (va.data && va.data.find(x => /visitor/i.test(x.key||''))?.total);
+        const vPageViews = va.pageViews ?? va.data?.find(x => /page/i.test(x.key||''))?.total;
+        const vBounce = va.bounceRate ?? va.data?.find(x => /bounce/i.test(x.key||''))?.value;
+
+        if (vVisitors != null || vPageViews != null || vBounce != null) {
+          if (vVisitors != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Visitors</div><div class="text-2xl font-semibold">${vVisitors}</div></div>`;
+          if (vPageViews != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Page Views</div><div class="text-2xl font-semibold">${vPageViews}</div></div>`;
+          if (vBounce != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Bounce Rate</div><div class="text-2xl font-semibold">${vBounce}%</div></div>`;
+        } else if (va.data && Array.isArray(va.data)) {
+          va.data.slice(0,6).forEach(item => {
             if (item.key && (item.total != null || item.value != null)) {
               const val = item.total ?? item.value;
-              html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4">
-                <div class="text-xs text-zinc-400">${item.key}</div>
-                <div class="text-2xl font-semibold">${val}</div>
-              </div>`;
+              html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">${item.key}</div><div class="text-2xl font-semibold">${val}</div></div>`;
             }
           });
-        } else if (va.visitors || va.pageViews || va.uniqueVisitors) {
-          if (va.visitors != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Visitors</div><div class="text-2xl font-semibold">${va.visitors}</div></div>`;
-          if (va.pageViews != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Page Views</div><div class="text-2xl font-semibold">${va.pageViews}</div></div>`;
-          if (va.uniqueVisitors != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Unique Visitors</div><div class="text-2xl font-semibold">${va.uniqueVisitors}</div></div>`;
+        } else if (Object.keys(va).length > 2) {
+          html = `<div class="text-xs text-zinc-400 col-span-4">Vercel data: ${JSON.stringify(va).slice(0,220)}...</div>`;
         } else {
-          html = `<div class="text-xs text-zinc-400">Data: <pre class="overflow-auto">${JSON.stringify(va, null, 2).slice(0,300)}...</pre></div>`;
+          html = `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Žádná data z Vercel (nastav VERCEL_ANALYTICS_TOKEN + VERCEL_PROJECT_ID v env nebo zapni Analytics v projektu).</div>`;
         }
         if (html) vercelEl.innerHTML = html;
-      } else if (vercelEl) {
-        vercelEl.innerHTML = `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Žádná data (token VERCEL_ANALYTICS_TOKEN nebo VERCEL_TOKEN není nastaven v Vercel env, nebo Analytics není zapnuté pro projekt).</div>`;
       }
+
+      // New rich traffic sections
+      renderTrafficAnalytics(d);
 
       // cink if live increased
       if (l.count > lastLive) playCink();
@@ -400,6 +461,69 @@
           data: { labels:['25%','50%','75%','100%'], datasets: [{label:'Počet', data:[sb['25']||0,sb['50']||0,sb['75']||0,sb['100']||0], backgroundColor:'#10b981', borderRadius:4 }] },
           options: { responsive:true, maintainAspectRatio:false, scales:{y:{beginAtZero:true, ticks:{color:'#a1a1aa'}}, x:{ticks:{color:'#a1a1aa'}}}, plugins:{legend:{display:false}} }
         });
+      }
+    }
+
+    function renderTrafficAnalytics(d) {
+      // Referrers
+      const refEl = document.getElementById('referrers-list');
+      if (refEl) {
+        const refs = d.topReferrers || [];
+        if (refs.length) {
+          refEl.innerHTML = refs.map(r => `<div class="flex justify-between"><span class="text-zinc-300">${r.name}</span><span class="font-mono text-emerald-400">${r.count}</span></div>`).join('');
+        } else {
+          refEl.innerHTML = '<div class="text-zinc-500 text-xs">Žádná data (Meta traffic by měl přijít přes fb/ig/l.facebook)</div>';
+        }
+      }
+
+      // UTM
+      const utmEl = document.getElementById('utm-list');
+      if (utmEl) {
+        const utms = d.topUTMs || [];
+        if (utms.length) {
+          utmEl.innerHTML = utms.map(u => `<div class="flex justify-between"><span class="text-zinc-300">${u.name}</span><span class="font-mono text-emerald-400">${u.count}</span></div>`).join('');
+        } else {
+          utmEl.innerHTML = '<div class="text-zinc-500 text-xs">Žádná UTM data (přidej ?utm_source=... do odkazů z reklam)</div>';
+        }
+      }
+
+      // Devices
+      const devEl = document.getElementById('devices-list');
+      if (devEl) {
+        const devs = d.deviceBreakdown || [];
+        devEl.innerHTML = devs.length ? devs.map(x => `<div class="flex justify-between"><span>${x.name}</span><span class="font-mono">${x.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
+      }
+
+      // OS
+      const osEl = document.getElementById('os-list');
+      if (osEl) {
+        const oss = d.osBreakdown || [];
+        osEl.innerHTML = oss.length ? oss.map(x => `<div class="flex justify-between"><span>${x.name}</span><span class="font-mono">${x.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
+      }
+
+      // Browsers
+      const brEl = document.getElementById('browsers-list');
+      if (brEl) {
+        const brs = d.browserBreakdown || [];
+        brEl.innerHTML = brs.length ? brs.map(x => `<div class="flex justify-between"><span>${x.name}</span><span class="font-mono">${x.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
+      }
+
+      // Top Pages
+      const pagesEl = document.getElementById('pages-list');
+      if (pagesEl) {
+        const pgs = d.topPages || [];
+        pagesEl.innerHTML = pgs.length ? pgs.map(p => `<div class="flex justify-between text-xs"><span class="truncate">${p.path}</span><span class="font-mono">${p.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
+      }
+
+      // Key metrics row
+      const metricsEl = document.getElementById('traffic-metrics');
+      if (metricsEl) {
+        const m = [];
+        if (d.totalVisitors != null) m.push(`<div><span class="text-xs text-zinc-400">Custom Visitors</span><div class="text-xl font-semibold">${d.totalVisitors}</div></div>`);
+        if (d.totalPageViews != null) m.push(`<div><span class="text-xs text-zinc-400">Page Views (tracked)</span><div class="text-xl font-semibold">${d.totalPageViews}</div></div>`);
+        if (d.bounceRate != null) m.push(`<div><span class="text-xs text-zinc-400">Bounce (approx)</span><div class="text-xl font-semibold">${d.bounceRate}%</div></div>`);
+        if (d.liveNow?.count != null) m.push(`<div><span class="text-xs text-zinc-400">Live now</span><div class="text-xl font-semibold">${d.liveNow.count}</div></div>`);
+        metricsEl.innerHTML = m.join('') || '<div class="text-xs text-zinc-500">Čekám na data z návštěv...</div>';
       }
     }
 

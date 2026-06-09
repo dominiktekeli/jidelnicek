@@ -130,6 +130,61 @@ export default async function handler(req, res) {
 
   const totalEvents = events.length;
 
+  // === Rich traffic analytics (to match Vercel Analytics style in admin) ===
+  const referrers = {};
+  const utmCampaigns = {};
+  const devices = {};
+  const operatingSystems = {};
+  const browsers = {};
+  const topPages = {};
+  let totalPageViews = 0;
+  let sessionsWithMoreThanOneEvent = 0;
+  const sessionEventCount = {};
+
+  events.forEach(e => {
+    const ev = e.event || '';
+    const refHost = e.referrerHost || (e.referrer ? (e.referrer.includes('facebook') ? 'facebook' : e.referrer.includes('instagram') ? 'instagram' : 'external') : 'direct');
+    if (ev === 'page_view' || ev === 'page_enter') {
+      totalPageViews++;
+      referrers[refHost] = (referrers[refHost] || 0) + 1;
+
+      const utm = e.utm_source || e.utm_medium || e.utm_campaign ? (e.utm_campaign || e.utm_source || 'unknown') : 'direct';
+      if (e.utm_campaign || e.utm_source) {
+        utmCampaigns[utm] = (utmCampaigns[utm] || 0) + 1;
+      }
+
+      const d = e.device || 'unknown';
+      devices[d] = (devices[d] || 0) + 1;
+
+      const os = e.os || 'unknown';
+      operatingSystems[os] = (operatingSystems[os] || 0) + 1;
+
+      const br = e.browser || 'unknown';
+      browsers[br] = (browsers[br] || 0) + 1;
+
+      const p = e.path || e.page || '/';
+      topPages[p] = (topPages[p] || 0) + 1;
+    }
+
+    // Session activity for bounce approx
+    if (e.session) {
+      sessionEventCount[e.session] = (sessionEventCount[e.session] || 0) + 1;
+    }
+  });
+
+  // Bounce rate approximation: sessions with <=1 meaningful event (very rough)
+  const totalSessionsTracked = Object.keys(sessionEventCount).length;
+  const bouncedSessions = Object.values(sessionEventCount).filter(c => c <= 1).length;
+  const bounceRate = totalSessionsTracked > 0 ? Math.round((bouncedSessions / totalSessionsTracked) * 100) : null;
+
+  // Sort top lists
+  const topReferrers = Object.entries(referrers).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>({name:k, count:v}));
+  const topUTMs = Object.entries(utmCampaigns).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>({name:k, count:v}));
+  const deviceBreakdown = Object.entries(devices).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({name:k, count:v}));
+  const osBreakdown = Object.entries(operatingSystems).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({name:k, count:v}));
+  const browserBreakdown = Object.entries(browsers).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({name:k, count:v}));
+  const topPagesList = Object.entries(topPages).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>({path:k, count:v}));
+
   // Return shape expected by admin.html updateUI + some extras
   res.status(200).json({
     todayVisitors,
@@ -144,9 +199,20 @@ export default async function handler(req, res) {
     conversionRates,
     eventTypes,
     vercelAnalytics,  // official Vercel Analytics data (if VERCEL_ANALYTICS_TOKEN or VERCEL_TOKEN is set in env)
+
+    // Rich analytics (custom first-party, to power admin like Vercel dashboard)
+    totalPageViews,
+    bounceRate,
+    topReferrers,
+    topUTMs,
+    deviceBreakdown,
+    osBreakdown,
+    browserBreakdown,
+    topPages: topPagesList,
+
     // keep some of the previous shape for compatibility if any other consumer
     ok: true,
-    note: "Fixed pipeline: events from /api/track now visible in admin via shared buffer. Phone visits should appear after refresh/heartbeat. Vercel Analytics included if token configured."
+    note: "Rich traffic data (referrers, UTM, devices, OS, browsers, pages, bounce approx) + official Vercel Analytics if token set."
   });
 }
 

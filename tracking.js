@@ -73,6 +73,55 @@
     }
   }
 
+  function getUtmParams() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get('utm_source') || null,
+        utm_medium: params.get('utm_medium') || null,
+        utm_campaign: params.get('utm_campaign') || null,
+        utm_content: params.get('utm_content') || null,
+        utm_term: params.get('utm_term') || null
+      };
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function getReferrerHost() {
+    try {
+      if (!document.referrer) return 'direct';
+      const u = new URL(document.referrer);
+      let host = u.hostname.replace(/^www\./, '');
+      // Group Meta sources
+      if (host.includes('facebook.com') || host.includes('fb.com')) return 'facebook';
+      if (host.includes('instagram.com')) return 'instagram';
+      return host;
+    } catch (e) {
+      return document.referrer ? 'external' : 'direct';
+    }
+  }
+
+  function getBrowserOS() {
+    const ua = navigator.userAgent || '';
+    let browser = 'Other';
+    let os = 'Other';
+
+    if (/Edg/i.test(ua)) browser = 'Edge';
+    else if (/Chrome/i.test(ua) && !/Edg/i.test(ua)) browser = 'Chrome';
+    else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = 'Safari';
+    else if (/Firefox/i.test(ua)) browser = 'Firefox';
+    else if (/OPR|Opera/i.test(ua)) browser = 'Opera';
+
+    if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS';
+    else if (/Android/i.test(ua)) os = 'Android';
+    else if (/Windows/i.test(ua)) os = 'Windows';
+    else if (/Macintosh|Mac OS/i.test(ua)) os = 'Mac';
+    else if (/Linux/i.test(ua)) os = 'Linux';
+
+    return { browser, os };
+  }
+
   function getPath() {
     return window.location.pathname + window.location.search;
   }
@@ -90,13 +139,20 @@
   function trackPageView() {
     const device = getDevice();
     const utm = getUtmSource();
+    const utms = getUtmParams();
+    const referrerHost = getReferrerHost();
     const path = getPath();
+    const tech = getBrowserOS();
     log('page_view', {
       referrer: document.referrer || 'direct',
+      referrerHost,
       device,
       utm_source: utm,
+      ...utms,
       path,
-      userAgent: navigator.userAgent.substring(0, 60)
+      browser: tech.browser,
+      os: tech.os,
+      userAgent: navigator.userAgent.substring(0, 80)
     });
   }
 
@@ -186,12 +242,19 @@
   function sendHeartbeat() {
     const device = getDevice();
     const utm = getUtmSource();
+    const utms = getUtmParams();
+    const referrerHost = getReferrerHost();
     const path = getPath();
+    const tech = getBrowserOS();
     KLID.track('heartbeat', { 
       page: getPageType(),
       device,
       utm_source: utm,
+      ...utms,
+      referrerHost,
       path,
+      browser: tech.browser,
+      os: tech.os,
       time_on_page: Date.now() - (window._klidStart || Date.now())
     });
   }
@@ -201,13 +264,20 @@
     window._klidStart = Date.now();
     const device = getDevice();
     const utm = getUtmSource();
+    const utms = getUtmParams();
+    const referrerHost = getReferrerHost();
     const path = getPath();
+    const tech = getBrowserOS();
     // Send initial enter
     KLID.track('page_enter', { 
       page: getPageType(),
       device,
       utm_source: utm,
-      path 
+      ...utms,
+      referrerHost,
+      path,
+      browser: tech.browser,
+      os: tech.os
     });
     // Heartbeat every 30s to match screenshot
     heartbeatInterval = setInterval(sendHeartbeat, 30000);
