@@ -567,7 +567,7 @@
         window.KLID.track('buy_clicked', { location: 'home', test:true });
       }
 
-      // bump local for UI
+      // bump local for UI (custom + demo for Vercel cards so you see numbers immediately)
       if (currentData) {
         currentData.todayVisitors = (currentData.todayVisitors || 0) + 1;
         currentData.totalVisitors = (currentData.totalVisitors || 0) + 1;
@@ -578,15 +578,21 @@
         currentData.recent.unshift({ ts: now, event: 'buy_clicked', page: 'home', test: true });
         if (currentData.recent.length > 12) currentData.recent.length = 12;
 
-        // For rich sections
-        currentData.topReferrers = [{name: 'facebook', count: 1}];
-        currentData.topUTMs = [{name: 'facebook', count: 1}];
-        currentData.deviceBreakdown = [{name: 'Mobile', count: 1}];
-        currentData.osBreakdown = [{name: 'Android', count: 1}];
-        currentData.browserBreakdown = [{name: 'Chrome', count: 1}];
-        currentData.topPages = [{path: '/', count: 1}];
+        // Rich custom sections (Referrers, UTM, Devices etc.)
+        currentData.topReferrers = [{name: 'facebook', count: (currentData.topReferrers?.[0]?.count || 0) + 1 }];
+        currentData.topUTMs = [{name: 'test-ad (facebook)', count: (currentData.topUTMs?.[0]?.count || 0) + 1 }];
+        currentData.deviceBreakdown = [{name: 'Mobile', count: (currentData.deviceBreakdown?.[0]?.count || 0) + 1 }];
+        currentData.osBreakdown = [{name: 'Android', count: (currentData.osBreakdown?.[0]?.count || 0) + 1 }];
+        currentData.browserBreakdown = [{name: 'Chrome', count: (currentData.browserBreakdown?.[0]?.count || 0) + 1 }];
+        currentData.topPages = [{path: '/', count: (currentData.topPages?.[0]?.count || 0) + 1 }];
         currentData.totalPageViews = (currentData.totalPageViews || 0) + 1;
-        currentData.bounceRate = 50;
+        currentData.bounceRate = 45;
+
+        // Demo data for the top "Vercel" cards so the UI doesn't stay at zero while testing
+        currentData.vercelAnalytics = currentData.vercelAnalytics || {};
+        currentData.vercelAnalytics.visitors = (currentData.vercelAnalytics.visitors || 0) + 1;
+        currentData.vercelAnalytics.pageViews = (currentData.vercelAnalytics.pageViews || 0) + 2;
+        currentData.vercelAnalytics.bounceRate = 45;
       }
 
       await refresh();
