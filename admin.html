@@ -97,6 +97,9 @@
         </div>
       </div>
 
+      <!-- Vercel fetch debug status (shows why you see 0 even after redeploy + tokens) -->
+      <div id="vercel-fetch-status" class="mb-4 text-[11px] text-amber-400 font-mono bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-1" style="display:none;"></div>
+
       <!-- Main Vercel + Breakdowns -->
       <div class="mb-8">
         <div class="flex items-center justify-between mb-3">
@@ -391,6 +394,21 @@
       if (vPageEl) vPageEl.textContent = vPageViews;
       const vBounceEl = document.getElementById('vercel-bounce');
       if (vBounceEl) vBounceEl.textContent = (typeof vBounce === 'number' ? vBounce + '%' : vBounce);
+
+      // Show Vercel fetch status / errors for debugging (very useful when everything is 0)
+      const statusEl = document.getElementById('vercel-fetch-status');
+      if (statusEl && d.vercelStatus) {
+        const s = d.vercelStatus;
+        let txt = `Vercel fetch → token:${s.tokenPresent ? '✓' : '✗'} proj:${s.projectPresent ? '✓' : '✗'} team:${s.teamPresent ? '✓' : '✗'} mainOk:${s.mainFetchOk ? '✓' : '✗'}`;
+        if (s.mainStatus) txt += ` status:${s.mainStatus}`;
+        if (s.error) txt += ` | ${s.error}`;
+        if (s.hasData) txt += ' | hasData';
+        statusEl.textContent = txt;
+        statusEl.style.display = 'block';
+      } else if (statusEl) {
+        statusEl.textContent = 'no vercelStatus in /api/stats response';
+        statusEl.style.display = 'block';
+      }
 
       // Custom live / today
       const todayEl = document.getElementById('today-count');

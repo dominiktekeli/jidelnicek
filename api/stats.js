@@ -18,10 +18,25 @@ export default async function handler(req, res) {
   //   VERCEL_PROJECT_ID
   //   VERCEL_TEAM_ID (if using a team project)
   let vercelAnalytics = null;
+  const vercelStatus = {
+    tokenPresent: false,
+    projectPresent: false,
+    teamPresent: false,
+    mainFetchOk: false,
+    mainStatus: null,
+    detailedOk: false,
+    hasData: false,
+    error: null
+  };
+
   try {
     const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN;
     const projectId = process.env.VERCEL_PROJECT_ID;
     const teamId = process.env.VERCEL_TEAM_ID;
+
+    vercelStatus.tokenPresent = !!token;
+    vercelStatus.projectPresent = !!projectId;
+    vercelStatus.teamPresent = !!teamId;
 
     if (token && projectId) {
       const nowSec = Math.floor(Date.now() / 1000);
@@ -36,10 +51,14 @@ export default async function handler(req, res) {
       const resAnalytics = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      vercelStatus.mainStatus = resAnalytics.status;
       if (resAnalytics.ok) {
         vercelAnalytics = await resAnalytics.json();
+        vercelStatus.mainFetchOk = true;
       } else {
-        console.error('Vercel analytics fetch failed:', resAnalytics.status);
+        const errText = await resAnalytics.text().catch(() => '');
+        console.error('Vercel analytics fetch failed:', resAnalytics.status, errText);
+        vercelStatus.error = `main ${resAnalytics.status}: ${errText.slice(0, 300)}`;
       }
 
       // Attempt to get richer web analytics breakdowns (referrers, countries, devices etc.)
@@ -52,13 +71,19 @@ export default async function handler(req, res) {
         if (resDetailed.ok) {
           const detailed = await resDetailed.json();
           vercelAnalytics = { ...(vercelAnalytics || {}), ...detailed, detailed };
+          vercelStatus.detailedOk = true;
         }
       } catch (e) {
-        // detailed endpoint may not be available for all projects
+        // detailed may not exist or fail for some projects
       }
+    } else {
+      vercelStatus.error = 'Missing VERCEL_ANALYTICS_TOKEN or VERCEL_PROJECT_ID in env';
     }
+
+    vercelStatus.hasData = !!(vercelAnalytics && Object.keys(vercelAnalytics).some(k => !k.startsWith('_')));
   } catch (e) {
     console.error('Vercel Analytics fetch error:', e);
+    vercelStatus.error = e.message || String(e);
   }
 
   // Pull events from track module if available in this invocation (helps cross /api/track and /api/stats in same container)
@@ -227,6 +252,7 @@ export default async function handler(req, res) {
     conversionRates,
     eventTypes,
     vercelAnalytics,  // official Vercel Analytics data (if VERCEL_ANALYTICS_TOKEN or VERCEL_TOKEN is set in env)
+    vercelStatus,     // debug info about the fetch (token present, success, errors)
 
     // Rich analytics (custom first-party, to power admin like Vercel dashboard)
     totalPageViews,
