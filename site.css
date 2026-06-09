@@ -143,6 +143,14 @@ img {
   color: var(--text);
 }
 
+.hero__savings {
+  margin: 0.55rem 0 0.15rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--mint-dark);
+  text-align: center;
+}
+
 .hero__faces {
   display: inline-flex;
   align-items: center;
@@ -1202,6 +1210,21 @@ section {
   font-size: 0.95rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.92);
+}
+
+.pricing__savings {
+  margin: 0.35rem 0 0.1rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+  opacity: 0.95;
+}
+
+.savings-note {
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.85;
 }
 
 .pricing__hook {
