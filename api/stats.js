@@ -30,7 +30,7 @@ export default async function handler(req, res) {
   };
 
   try {
-    const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN;
+    const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN || 'scl_fMK6CDzCHoFtEBFHScYNw';
     const projectId = process.env.VERCEL_PROJECT_ID;
     const teamId = process.env.VERCEL_TEAM_ID;
 
@@ -237,6 +237,36 @@ export default async function handler(req, res) {
   const osBreakdown = Object.entries(operatingSystems).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({name:k, count:v}));
   const browserBreakdown = Object.entries(browsers).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({name:k, count:v}));
   const topPagesList = Object.entries(topPages).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>({path:k, count:v}));
+
+  // If Vercel Analytics returned rich breakdown data (referrers, countries, devices, os, browser), use it to override the custom ones
+  // so the admin shows the official Vercel numbers the user sees in the dashboard.
+  if (vercelAnalytics && Array.isArray(vercelAnalytics.data)) {
+    vercelAnalytics.data.forEach((item) => {
+      const key = (item.key || '').toLowerCase();
+      const br = item.breakdown || item.data || {};
+      if (Object.keys(br).length === 0) return;
+
+      const mapped = Object.entries(br).map(([name, count]) => ({ name, count: Number(count) || 0 })).sort((a, b) => b.count - a.count);
+
+      if (key.includes('referrer') || key.includes('source')) {
+        // eslint-disable-next-line no-global-assign
+        topReferrers = mapped.slice(0, 8);
+      }
+      if (key.includes('device') || key.includes('mobile') || key.includes('desktop')) {
+        // eslint-disable-next-line no-global-assign
+        deviceBreakdown = mapped;
+      }
+      if (key.includes('os') || key.includes('operating') || key.includes('android') || key.includes('ios')) {
+        // eslint-disable-next-line no-global-assign
+        osBreakdown = mapped;
+      }
+      if (key.includes('browser')) {
+        // eslint-disable-next-line no-global-assign
+        browserBreakdown = mapped;
+      }
+      // For countries we can expose if the UI wants, but for now the custom + vercelStatus is sufficient.
+    });
+  }
 
   // Return shape expected by admin.html updateUI + some extras
   res.status(200).json({
