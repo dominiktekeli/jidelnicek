@@ -53,7 +53,7 @@
           <div class="w-11 h-11 bg-emerald-500 rounded-3xl flex items-center justify-center text-2xl">🍽</div>
           <div>
             <div class="font-semibold text-3xl tracking-tight">Klid v kuchyni</div>
-            <div class="text-emerald-400 text-sm -mt-1 font-medium">Analytics • Propojený s Vercel Web Analytics</div>
+            <div class="text-emerald-400 text-sm -mt-1 font-medium">Analytics • Propojený s Vercel Web Analytics (tokens wired)</div>
           </div>
         </div>
         <div class="flex items-center gap-2 text-sm">
@@ -65,6 +65,11 @@
           <button onclick="simulateVisit()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-2xl font-medium">Simulate visit</button>
           <button onclick="logout()" class="px-5 py-2 text-zinc-400 hover:text-white">Odhlásit</button>
         </div>
+      </div>
+
+      <div class="mb-4 p-3 bg-emerald-900/30 border border-emerald-700 rounded-2xl text-xs text-emerald-300">
+        ✅ Admin je propojen s Vercel Web Analytics přes <code>VERCEL_ANALYTICS_TOKEN</code> + <code>VERCEL_PROJECT_ID</code> (+ teamId).<br>
+        Nastav je v Vercel Project → Settings → Environment Variables (doporučeno pro produkci).
       </div>
 
       <!-- Top Metrics -->
@@ -421,18 +426,27 @@
     function renderBreakdowns(d) {
       const va = d.vercelAnalytics || {};
 
-      // Referrers
+      // Referrers - prefer custom first-party (rich from tracking.js), then Vercel
       const refEl = document.getElementById('referrers-table');
       if (refEl) {
         let refs = d.topReferrers || [];
-        if (!refs.length && va.data) {
-          const refItem = va.data.find(x => /referrer|source|facebook|instagram/i.test(x.key || ''));
-          if (refItem) refs = [{name: refItem.key, count: refItem.total || refItem.value || 0}];
+        if ((!refs || refs.length === 0) && va) {
+          // Try common Vercel response shapes for referrers
+          if (va.referrers && Array.isArray(va.referrers)) {
+            refs = va.referrers.map(r => ({ name: r.key || r.name || r.referrer, count: r.value || r.count || r.total }));
+          } else if (va.data && Array.isArray(va.data)) {
+            const refItem = va.data.find(x => /referrer|source|facebook|instagram|meta/i.test((x.key || x.name || '').toString()));
+            if (refItem && refItem.breakdown) {
+              refs = Object.entries(refItem.breakdown).map(([k, v]) => ({ name: k, count: v }));
+            } else if (refItem) {
+              refs = [{ name: refItem.key || refItem.name, count: refItem.total || refItem.value || refItem.count }];
+            }
+          }
         }
-        if (refs.length) {
-          refEl.innerHTML = refs.map(r => {
-            const isMeta = /facebook|instagram|meta/i.test(r.name);
-            return `<div class="flex justify-between py-1 text-sm ${isMeta ? 'text-emerald-400 font-medium' : ''}"><span>${r.name}</span><span class="font-mono">${r.count}</span></div>`;
+        if (refs && refs.length) {
+          refEl.innerHTML = refs.slice(0, 8).map(r => {
+            const isMeta = /facebook|instagram|meta|fb|ig/i.test((r.name || '').toString());
+            return `<div class="flex justify-between py-1 text-sm ${isMeta ? 'text-emerald-400 font-medium' : ''}"><span class="truncate">${r.name}</span><span class="font-mono">${r.count}</span></div>`;
           }).join('');
         } else {
           refEl.innerHTML = '<div class="text-xs text-zinc-500">Žádná data (Meta traffic by měl přijít přes fb/ig)</div>';
@@ -442,41 +456,47 @@
       // UTM
       const utmEl = document.getElementById('utm-table');
       if (utmEl) {
-        const utms = d.topUTMs || [];
-        utmEl.innerHTML = utms.length 
-          ? utms.map(u => `<div class="flex justify-between py-1 text-sm"><span>${u.name}</span><span class="font-mono">${u.count}</span></div>`).join('')
-          : '<div class="text-xs text-zinc-500">Žádná UTM data</div>';
+        let utms = d.topUTMs || [];
+        if ((!utms || utms.length === 0) && va && va.data) {
+          const utmItem = va.data.find(x => /utm|campaign|source/i.test((x.key || '').toString()));
+          if (utmItem && utmItem.breakdown) {
+            utms = Object.entries(utmItem.breakdown).map(([k,v]) => ({name: k, count: v}));
+          }
+        }
+        utmEl.innerHTML = (utms && utms.length) 
+          ? utms.slice(0,6).map(u => `<div class="flex justify-between py-1 text-sm"><span class="truncate">${u.name}</span><span class="font-mono">${u.count}</span></div>`).join('')
+          : '<div class="text-xs text-zinc-500">Žádná UTM data (přidej ?utm_source=... do odkazů z reklam)</div>';
       }
 
-      // Countries (from Vercel if present)
+      // Countries (primarily from Vercel)
       const countriesEl = document.getElementById('countries-table');
       if (countriesEl) {
         let countries = [];
-        if (va.data) {
-          const cItem = va.data.find(x => /country|countries|geo/i.test(x.key || ''));
+        if (va && va.data) {
+          const cItem = va.data.find(x => /country|countries|geo|location/i.test((x.key || x.name || '').toString()));
           if (cItem && cItem.breakdown) {
-            countries = Object.entries(cItem.breakdown).map(([k,v]) => ({name: k, count: v})).sort((a,b)=>b.count-a.count);
+            countries = Object.entries(cItem.breakdown).map(([k,v]) => ({name: k, count: v})).sort((a,b) => b.count - a.count);
           }
         }
         countriesEl.innerHTML = countries.length 
-          ? countries.slice(0,5).map(c => `<div class="flex justify-between py-1 text-sm"><span>${c.name}</span><span class="font-mono">${c.count}</span></div>`).join('')
+          ? countries.slice(0,6).map(c => `<div class="flex justify-between py-1 text-sm"><span>${c.name}</span><span class="font-mono">${c.count}</span></div>`).join('')
           : '<div class="text-xs text-zinc-500">Z Vercel Analytics (countries)</div>';
       }
 
-      // Devices, OS, Browsers from custom rich data
-      const renderSimpleList = (elId, data) => {
+      // Devices, OS, Browsers - custom rich data (from tracking.js) is usually better here
+      const renderSimpleList = (elId, data, emptyMsg = '—') => {
         const el = document.getElementById(elId);
         if (!el) return;
         if (!data || !data.length) {
-          el.innerHTML = `<div class="text-xs text-zinc-500">—</div>`;
+          el.innerHTML = `<div class="text-xs text-zinc-500">${emptyMsg}</div>`;
           return;
         }
         el.innerHTML = data.map(item => `<div class="flex justify-between py-1 text-sm border-b border-zinc-800 last:border-none"><span>${item.name}</span><span class="font-mono text-emerald-400">${item.count}</span></div>`).join('');
       };
 
-      renderSimpleList('devices-table', d.deviceBreakdown);
-      renderSimpleList('os-table', d.osBreakdown);
-      renderSimpleList('browsers-table', d.browserBreakdown);
+      renderSimpleList('devices-table', d.deviceBreakdown, 'Data z custom trackingu');
+      renderSimpleList('os-table', d.osBreakdown, 'Data z custom trackingu');
+      renderSimpleList('browsers-table', d.browserBreakdown, 'Data z custom trackingu');
     }
 
 

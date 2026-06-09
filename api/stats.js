@@ -13,32 +13,49 @@ export default async function handler(req, res) {
   }
 
   // Vercel Analytics (official Web Analytics)
+  // Set these in Vercel Project Settings → Environment Variables (recommended):
+  //   VERCEL_ANALYTICS_TOKEN  (or VERCEL_TOKEN)
+  //   VERCEL_PROJECT_ID
+  //   VERCEL_TEAM_ID (if using a team project)
   let vercelAnalytics = null;
   try {
     const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN;
     const projectId = process.env.VERCEL_PROJECT_ID;
+    const teamId = process.env.VERCEL_TEAM_ID;
+
     if (token && projectId) {
       const nowSec = Math.floor(Date.now() / 1000);
       const fromSec = nowSec - 86400 * 7; // last 7 days for better data
 
+      let url = `https://api.vercel.com/v1/projects/${projectId}/analytics?from=${fromSec}&to=${nowSec}`;
+      if (teamId) {
+        url += `&teamId=${teamId}`;
+      }
+
       // Main analytics
-      const resAnalytics = await fetch(`https://api.vercel.com/v1/projects/${projectId}/analytics?from=${fromSec}&to=${nowSec}`, {
+      const resAnalytics = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (resAnalytics.ok) {
         vercelAnalytics = await resAnalytics.json();
+      } else {
+        console.error('Vercel analytics fetch failed:', resAnalytics.status);
       }
 
-      // Try to fetch more detailed if possible (some projects support extra)
+      // Attempt to get richer web analytics breakdowns (referrers, countries, devices etc.)
       try {
-        const resDetailed = await fetch(`https://api.vercel.com/v1/web-analytics?projectId=${projectId}&from=${fromSec}&to=${nowSec}`, {
+        let detailedUrl = `https://api.vercel.com/v1/web-analytics?projectId=${projectId}&from=${fromSec}&to=${nowSec}`;
+        if (teamId) detailedUrl += `&teamId=${teamId}`;
+        const resDetailed = await fetch(detailedUrl, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (resDetailed.ok) {
           const detailed = await resDetailed.json();
-          vercelAnalytics = { ...vercelAnalytics, detailed };
+          vercelAnalytics = { ...(vercelAnalytics || {}), ...detailed, detailed };
         }
-      } catch (e) {}
+      } catch (e) {
+        // detailed endpoint may not be available for all projects
+      }
     }
   } catch (e) {
     console.error('Vercel Analytics fetch error:', e);
