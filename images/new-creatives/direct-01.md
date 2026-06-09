@@ -13,11 +13,11 @@ Tipy, jak to celé zkrátit.
 
 + Při koupi dnes zdarma 5 rychlých snídaní pro chaotická rána.
 
-297 Kč. 
+149 Kč. 
 Přístup navždy. 
 Žádné předplatné.
 
-**Headline:** 4 týdny jídla + snídaně zdarma za 297 Kč
+**Headline:** 4 týdny jídla + snídaně zdarma za 149 Kč
 
 **Description:** Hned po zaplacení v mobilu. Bez appky, bez přihlašování.
 

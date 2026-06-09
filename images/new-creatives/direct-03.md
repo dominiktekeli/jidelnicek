@@ -13,9 +13,9 @@ Už to mají desítky maminek.
 Nákupní seznamy, které zaškrtáváš v obchodě.
 Přístup navždy.
 
-297 Kč + 5 snídaní zdarma dnes.
+149 Kč + 5 snídaní zdarma dnes.
 
-**Headline:** 297 Kč za klid na celý měsíc
+**Headline:** 149 Kč za klid na celý měsíc
 
 **Description:** + bonus snídaně při koupi
 

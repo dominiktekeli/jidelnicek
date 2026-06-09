@@ -12,9 +12,9 @@ Chceš mít na příští 4 týdny hotovo?
 Obědy, večeře, nákupy i tipy na rychlejší večery.
 + 5 snídaní zdarma při koupi dnes.
 
-Jedna platba 297 Kč. Přístup navždy.
+Jedna platba 149 Kč. Přístup navždy.
 
-**Headline:** 4 týdny jídla + snídaně zdarma za 297 Kč
+**Headline:** 4 týdny jídla + snídaně zdarma za 149 Kč
 
 **Description:** Hned v mobilu
 

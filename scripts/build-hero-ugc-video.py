@@ -46,7 +46,7 @@ SHOTS = [
         "min_duration": 6.0,
         "burned_subtitles": True,
         "price_at": 2.0,
-        "price_subtitle": "297 Kč",
+        "price_subtitle": "149 Kč",
     },
 ]
 
@@ -236,7 +236,7 @@ def end_card_frames() -> list[np.ndarray]:
 
         title = "🌿 Klid v kuchyni"
         sub = "4 týdny jídla · nákup v telefonu"
-        price = "297 Kč"
+        price = "149 Kč"
 
         for text, font, y, color in [
             (title, title_font, 220, (45, 154, 106)),

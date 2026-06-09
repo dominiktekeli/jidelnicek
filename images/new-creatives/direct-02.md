@@ -14,9 +14,9 @@ Otevřeš odkaz v mobilu a máš kompletní plán na 4 týdny + nákupní seznam
 
 + 5 snídaní zdarma při koupi dnes.
 
-297 Kč. Přístup navždy.
+149 Kč. Přístup navždy.
 
-**Headline:** Celý jídelníček v mobilu za 297 Kč
+**Headline:** Celý jídelníček v mobilu za 149 Kč
 
 **Description:** + snídaně zdarma při koupi dnes
 

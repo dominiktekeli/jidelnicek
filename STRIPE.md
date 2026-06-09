@@ -45,7 +45,7 @@ Checkout pak bude česky (e-mail, karta, souhrn). Tlačítko může zůstat „Z
 
 ### 2. Měna produktu
 
-**Products** → cena musí být **CZK** (297 Kč), ne EUR/USD.
+**Products** → cena musí být **CZK** (149 Kč), ne EUR/USD.
 
 ### 3. Jazyk Stripe Dashboardu (jen pro tebe)
 
@@ -68,7 +68,7 @@ Při zakládání účtu zvol **Česko** jako zemi podnikání (ovlivní výpisy
 ```
 🍽 4 týdny obědů a večeří pro rodinu — vše v mobilu
 🛒 Nákupní seznamy · přehled celého týdne dopředu
-💚 Jedna platba 297 Kč · žádné předplatné
+💚 Jedna platba 149 Kč · žádné předplatné
 ♻️ Přístup navždy — recepty, které budeš chtít opakovat
 
 📱 Po zaplacení hned: odkaz do aplikace v prohlížeči (bez instalace)
@@ -79,7 +79,7 @@ Při zakládání účtu zvol **Česko** jako zemi podnikání (ovlivní výpisy
 Kratší varianta (limit znaků):
 
 ```
-🍽 4 týdny jídla v mobilu · 🛒 nákup · 💚 297 Kč jednorázově · 📱 přístup hned po platbě
+🍽 4 týdny jídla v mobilu · 🛒 nákup · 💚 149 Kč jednorázově · 📱 přístup hned po platbě
 ```
 
 ### Potvrzovací e-mail od Stripe (Settings → Emails → Successful payments)

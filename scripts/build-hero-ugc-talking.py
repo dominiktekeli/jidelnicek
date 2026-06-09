@@ -192,7 +192,7 @@ def end_card_frames() -> list[np.ndarray]:
         for text, size, y, color in [
             ("🌿 Klid v kuchyni", 50, 240, (45, 154, 106)),
             ("4 týdny jídla · nákup v telefonu", 26, 308, (92, 92, 106)),
-            ("297 Kč", 62, 388, (45, 154, 106)),
+            ("149 Kč", 62, 388, (45, 154, 106)),
         ]:
             f = load_font(size)
             b = draw.textbbox((0, 0), text, font=f)

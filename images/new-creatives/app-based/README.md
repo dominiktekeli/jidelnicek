@@ -24,7 +24,7 @@ Přesně podle poskytnutého screenshotu aplikace. Žádné gramatické chyby, p
 
 ### Direct (jasný offer, cena, bonus, CTA - pro retargeting)
 - direct-app-family-9x16.jpg : Rodina u večeře s app UI, direct nabídka.
-- direct-app-ui-offer-9x16.jpg : Velký app UI + cena 297 Kč + bonus + CTA.
+- direct-app-ui-offer-9x16.jpg : Velký app UI + cena 149 Kč + bonus + CTA.
 
 Všechny kreativy respektují safe zones pro Meta Ads (dostatek marginu, text ne na okrajích, klíčové prvky v safe area pro 9:16 a 1:1).
 

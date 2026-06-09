@@ -26,6 +26,12 @@
 
   const BUY_IDS = ["btn-koupit", "btn-koupit-hero", "sticky-buy"];
 
+  function getPriceNum() {
+    const p = cfg.priceDisplay || "149 Kč";
+    const n = parseInt(String(p).replace(/\D/g, ""), 10);
+    return n > 0 ? n : 149;
+  }
+
   function wireBuyButtons() {
     const url = checkoutUrl();
     const ready = isCheckoutReady();
@@ -53,6 +59,7 @@
     // Fire Meta Pixel InitiateCheckout on buy click (BEFORE redirect to Stripe)
     // Race-condition safe: preventDefault + delay navigation so the pixel request has time to leave
     // (fixes 30-60% loss on direct <a href=stripe> navigation)
+    const priceNum = getPriceNum();
     BUY_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) {
@@ -61,7 +68,7 @@
           if (window.marketingConsent && window.marketingConsent()) {
             if (typeof fbq === 'function') {
               fbq('track', 'InitiateCheckout', {
-                value: 297,
+                value: priceNum,
                 currency: 'CZK',
                 content_name: 'Klid v kuchyni',
                 content_ids: ['klid-balicek']
@@ -80,12 +87,12 @@
   }
 
   function wirePrice() {
-    const p = cfg.priceDisplay || "297 Kč";
+    const p = cfg.priceDisplay || "149 Kč";
     const priceEl = document.getElementById("pricing-price");
     const stickyPrice = document.getElementById("sticky-price");
     const perWeekEl = document.getElementById("pricing-perweek");
     const heroBuy = document.getElementById("btn-koupit-hero");
-    const num = parseInt(String(p).replace(/\D/g, ""), 10);
+    const num = getPriceNum();
     if (priceEl) priceEl.textContent = p;
     if (heroBuy) heroBuy.textContent = "🛒 Koupit za " + p;
     if (stickyPrice) stickyPrice.textContent = p;

@@ -12,7 +12,7 @@ window.KLID_CONFIG = {
 
   payhipUrl: "",
 
-  priceDisplay: "297 Kč",
+  priceDisplay: "149 Kč",
 
   // Heslo jen pro záložní vstup přes stahnout.html (po zaplacení stačí dekujeme.html)
   downloadPassword: "klid2026-zive-4tydny",

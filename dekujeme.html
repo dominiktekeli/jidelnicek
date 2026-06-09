@@ -106,7 +106,7 @@
 
           // Standardní událost Purchase (z Meta spec) pro optimalizaci reklam
           fbq('track', 'Purchase', {
-            value: 297,
+            value: 149,
             currency: 'CZK'
           });
         }
@@ -114,7 +114,7 @@
 
       // Track payment success for admin overview
       if (window.KLID && window.KLID.track) {
-        window.KLID.track('payment_completed', { value: 297, currency: 'CZK' });
+        window.KLID.track('payment_completed', { value: 149, currency: 'CZK' });
       }
     </script>
   </body>

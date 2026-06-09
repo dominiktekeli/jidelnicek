@@ -17,7 +17,7 @@ Uprav `config.js`:
 
 ```js
 checkoutUrl: "https://TVOJ-OBCHOD.lemonsqueezy.com/checkout/buy/XXXX",
-priceDisplay: "297 Kč",
+priceDisplay: "149 Kč",
 downloadPassword: "silne-heslo-pro-zakaznice",
 supportEmail: "ahoj@tvoje-domena.cz",
 ```
@@ -26,7 +26,7 @@ supportEmail: "ahoj@tvoje-domena.cz",
 
 1. Účet na [lemonsqueezy.com](https://www.lemonsqueezy.com) — režim pro EU, DPH řeší platforma.
 2. **Products** → nový produkt „4týdenní rodinný jídelníček“ (digitální).
-3. **Price** — např. 297 Kč / EUR podle trhu.
+3. **Price** — např. 149 Kč / EUR podle trhu.
 4. **Files** (volitelné) — můžeš přiložit PDF; hlavní produkt je odkaz na web.
 5. **Confirmation email** — do těla e-mailu vlož:
    - Odkaz na aplikaci: `https://jidelnicek-olive.vercel.app/app/`

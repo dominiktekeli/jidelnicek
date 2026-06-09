@@ -39,7 +39,7 @@ SCENES = [
     {
         "file": "images/mom-calm.jpg",
         "duration": 4.0,
-        "lines": ["Klid v kuchyni.", "297 Kč jednou · bez předplatného"],
+        "lines": ["Klid v kuchyni.", "149 Kč jednou · bez předplatného"],
         "zoom": (1.0, 1.05),
     },
 ]

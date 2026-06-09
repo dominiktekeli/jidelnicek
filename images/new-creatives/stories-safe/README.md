@@ -27,7 +27,7 @@ Všechny tyto kreativy jsou **připravené pro Instagram Stories/Reels ads** s d
 - indirect-stories-mom-safe-9x16.jpg : Maminka v kuchyni s telefonem (app UI), curiosity text "Takhle vypadá klid..."
 - indirect-stories-family-safe-9x16.jpg : Rodina u večeře + app UI, teplý organický feel
 
-**DIRECT (retargeting - jasný offer, cena 297 Kč, bonus, CTA, konverzní):**
+**DIRECT (retargeting - jasný offer, cena 149 Kč, bonus, CTA, konverzní):**
 - direct-stories-offer-safe-9x16.jpg : App UI + přímá nabídka s cenou a bonusem
 - direct-stories-price-safe-9x16.jpg : Velká cena + app UI, silný direct
 
