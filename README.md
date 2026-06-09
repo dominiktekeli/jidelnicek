@@ -26,14 +26,14 @@ supportEmail: "ahoj@tvoje-domena.cz",
 
 1. Účet na [lemonsqueezy.com](https://www.lemonsqueezy.com) — režim pro EU, DPH řeší platforma.
 2. **Products** → nový produkt „4týdenní rodinný jídelníček“ (digitální).
-3. **Price** — např. 149 Kč / EUR podle trhu.
+3. **Price** — přesně 149 Kč (jednorázově, CZK). Důležité: musí sedět s cenou na webu (jinak disonance a ztráta důvěry).
 4. **Files** (volitelné) — můžeš přiložit PDF; hlavní produkt je odkaz na web.
 5. **Confirmation email** — do těla e-mailu vlož:
-   - Odkaz na aplikaci: `https://jidelnicek-olive.vercel.app/app/`
+   - Odkaz na aplikaci: `https://klidvkuchyni.cz/app/`
    - Heslo: stejné jako `downloadPassword` v `config.js`
-   - Odkaz: `https://jidelnicek-olive.vercel.app/stahnout.html`
+   - Odkaz: `https://klidvkuchyni.cz/stahnout.html`
 6. **Product → Settings → Confirmation modal / Redirect URL**:
-   - `https://jidelnicek-olive.vercel.app/dekujeme.html`
+   - `https://klidvkuchyni.cz/dekujeme.html`
 7. Zkopíruj **Checkout link** do `config.js` → `checkoutUrl`.
 
 ### Payhip (alternativa)

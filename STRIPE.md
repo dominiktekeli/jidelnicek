@@ -1,6 +1,6 @@
 # Stripe — nastavení (doporučená cesta)
 
-**Web:** https://jidelnicek-olive.vercel.app
+**Web:** https://klidvkuchyni.cz
 
 ## Texty do Stripe (co kam zkopírovat)
 
@@ -57,6 +57,15 @@ Při zakládání účtu zvol **Česko** jako zemi podnikání (ovlivní výpisy
 
 ---
 
+### ⚠️ Kritické: Brand name a důvěra (Stripe "Jidelnicek" je trust killer)
+
+**Nejdůležitější věc pro konverze:**
+- V Stripe → Product → **Name** musí být **přesně "Klid v kuchyni"** (ne "Jidelnicek", ne starý název).
+- V Payment Link settings → **Business name** / branding musí odpovídat "Klid v kuchyni" nebo tvému skutečnému jménu + IČO.
+- Zákaznice vidí název na checkout stránce, v e-mailu od Stripe a na výpisu z karty. Starý název "Jidelnicek" ničí důvěru.
+
+**Cena v Stripe musí být přesně 149 Kč** (jednorázově, CZK). Pokud je tam pořád 297 Kč, zákaznice uvidí nesoulad se stránkou (disonance) a odejde.
+
 ### Název produktu (Product name)
 
 ```
@@ -90,12 +99,12 @@ Do vlastního textu / footeru:
 💚 Děkujeme za nákup!
 
 📱 Otevři jídelníček hned tady:
-https://jidelnicek-olive.vercel.app/dekujeme.html
+https://klidvkuchyni.cz/dekujeme.html
 
 📲 Na mobilu: po otevření Sdílet → Přidat na plochu.
 
 🔑 Záložní vstup (heslo z e-mailu / po objednávce):
-https://jidelnicek-olive.vercel.app/stahnout.html
+https://klidvkuchyni.cz/stahnout.html
 
 ✉️ Potřebuješ pomoc? napiš na ahoj@tvujemail.cz
 ```
@@ -106,9 +115,9 @@ https://jidelnicek-olive.vercel.app/stahnout.html
 
 - **Support email:** tvůj e-mail
 - **Policy links** (nastav na webu):
-  - Obchodní podmínky: `https://jidelnicek-olive.vercel.app/obchodni-podminky.html`
-  - Odstoupení / reklamace: `https://jidelnicek-olive.vercel.app/vraceni-penez.html`
-  - Ochrana údajů: `https://jidelnicek-olive.vercel.app/ochrana-osobnich-udaju.html`
+  - Obchodní podmínky: `https://klidvkuchyni.cz/obchodni-podminky.html`
+  - Odstoupení / reklamace: `https://klidvkuchyni.cz/vraceni-penez.html`
+  - Ochrana údajů: `https://klidvkuchyni.cz/ochrana-osobnich-udaju.html`
 
 Dobrovolné vrácení peněz **neposkytujeme** — v Stripe nepiš garanci spokojenosti.
 
@@ -121,7 +130,7 @@ Dobrovolné vrácení peněz **neposkytujeme** — v Stripe nepiš garanci spoko
 Ve zkratce: Payment Link → **Upravit** → **Po platbě** → **Přesměrovat na web**:
 
 ```
-https://jidelnicek-olive.vercel.app/dekujeme.html
+https://klidvkuchyni.cz/dekujeme.html
 ```
 
 Nepoužívej jen „potvrzovací stránku Stripe“ — tam redirect není.
@@ -133,11 +142,11 @@ Zákaznice po zaplacení uvidí velké tlačítko **Otevřít jídelníček** �
 Do potvrzení objednávky přidej:
 
 ```
-Otevřete jídelníček: https://jidelnicek-olive.vercel.app/dekujeme.html
+Otevřete jídelníček: https://klidvkuchyni.cz/dekujeme.html
 
 (Na mobilu: Sdílet → Přidat na plochu.)
 
-Záložní vstup heslem: https://jidelnicek-olive.vercel.app/stahnout.html
+Záložní vstup heslem: https://klidvkuchyni.cz/stahnout.html
 ```
 
 Heslo = `downloadPassword` v `config.js`.
