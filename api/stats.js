@@ -1,5 +1,3 @@
-const recentEvents = [];
-
 import { recentEvents as trackRecent } from './track.js';
 
 function isToday(ts) {
@@ -14,30 +12,43 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Vercel Analytics (official, enabled in Vercel dashboard)
+  // Vercel Analytics (official Web Analytics)
   let vercelAnalytics = null;
   try {
     const token = process.env.VERCEL_ANALYTICS_TOKEN || process.env.VERCEL_TOKEN;
     const projectId = process.env.VERCEL_PROJECT_ID;
     if (token && projectId) {
       const nowSec = Math.floor(Date.now() / 1000);
-      const fromSec = nowSec - 86400 * 2; // last ~2 days
+      const fromSec = nowSec - 86400 * 7; // last 7 days for better data
+
+      // Main analytics
       const resAnalytics = await fetch(`https://api.vercel.com/v1/projects/${projectId}/analytics?from=${fromSec}&to=${nowSec}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (resAnalytics.ok) {
         vercelAnalytics = await resAnalytics.json();
       }
+
+      // Try to fetch more detailed if possible (some projects support extra)
+      try {
+        const resDetailed = await fetch(`https://api.vercel.com/v1/web-analytics?projectId=${projectId}&from=${fromSec}&to=${nowSec}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (resDetailed.ok) {
+          const detailed = await resDetailed.json();
+          vercelAnalytics = { ...vercelAnalytics, detailed };
+        }
+      } catch (e) {}
     }
   } catch (e) {
     console.error('Vercel Analytics fetch error:', e);
   }
 
   // Pull events from track module if available in this invocation (helps cross /api/track and /api/stats in same container)
-  let events = recentEvents;
+  let events = [];
   try {
-    if (trackRecent && trackRecent.length > events.length) {
-      events = trackRecent;
+    if (Array.isArray(trackRecent)) {
+      events = [...trackRecent];
     }
   } catch (e) {}
 
@@ -217,6 +228,8 @@ export default async function handler(req, res) {
 }
 
 export function registerEvent(ev) {
-  recentEvents.push(ev);
-  if (recentEvents.length > 200) recentEvents.shift();
+  if (Array.isArray(trackRecent)) {
+    trackRecent.push(ev);
+    if (trackRecent.length > 200) trackRecent.shift();
+  }
 }

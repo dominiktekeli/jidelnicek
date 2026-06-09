@@ -44,117 +44,156 @@
     </div>
   </div>
 
-  <!-- Dashboard -->
+  <!-- Dashboard - Completely new Vercel Analytics focused admin -->
   <div id="dashboard" class="hidden">
-    <div class="max-w-6xl mx-auto p-6">
+    <div class="max-w-7xl mx-auto p-6">
       <!-- Header -->
-      <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center text-xl">🍽</div>
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 bg-emerald-500 rounded-3xl flex items-center justify-center text-2xl">🍽</div>
           <div>
-            <div class="font-semibold text-2xl">Klid v kuchyni — Admin</div>
-            <div class="text-emerald-400 text-sm -mt-1">Základní přehled (reálná data z trackingu)</div>
+            <div class="font-semibold text-3xl tracking-tight">Klid v kuchyni</div>
+            <div class="text-emerald-400 text-sm -mt-1 font-medium">Analytics • Propojený s Vercel Web Analytics</div>
           </div>
         </div>
-        <div class="flex items-center gap-3 text-sm">
-          <div class="px-3 py-1 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-2">
+        <div class="flex items-center gap-2 text-sm">
+          <div class="px-3 py-1.5 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-2">
             <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
             <span>Auto-refresh 60s</span>
           </div>
-          <button onclick="refresh()" class="px-4 py-1.5 bg-zinc-900 hover:bg-zinc-800 rounded-2xl border border-zinc-700">Obnovit</button>
-          <button onclick="simulateVisit()" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-2xl">Simulate visit (test push)</button>
-          <button onclick="logout()" class="px-4 py-1.5 text-zinc-400 hover:text-zinc-200">Odhlásit</button>
+          <button onclick="refresh()" class="px-5 py-2 bg-zinc-900 hover:bg-zinc-800 rounded-2xl border border-zinc-700 font-medium">Obnovit</button>
+          <button onclick="simulateVisit()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-2xl font-medium">Simulate visit</button>
+          <button onclick="logout()" class="px-5 py-2 text-zinc-400 hover:text-white">Odhlásit</button>
         </div>
       </div>
 
-      <!-- Quick Stats -->
+      <!-- Top Metrics -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-zinc-900 border border-emerald-500/30 rounded-3xl p-5">
-          <div class="text-emerald-400 text-xs font-medium mb-1">DNES NA WEBU</div>
-          <div id="today-count" class="text-5xl font-semibold">—</div>
-          <div class="text-xs text-zinc-400 mt-1 flex items-center gap-2">
-            unikátních návštěv 
-            <button onclick="pripsatDnes()" class="text-emerald-400 hover:text-emerald-300 underline">připsat</button>
-          </div>
-          <div id="credited-today" class="text-[10px] text-emerald-400 mt-1 hidden">Připsáno: <span id="credited-val"></span></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="text-emerald-400 text-xs tracking-widest font-medium mb-2">VISITORS (VERCEL)</div>
+          <div id="vercel-visitors" class="text-6xl font-semibold tabular-nums">—</div>
+          <div class="text-xs text-zinc-400 mt-1">Unique visitors (from Vercel)</div>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-          <div class="text-zinc-400 text-xs font-medium mb-1">CELKEM NÁVŠTĚV</div>
-          <div id="total-visitors" class="text-5xl font-semibold">—</div>
-          <div class="text-xs text-zinc-400 mt-1">unikátních session (vše)</div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="text-emerald-400 text-xs tracking-widest font-medium mb-2">PAGE VIEWS</div>
+          <div id="vercel-pageviews" class="text-6xl font-semibold tabular-nums">—</div>
+          <div class="text-xs text-zinc-400 mt-1">Total page views</div>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-          <div class="text-zinc-400 text-xs font-medium mb-1">LIVE TEĎ</div>
-          <div id="live-count" class="text-5xl font-semibold">—</div>
-          <div class="text-xs text-emerald-400 mt-1">aktivních (posledních 60s)</div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="text-emerald-400 text-xs tracking-widest font-medium mb-2">BOUNCE RATE</div>
+          <div id="vercel-bounce" class="text-6xl font-semibold tabular-nums">—</div>
+          <div class="text-xs text-zinc-400 mt-1">From Vercel Analytics</div>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-          <div class="text-zinc-400 text-xs font-medium mb-1">OBJEDNÁVKY (PLATBY)</div>
-          <div id="orders-count" class="text-5xl font-semibold">—</div>
-          <div class="text-xs text-zinc-400 mt-1">dokončených plateb</div>
+        <div class="bg-zinc-900 border border-emerald-500/40 rounded-3xl p-6">
+          <div class="text-emerald-400 text-xs tracking-widest font-medium mb-2">LIVE + CUSTOM</div>
+          <div id="live-count" class="text-6xl font-semibold tabular-nums">—</div>
+          <div class="text-xs text-emerald-400 mt-1">Aktivní teď (heartbeat)</div>
+          <div id="custom-visitors" class="text-xs text-zinc-400 mt-2">Custom visitors today: <span id="today-count" class="font-mono">—</span></div>
         </div>
       </div>
 
-      <!-- Vercel Analytics (oficiální data z Vercel dashboardu) -->
+      <!-- Main Vercel + Breakdowns -->
       <div class="mb-8">
-        <h2 class="font-semibold text-lg mb-3">Vercel Analytics (oficiální) + Custom Traffic</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="vercel-stats">
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Načítání...</div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-semibold text-xl">Vercel Web Analytics</h2>
+          <div class="text-xs text-zinc-500">Data přímo z Vercel (oficiální)</div>
         </div>
-        <div class="text-[10px] text-zinc-500 mt-2">Kombinace oficiálních Vercel dat (když je token) + first-party tracking (referrers, UTM, tech, bounce approx).</div>
-      </div>
 
-      <!-- Rich Traffic Sources like the screenshot -->
-      <div class="mb-8">
-        <h2 class="font-semibold text-lg mb-3">Traffic Sources & Audience</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <!-- Referrers -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">Referrers (Meta heavy)</div>
-            <div id="referrers-list" class="text-sm space-y-1"></div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+            <div class="font-medium mb-4 flex items-center gap-2">Referrers <span class="text-xs text-zinc-500">(Meta traffic highlighted)</span></div>
+            <div id="referrers-table" class="text-sm"></div>
           </div>
 
-          <!-- UTM -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">UTM Campaigns / Sources</div>
-            <div id="utm-list" class="text-sm space-y-1"></div>
-          </div>
-        </div>
+          <!-- UTM + Countries -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+            <div class="font-medium mb-4">UTM Parameters</div>
+            <div id="utm-table" class="text-sm mb-6"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <!-- Devices -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">Devices</div>
-            <div id="devices-list" class="text-sm space-y-1"></div>
-          </div>
-
-          <!-- OS -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">Operating Systems</div>
-            <div id="os-list" class="text-sm space-y-1"></div>
-          </div>
-
-          <!-- Browsers -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">Browsers</div>
-            <div id="browsers-list" class="text-sm space-y-1"></div>
+            <div class="font-medium mb-4">Countries</div>
+            <div id="countries-table" class="text-sm"></div>
           </div>
         </div>
+      </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Top Pages -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">Top Pages / Routes</div>
-            <div id="pages-list" class="text-sm space-y-1"></div>
+      <!-- Tech Breakdown -->
+      <div class="mb-8">
+        <h2 class="font-semibold text-xl mb-3">Audience & Technology</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+            <div class="font-medium mb-4">Devices</div>
+            <div id="devices-table" class="text-sm space-y-2"></div>
           </div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+            <div class="font-medium mb-4">Operating Systems</div>
+            <div id="os-table" class="text-sm space-y-2"></div>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+            <div class="font-medium mb-4">Browsers</div>
+            <div id="browsers-table" class="text-sm space-y-2"></div>
+          </div>
+        </div>
+      </div>
 
-          <!-- Key Metrics -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
-            <div class="font-medium mb-2 text-sm">Key Metrics (custom + Vercel)</div>
-            <div class="grid grid-cols-2 gap-3 text-sm" id="traffic-metrics">
-              <!-- filled by JS -->
+      <!-- Custom Funnel (your important list) -->
+      <div class="mb-8">
+        <h2 class="font-semibold text-xl mb-3">Custom Funnel & Events (first-party tracking)</h2>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            <div>
+              <div class="text-xs text-zinc-400">Homepage views</div>
+              <div id="funnel-home" class="text-4xl font-semibold mt-1">—</div>
             </div>
+            <div>
+              <div class="text-xs text-zinc-400">Reached pricing/demo</div>
+              <div id="funnel-pricing" class="text-4xl font-semibold mt-1">—</div>
+              <div id="funnel-pricing-pct" class="text-emerald-400 text-xs">—%</div>
+            </div>
+            <div>
+              <div class="text-xs text-zinc-400">Clicked Buy</div>
+              <div id="funnel-buy" class="text-4xl font-semibold mt-1">—</div>
+              <div id="funnel-buy-pct" class="text-emerald-400 text-xs">—%</div>
+            </div>
+            <div>
+              <div class="text-xs text-zinc-400">Payment completed</div>
+              <div id="funnel-payment" class="text-4xl font-semibold mt-1">—</div>
+              <div id="funnel-payment-pct" class="text-emerald-400 text-xs">—%</div>
+            </div>
+            <div>
+              <div class="text-xs text-zinc-400">App opened</div>
+              <div id="funnel-app" class="text-4xl font-semibold mt-1">—</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[10px] text-zinc-500">Data z vašeho custom trackingu (page_view, buy_clicked, payment_completed, heartbeat...)</div>
+        </div>
+      </div>
+
+      <!-- Recent + Pages -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div>
+          <h2 class="font-semibold text-lg mb-3">Recent Activity</h2>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-zinc-800 text-zinc-400 text-xs">
+                  <th class="text-left px-4 py-3">Time</th>
+                  <th class="text-left px-4 py-3">Event</th>
+                  <th class="text-left px-4 py-3">Details</th>
+                </tr>
+              </thead>
+              <tbody id="recent-table" class="divide-y divide-zinc-800"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-semibold text-lg mb-3">Top Pages / Routes (Custom)</h2>
+          <div id="top-pages" class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-sm"></div>
+
+          <div class="mt-6">
+            <h2 class="font-semibold text-lg mb-3">Live Now (Custom)</h2>
+            <div id="live-details" class="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-sm"></div>
           </div>
         </div>
       </div>
@@ -203,28 +242,7 @@
         </div>
       </div>
 
-      <!-- Kompletní seznam (přesně tvůj text) -->
-      <div class="bg-zinc-900 border border-zinc-700 rounded-3xl p-6 mb-8">
-        <h3 class="font-semibold mb-3 text-emerald-400">Vše, co potřebuji sledovat, abych viděl, jestli stránka + funnel + app fungují (kompletní seznam + aktuální čísla)</h3>
-        <ul class="space-y-1 text-sm">
-          <li>• <strong>Homepage views</strong> – kolik lidí přišlo na úvodní stránku: <span id="val-homepage" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Reached pricing / demo</strong> – kolik scrollovalo nebo vidělo ukázku appky: <span id="val-pricing" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Clicked Buy</strong> – kolik kliklo na tlačítko koupit: <span id="val-buy" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Payment completed</strong> – kolik dokončilo platbu (149 Kč): <span id="val-payment" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>App opened</strong> – kolik otevřelo aplikaci po platbě: <span id="val-app" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Scroll depth (25/50/75/100%)</strong> – jak daleko lidé čtou stránku: <span id="val-scroll" class="font-mono text-emerald-400">25%: — | 50%: — | 75%: — | 100%: —</span></li>
-          <li>• <strong>Live sessions</strong> – kolik lidí je právě teď aktivních (heartbeat): <span id="val-live" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Total visitors</strong> – celkový počet unikátních lidí na stránce: <span id="val-total" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Total events</strong> – kolik eventů celkem (všechny interakce): <span id="val-events" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Last event time</strong> – kdy naposledy někdo interagoval: <span id="val-last" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Conversion rates</strong> mezi kroky funnelu (v %): <span id="val-conv" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Event types distribution</strong> – jaké akce lidé dělají: <span id="val-types" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Locations</strong> – kolik je na home / v platbě / v appce: <span id="val-locs" class="font-mono text-emerald-400">—</span></li>
-          <li>• <strong>Recent activity log</strong> – posledních 10–12 událostí v reálném čase (viz tabulka níže)</li>
-          <li>• <strong>Kolik lidí bylo dnes na webu</strong> – <span id="val-today" class="font-mono text-emerald-400">—</span> <button onclick="pripsatDnes()" class="ml-2 text-xs px-2 py-0.5 bg-emerald-600 hover:bg-emerald-500 rounded">připsat</button></li>
-        </ul>
-        <div class="mt-3 text-xs text-zinc-400">Všechna data přicházejí přes tracking.js → /api/track → /api/stats. Reálné eventy od návštěvníků (z reklam) vidíš v logách Vercel Functions (KLID_EVENT) a v bufferu adminu.</div>
-      </div>
+
 
       <!-- Recent + Live details -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -330,202 +348,138 @@
     function updateUI(d) {
       currentData = d;
 
-      // basic cards
-      document.getElementById('today-count').textContent = d.todayVisitors || 0;
-      document.getElementById('total-visitors').textContent = d.totalVisitors || 0;
-      const liveEl = document.getElementById('live-count') || document.getElementById('live-now-card');
-      if (liveEl) liveEl.textContent = d.liveNow?.count || 0;
-      document.getElementById('orders-count').textContent = d.funnel?.paymentCompleted || 0;
+      // Top metrics from Vercel + custom
+      const va = d.vercelAnalytics || {};
+      const vVisitors = va.visitors ?? va.uniqueVisitors ?? (va.data?.find?.(x => /visitor|unique/i.test(x.key||''))?.total) ?? d.totalVisitors ?? 0;
+      const vPageViews = va.pageViews ?? (va.data?.find?.(x => /page/i.test(x.key||''))?.total) ?? d.totalPageViews ?? 0;
+      const vBounce = va.bounceRate ?? (va.data?.find?.(x => /bounce/i.test(x.key||''))?.value) ?? d.bounceRate ?? '—';
 
-      // funnel basic
+      const vVisitorsEl = document.getElementById('vercel-visitors');
+      if (vVisitorsEl) vVisitorsEl.textContent = vVisitors;
+      const vPageEl = document.getElementById('vercel-pageviews');
+      if (vPageEl) vPageEl.textContent = vPageViews;
+      const vBounceEl = document.getElementById('vercel-bounce');
+      if (vBounceEl) vBounceEl.textContent = (typeof vBounce === 'number' ? vBounce + '%' : vBounce);
+
+      // Custom live / today
+      const todayEl = document.getElementById('today-count');
+      if (todayEl) todayEl.textContent = d.todayVisitors || 0;
+      const liveEl = document.getElementById('live-count');
+      if (liveEl) liveEl.textContent = d.liveNow?.count || 0;
+
+      // Render all breakdowns
+      renderBreakdowns(d);
+
+      // Custom Funnel
       const f = d.funnel || {};
-      document.getElementById('funnel-home').textContent = f.homepage || 0;
-      document.getElementById('funnel-pricing').textContent = f.reachedPricing || 0;
-      document.getElementById('funnel-buy').textContent = f.clickedBuy || 0;
-      document.getElementById('funnel-payment').textContent = f.paymentCompleted || 0;
-      document.getElementById('funnel-app').textContent = f.appOpened || 0;
+      const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val ?? '—'; };
+      setText('funnel-home', f.homepage || 0);
+      setText('funnel-pricing', f.reachedPricing || 0);
+      setText('funnel-buy', f.clickedBuy || 0);
+      setText('funnel-payment', f.paymentCompleted || 0);
+      setText('funnel-app', f.appOpened || 0);
 
       const c = d.conversionRates || {};
-      document.getElementById('funnel-pricing-pct').textContent = (c.homeToPricing||0) + '%';
-      document.getElementById('funnel-buy-pct').textContent = (c.pricingToBuy||0) + '%';
-      document.getElementById('funnel-payment-pct').textContent = (c.buyToPayment||0) + '%';
-      document.getElementById('funnel-app-pct').textContent = (c.paymentToApp||0) + '%';
+      setText('funnel-pricing-pct', (c.homeToPricing || 0) + '%');
+      setText('funnel-buy-pct', (c.pricingToBuy || 0) + '%');
+      setText('funnel-payment-pct', (c.buyToPayment || 0) + '%');
 
-      // complete list vals
-      const set = (id,v) => { const el = document.getElementById(id); if(el) el.textContent = v ?? '—'; };
-      set('val-homepage', f.homepage || d.summary?.homeViews);
-      set('val-pricing', f.reachedPricing);
-      set('val-buy', f.clickedBuy);
-      set('val-payment', f.paymentCompleted);
-      set('val-app', f.appOpened);
-      const sb = d.scrollBreakdown || {};
-      set('val-scroll', `25%: ${sb['25']||0} | 50%: ${sb['50']||0} | 75%: ${sb['75']||0} | 100%: ${sb['100']||0}`);
-      set('val-live', d.liveNow?.count);
-      set('val-total', d.totalVisitors);
-      set('val-events', d.totalEvents);
-      const lt = document.getElementById('val-last');
-      if(lt && d.lastEventTime) lt.textContent = new Date(d.lastEventTime).toLocaleString('cs-CZ');
-      const cv = d.conversionRates || {};
-      set('val-conv', `home→pricing ${cv.homeToPricing||0}% | pricing→buy ${cv.pricingToBuy||0}% | buy→payment ${cv.buyToPayment||0}% | payment→app ${cv.paymentToApp||0}%`);
-      const et = d.eventTypes || {};
-      set('val-types', Object.entries(et).map(([k,v])=>`${k}:${v}`).join(' '));
-      const lc = d.locations || {};
-      set('val-locs', `home:${lc.home||0} platba:${lc.payment||0} app:${lc.app||0}`);
-      set('val-today', d.todayVisitors || '—');
-
-      // live details
-      const ld = document.getElementById('live-details');
-      const l = d.liveNow || {count:0, byLocation:{}};
-      if (l.count > 0) {
-        ld.innerHTML = `Aktivní: ${l.count} <br> ${l.byLocation.home ? '🏠 ' + l.byLocation.home + ' na webu ' : ''} ${l.byLocation.app ? '📱 ' + l.byLocation.app + ' v appce' : ''}`;
-        const liveEl2 = document.getElementById('live-count') || document.getElementById('live-now-card');
-        if (liveEl2) liveEl2.textContent = l.count;
-      } else {
-        ld.textContent = 'Žádní aktivní návštěvníci v posledních 60s.';
-      }
-
-      // recent table
+      // Recent table
       const tb = document.getElementById('recent-table');
-      tb.innerHTML = '';
-      (d.recent || []).slice(0,12).forEach(ev => {
-        const tr = document.createElement('tr');
-        tr.className = 'border-b border-zinc-800';
-        const t = new Date(ev.ts).toLocaleTimeString('cs-CZ');
-        tr.innerHTML = `<td class="px-4 py-1.5 text-zinc-400">${t}</td><td class="px-4 py-1.5 text-emerald-400">${ev.event}</td><td class="px-4 py-1.5">${ev.page||'—'}</td><td class="px-4 py-1.5 text-zinc-400">${ev.percent!=null ? ev.percent+'%' : (ev.test?'test':'')}</td>`;
-        tb.appendChild(tr);
-      });
-
-      // graphs
-      renderGraphs(d);
-
-      // Vercel Analytics (official) + rich custom
-      const vercelEl = document.getElementById('vercel-stats');
-      if (vercelEl) {
-        const va = d.vercelAnalytics || {};
-        let html = '';
-
-        // Try to render nice cards like the screenshot
-        const vVisitors = va.visitors ?? va.uniqueVisitors ?? (va.data && va.data.find(x => /visitor/i.test(x.key||''))?.total);
-        const vPageViews = va.pageViews ?? va.data?.find(x => /page/i.test(x.key||''))?.total;
-        const vBounce = va.bounceRate ?? va.data?.find(x => /bounce/i.test(x.key||''))?.value;
-
-        if (vVisitors != null || vPageViews != null || vBounce != null) {
-          if (vVisitors != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Visitors</div><div class="text-2xl font-semibold">${vVisitors}</div></div>`;
-          if (vPageViews != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Page Views</div><div class="text-2xl font-semibold">${vPageViews}</div></div>`;
-          if (vBounce != null) html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">Bounce Rate</div><div class="text-2xl font-semibold">${vBounce}%</div></div>`;
-        } else if (va.data && Array.isArray(va.data)) {
-          va.data.slice(0,6).forEach(item => {
-            if (item.key && (item.total != null || item.value != null)) {
-              const val = item.total ?? item.value;
-              html += `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4"><div class="text-xs text-zinc-400">${item.key}</div><div class="text-2xl font-semibold">${val}</div></div>`;
-            }
-          });
-        } else if (Object.keys(va).length > 2) {
-          html = `<div class="text-xs text-zinc-400 col-span-4">Vercel data: ${JSON.stringify(va).slice(0,220)}...</div>`;
-        } else {
-          html = `<div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-4 text-sm text-zinc-400">Žádná data z Vercel (nastav VERCEL_ANALYTICS_TOKEN + VERCEL_PROJECT_ID v env nebo zapni Analytics v projektu).</div>`;
-        }
-        if (html) vercelEl.innerHTML = html;
-      }
-
-      // New rich traffic sections
-      renderTrafficAnalytics(d);
-
-      // cink if live increased
-      if (l.count > lastLive) playCink();
-      lastLive = l.count || 0;
-
-      document.getElementById('last-updated').textContent = new Date().toLocaleTimeString('cs-CZ');
-    }
-
-    function renderGraphs(d) {
-      // destroy old
-      Object.values(charts).forEach(c => c && c.destroy && c.destroy());
-      charts = {};
-
-      const locs = d.locations || {home:0, payment:0, app:0};
-      const lc = document.getElementById('chart-locs');
-      if (lc) {
-        charts.locs = new Chart(lc, {
-          type: 'doughnut',
-          data: { labels: ['Home','Platba','App'], datasets: [{data: [locs.home||0, locs.payment||0, locs.app||0], backgroundColor: ['#10b981','#3b82f6','#8b5cf6'] }] },
-          options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{color:'#a1a1aa'}}} }
+      if (tb) {
+        tb.innerHTML = '';
+        (d.recent || []).slice(0, 10).forEach(ev => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-zinc-800';
+          const t = new Date(ev.ts || ev.receivedAt).toLocaleTimeString('cs-CZ', {hour:'2-digit', minute:'2-digit'});
+          tr.innerHTML = `<td class="px-4 py-2 text-zinc-400 text-xs">${t}</td>
+                          <td class="px-4 py-2 text-emerald-400 text-xs font-medium">${ev.event}</td>
+                          <td class="px-4 py-2 text-xs text-zinc-400">${ev.page || ev.referrerHost || ev.path || ''}</td>`;
+          tb.appendChild(tr);
         });
       }
 
-      const sb = d.scrollBreakdown || {};
-      const sc = document.getElementById('chart-scroll');
-      if (sc) {
-        charts.scroll = new Chart(sc, {
-          type: 'bar',
-          data: { labels:['25%','50%','75%','100%'], datasets: [{label:'Počet', data:[sb['25']||0,sb['50']||0,sb['75']||0,sb['100']||0], backgroundColor:'#10b981', borderRadius:4 }] },
-          options: { responsive:true, maintainAspectRatio:false, scales:{y:{beginAtZero:true, ticks:{color:'#a1a1aa'}}, x:{ticks:{color:'#a1a1aa'}}}, plugins:{legend:{display:false}} }
-        });
+      // Live details
+      const ld = document.getElementById('live-details');
+      if (ld) {
+        const l = d.liveNow || {count: 0};
+        ld.innerHTML = l.count > 0 
+          ? `Aktivních: <span class="font-semibold">${l.count}</span><br><span class="text-xs text-zinc-400">Heartbeat z custom trackingu</span>` 
+          : 'Žádní aktivní návštěvníci v posledních 60s.';
+      }
+
+      // Top pages from custom
+      const pagesEl = document.getElementById('top-pages');
+      if (pagesEl) {
+        const pages = d.topPages || [];
+        pagesEl.innerHTML = pages.length 
+          ? pages.map(p => `<div class="flex justify-between py-1 border-b border-zinc-800 last:border-none"><span class="truncate text-xs">${p.path}</span><span class="font-mono text-emerald-400 text-xs">${p.count}</span></div>`).join('')
+          : '<div class="text-xs text-zinc-500">Žádná data</div>';
       }
     }
 
-    function renderTrafficAnalytics(d) {
+    function renderBreakdowns(d) {
+      const va = d.vercelAnalytics || {};
+
       // Referrers
-      const refEl = document.getElementById('referrers-list');
+      const refEl = document.getElementById('referrers-table');
       if (refEl) {
-        const refs = d.topReferrers || [];
+        let refs = d.topReferrers || [];
+        if (!refs.length && va.data) {
+          const refItem = va.data.find(x => /referrer|source|facebook|instagram/i.test(x.key || ''));
+          if (refItem) refs = [{name: refItem.key, count: refItem.total || refItem.value || 0}];
+        }
         if (refs.length) {
-          refEl.innerHTML = refs.map(r => `<div class="flex justify-between"><span class="text-zinc-300">${r.name}</span><span class="font-mono text-emerald-400">${r.count}</span></div>`).join('');
+          refEl.innerHTML = refs.map(r => {
+            const isMeta = /facebook|instagram|meta/i.test(r.name);
+            return `<div class="flex justify-between py-1 text-sm ${isMeta ? 'text-emerald-400 font-medium' : ''}"><span>${r.name}</span><span class="font-mono">${r.count}</span></div>`;
+          }).join('');
         } else {
-          refEl.innerHTML = '<div class="text-zinc-500 text-xs">Žádná data (Meta traffic by měl přijít přes fb/ig/l.facebook)</div>';
+          refEl.innerHTML = '<div class="text-xs text-zinc-500">Žádná data (Meta traffic by měl přijít přes fb/ig)</div>';
         }
       }
 
       // UTM
-      const utmEl = document.getElementById('utm-list');
+      const utmEl = document.getElementById('utm-table');
       if (utmEl) {
         const utms = d.topUTMs || [];
-        if (utms.length) {
-          utmEl.innerHTML = utms.map(u => `<div class="flex justify-between"><span class="text-zinc-300">${u.name}</span><span class="font-mono text-emerald-400">${u.count}</span></div>`).join('');
-        } else {
-          utmEl.innerHTML = '<div class="text-zinc-500 text-xs">Žádná UTM data (přidej ?utm_source=... do odkazů z reklam)</div>';
+        utmEl.innerHTML = utms.length 
+          ? utms.map(u => `<div class="flex justify-between py-1 text-sm"><span>${u.name}</span><span class="font-mono">${u.count}</span></div>`).join('')
+          : '<div class="text-xs text-zinc-500">Žádná UTM data</div>';
+      }
+
+      // Countries (from Vercel if present)
+      const countriesEl = document.getElementById('countries-table');
+      if (countriesEl) {
+        let countries = [];
+        if (va.data) {
+          const cItem = va.data.find(x => /country|countries|geo/i.test(x.key || ''));
+          if (cItem && cItem.breakdown) {
+            countries = Object.entries(cItem.breakdown).map(([k,v]) => ({name: k, count: v})).sort((a,b)=>b.count-a.count);
+          }
         }
+        countriesEl.innerHTML = countries.length 
+          ? countries.slice(0,5).map(c => `<div class="flex justify-between py-1 text-sm"><span>${c.name}</span><span class="font-mono">${c.count}</span></div>`).join('')
+          : '<div class="text-xs text-zinc-500">Z Vercel Analytics (countries)</div>';
       }
 
-      // Devices
-      const devEl = document.getElementById('devices-list');
-      if (devEl) {
-        const devs = d.deviceBreakdown || [];
-        devEl.innerHTML = devs.length ? devs.map(x => `<div class="flex justify-between"><span>${x.name}</span><span class="font-mono">${x.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
-      }
+      // Devices, OS, Browsers from custom rich data
+      const renderSimpleList = (elId, data) => {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        if (!data || !data.length) {
+          el.innerHTML = `<div class="text-xs text-zinc-500">—</div>`;
+          return;
+        }
+        el.innerHTML = data.map(item => `<div class="flex justify-between py-1 text-sm border-b border-zinc-800 last:border-none"><span>${item.name}</span><span class="font-mono text-emerald-400">${item.count}</span></div>`).join('');
+      };
 
-      // OS
-      const osEl = document.getElementById('os-list');
-      if (osEl) {
-        const oss = d.osBreakdown || [];
-        osEl.innerHTML = oss.length ? oss.map(x => `<div class="flex justify-between"><span>${x.name}</span><span class="font-mono">${x.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
-      }
-
-      // Browsers
-      const brEl = document.getElementById('browsers-list');
-      if (brEl) {
-        const brs = d.browserBreakdown || [];
-        brEl.innerHTML = brs.length ? brs.map(x => `<div class="flex justify-between"><span>${x.name}</span><span class="font-mono">${x.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
-      }
-
-      // Top Pages
-      const pagesEl = document.getElementById('pages-list');
-      if (pagesEl) {
-        const pgs = d.topPages || [];
-        pagesEl.innerHTML = pgs.length ? pgs.map(p => `<div class="flex justify-between text-xs"><span class="truncate">${p.path}</span><span class="font-mono">${p.count}</span></div>`).join('') : '<span class="text-xs text-zinc-500">—</span>';
-      }
-
-      // Key metrics row
-      const metricsEl = document.getElementById('traffic-metrics');
-      if (metricsEl) {
-        const m = [];
-        if (d.totalVisitors != null) m.push(`<div><span class="text-xs text-zinc-400">Custom Visitors</span><div class="text-xl font-semibold">${d.totalVisitors}</div></div>`);
-        if (d.totalPageViews != null) m.push(`<div><span class="text-xs text-zinc-400">Page Views (tracked)</span><div class="text-xl font-semibold">${d.totalPageViews}</div></div>`);
-        if (d.bounceRate != null) m.push(`<div><span class="text-xs text-zinc-400">Bounce (approx)</span><div class="text-xl font-semibold">${d.bounceRate}%</div></div>`);
-        if (d.liveNow?.count != null) m.push(`<div><span class="text-xs text-zinc-400">Live now</span><div class="text-xl font-semibold">${d.liveNow.count}</div></div>`);
-        metricsEl.innerHTML = m.join('') || '<div class="text-xs text-zinc-500">Čekám na data z návštěv...</div>';
-      }
+      renderSimpleList('devices-table', d.deviceBreakdown);
+      renderSimpleList('os-table', d.osBreakdown);
+      renderSimpleList('browsers-table', d.browserBreakdown);
     }
+
+
 
     async function refresh() {
       const d = await fetchReal();
@@ -533,14 +487,67 @@
     }
 
     async function simulateVisit() {
-      // real push via API
-      const ev = { ts: new Date().toISOString(), event: 'heartbeat', page: 'home', session: 'test-' + Date.now(), test: true };
-      await fetch('/api/track', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(ev) });
+      const session = 'test-' + Date.now();
+      const now = new Date().toISOString();
 
-      // also local for immediate UI
-      if (window.KLID && window.KLID.track) window.KLID.track('heartbeat', {page:'home', test:true});
+      // Simulate a full ad visit from Meta with rich data (like real traffic)
+      const base = { 
+        ts: now, 
+        session, 
+        test: true,
+        referrer: 'https://m.facebook.com/',
+        referrerHost: 'facebook',
+        device: 'Mobile',
+        utm_source: 'facebook',
+        utm_medium: 'cpc',
+        utm_campaign: 'test-ad',
+        browser: 'Chrome',
+        os: 'Android',
+        path: '/'
+      };
 
-      // bump local currentData for immediate numbers
+      // 1. page_view (like real landing)
+      await fetch('/api/track', { 
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body: JSON.stringify({ ...base, event: 'page_view', page: 'home' }) 
+      });
+
+      // 2. page_enter
+      await fetch('/api/track', { 
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body: JSON.stringify({ ...base, event: 'page_enter', page: 'home' }) 
+      });
+
+      // 3. scroll a bit
+      await fetch('/api/track', { 
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body: JSON.stringify({ ...base, event: 'scroll_depth', percent: 50 }) 
+      });
+
+      // 4. reached pricing
+      await fetch('/api/track', { 
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body: JSON.stringify({ ...base, event: 'pricing_viewed', page: 'home' }) 
+      });
+
+      // 5. clicked buy
+      await fetch('/api/track', { 
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body: JSON.stringify({ ...base, event: 'buy_clicked', location: 'home' }) 
+      });
+
+      // Also local client tracking for immediate
+      if (window.KLID && window.KLID.track) {
+        window.KLID.track('page_view', { ...base });
+        window.KLID.track('buy_clicked', { location: 'home', test:true });
+      }
+
+      // bump local for UI
       if (currentData) {
         currentData.todayVisitors = (currentData.todayVisitors || 0) + 1;
         currentData.totalVisitors = (currentData.totalVisitors || 0) + 1;
@@ -548,8 +555,18 @@
         currentData.liveNow.count = (currentData.liveNow.count || 0) + 1;
         currentData.liveNow.byLocation.home = (currentData.liveNow.byLocation.home || 0) + 1;
         if (!currentData.recent) currentData.recent = [];
-        currentData.recent.unshift(ev);
+        currentData.recent.unshift({ ts: now, event: 'buy_clicked', page: 'home', test: true });
         if (currentData.recent.length > 12) currentData.recent.length = 12;
+
+        // For rich sections
+        currentData.topReferrers = [{name: 'facebook', count: 1}];
+        currentData.topUTMs = [{name: 'facebook', count: 1}];
+        currentData.deviceBreakdown = [{name: 'Mobile', count: 1}];
+        currentData.osBreakdown = [{name: 'Android', count: 1}];
+        currentData.browserBreakdown = [{name: 'Chrome', count: 1}];
+        currentData.topPages = [{path: '/', count: 1}];
+        currentData.totalPageViews = (currentData.totalPageViews || 0) + 1;
+        currentData.bounceRate = 50;
       }
 
       await refresh();
