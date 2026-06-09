@@ -145,10 +145,22 @@ img {
 
 .hero__savings {
   margin: 0.55rem 0 0.15rem;
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: var(--mint-dark);
+  color: var(--text);
   text-align: center;
+}
+
+.hero__savings s {
+  text-decoration: line-through;
+  opacity: 0.55;
+  margin-right: 0.2rem;
+}
+
+.hero__savings .savings-highlight {
+  font-weight: 800;
+  color: var(--mint-dark);
+  margin-left: 0.25rem;
 }
 
 .hero__faces {
@@ -1205,26 +1217,49 @@ section {
     0 0 40px rgba(255, 255, 255, 0.35);
 }
 
+.pricing__old {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: #fff;
+  margin-bottom: -0.15rem;
+}
+
 .pricing__perweek {
-  margin: 0.35rem 0 0;
+  margin: 0.25rem 0 0;
   font-size: 0.95rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.92);
 }
 
 .pricing__savings {
-  margin: 0.35rem 0 0.1rem;
-  font-size: 0.9rem;
+  display: inline-block;
+  margin: 0.45rem auto 0;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  color: #fff;
+  background: #fff;
+  color: #2d9a6a;
+  border-radius: 999px;
   letter-spacing: -0.01em;
-  opacity: 0.95;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .savings-note {
   font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--mint-dark);
+  opacity: 0.95;
+}
+
+.bundle__intro s,
+.value-note s,
+.faq__item s {
+  text-decoration: line-through;
+  opacity: 0.55;
   font-weight: 600;
-  opacity: 0.85;
 }
 
 .pricing__hook {
@@ -2223,6 +2258,12 @@ section {
 .sticky-bar__sub #sticky-price {
   color: var(--mint-dark);
   font-weight: 800;
+}
+
+.sticky-bar__sub s {
+  text-decoration: line-through;
+  opacity: 0.5;
+  margin-right: 0.15rem;
 }
 
 .sticky-bar__btn {
