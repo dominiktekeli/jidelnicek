@@ -2,8 +2,8 @@
 window.KLID_CONFIG = {
   siteUrl: "https://klidvkuchyni.cz",
 
-  // Stripe Payment Link — live
-  checkoutUrl: "https://buy.stripe.com/bJe4gz7lP2iQ3Poend6Vq00",
+  // Stripe Payment Link — live (149 Kč)
+  checkoutUrl: "https://buy.stripe.com/00wfZh21v3mUclUa6X6Vq01",
 
   // Jazyk Stripe pokladny: cs = čeština (přidá se ?locale=cs k odkazu)
   stripeLocale: "cs",
